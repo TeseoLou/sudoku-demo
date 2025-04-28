@@ -87,6 +87,11 @@ header {
     /* This SVG defines the 3-line hamburger icon in black instead of Bootstrap's default white */
 }
 
+#theme-toggle {
+    min-width: 150px;
+    /* Prevents the switch from shrinking too much */
+}
+
 /* Make main content grow to fill space */
 main {
     flex: 1 0 auto;
