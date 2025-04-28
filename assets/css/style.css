@@ -1,18 +1,30 @@
+/* Global Variables */
+/* Define reusable values like fonts using CSS custom properties */
 :root {
-    --font-body: 'Quicksand', sans-serif;
-    --font-heading: 'Space Mono', monospace;
-  }
-  
-  body {
-    font-family: var(--font-body);
-  }
-  
-  h1 {
-    font-family: var(--font-heading);
+    --font-body: 'Quicksand', sans-serif;    /* Main font for body text */
+    --font-heading: 'Space Mono', monospace; /* Font for game title */
+}
+
+/* Utility Classes */
+/* Small reusable classes for behaviors like hiding elements */
+.hidden {
+    display: none; /* Hide elements visually but still in the DOM */
+}
+
+/* Base Styles */
+/* General default styles applied across the entire site */
+body {
+    font-family: var(--font-body); 
+}
+
+h1 {
+    font-family: var(--font-heading); 
     font-weight: bold;
-  }
-  
-/* Make the hamburger icon black */
+}
+
+/* Navbar Customization */
+/* Override Bootstrap's hamburger icon to make it black */
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  }
+    /* This SVG defines the 3-line hamburger icon in black instead of Bootstrap's default white */
+}
