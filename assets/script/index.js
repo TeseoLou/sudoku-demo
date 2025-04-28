@@ -3,61 +3,56 @@
  * Also smooth scrolls to the linked section, adjusting for navbar height.
  */
 function setupNavLinkCollapse() {
-    // Select all nav-links inside the collapsed navbar
-    document
-        .querySelectorAll(".navbar-collapse .nav-link")
-        .forEach((link) => {
-            // Add a click event listener to each nav-link
-            link.addEventListener("click", function (e) {
-                // Find the target section element based on the href attribute
-                let section = document.querySelector(e.target.getAttribute("href"));
+    // Select all navigation links inside the collapsed navbar
+    $(".navbar-collapse .nav-link").on("click", function (e) {
+        const href = $(this).attr("href"); // Get the href attribute of the clicked link
+        const $section = $(href); // Select the section element matching the href
 
-                // If the section exists on the page
-                if (section) {
-                    e.preventDefault(); // Prevent the default anchor jump behavior
+        // Check if the target section exists on the page
+        if ($section.length) {
+            e.preventDefault(); // Prevent the default anchor link jump behavior
 
-                    // Get the height of the navbar toggler (hamburger menu)
-                    let navbarHeight = document.querySelector(".navbar-toggler").offsetHeight;
+            // Get the height of the navbar toggler (hamburger button)
+            const navbarHeight = $(".navbar-toggler").outerHeight() || 0;
 
-                    // Smoothly scroll to the target section
-                    // Adjust the scroll position by subtracting the navbar height to avoid hiding content
-                    window.scroll({
-                        top: section.offsetTop - navbarHeight,
-                        behavior: "smooth",
-                    });
+            // Animate smooth scroll to the target section
+            // Adjust scroll position to account for navbar height
+            $("html, body").animate(
+                {
+                    scrollTop: $section.offset().top - navbarHeight,
+                },
+                600 // Duration of the animation in milliseconds
+            );
 
-                    // After clicking a nav-link, manually collapse the navbar
-                    document
-                        .querySelector(".navbar-collapse")
-                        .classList.remove("show");
-                }
-            });
-        });
+            // Manually collapse (hide) the navbar after clicking a nav-link
+            $(".navbar-collapse").removeClass("show");
+        }
+    });
 }
 
 /**
  * Collapse the Bootstrap navbar when clicking outside of the open menu.
  */
 function setupOutsideNavbarCollapse() {
-    // Listen for any click anywhere on the document
-    document.addEventListener("click", function (event) {
-        const navbarCollapse = document.getElementById("navbarContent");
+    // Listen for click events anywhere in the document
+    $(document).on("click", function (e) {
+        const $navbarCollapse = $("#navbarContent"); // Select the collapsible navbar content
 
-        // If the navbar collapse element does not exist, exit early
-        if (!navbarCollapse) return;
+        // Exit early if the navbar content is not found
+        if (!$navbarCollapse.length) return;
 
-        // Check if the clicked element is inside the navbar collapse area
-        const isClickInsideNavbar = navbarCollapse.contains(event.target);
+        // Determine if the clicked element is inside the navbar collapse area
+        const isClickInsideNavbar = $(e.target).closest("#navbarContent").length > 0;
 
-        // Check if the clicked element is the navbar toggler (hamburger button)
-        const isNavbarToggler = event.target.classList.contains("navbar-toggler") || event.target.closest(".navbar-toggler");
+        // Determine if the clicked element is the navbar toggler (hamburger button)
+        const isNavbarToggler = $(e.target).is(".navbar-toggler") || $(e.target).closest(".navbar-toggler").length > 0;
 
-        // If click is outside navbar and toggler, and navbar is currently open (has class 'show')
-        if (!isClickInsideNavbar && !isNavbarToggler && navbarCollapse.classList.contains("show")) {
-            // Get the existing Bootstrap Collapse instance
-            const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
-
-            // If the Bootstrap Collapse instance exists, call hide() to collapse the navbar
+        // If the click is outside the navbar content and the toggler, and the navbar is open
+        if (!isClickInsideNavbar && !isNavbarToggler && $navbarCollapse.hasClass("show")) {
+            // Get the existing Bootstrap Collapse instance associated with the navbar
+            const bsCollapse = bootstrap.Collapse.getInstance($navbarCollapse[0]);
+            
+            // If an instance exists, call hide() to collapse the navbar
             if (bsCollapse) {
                 bsCollapse.hide();
             }
@@ -67,15 +62,13 @@ function setupOutsideNavbarCollapse() {
 
 /**
  * Initialize all navbar behaviors for collapse and smooth scrolling.
- * This function calls both setup functions to activate navbar functionality.
  */
 function initNavbarBehavior() {
-    setupNavLinkCollapse();       // Enable nav-link click behavior
-    setupOutsideNavbarCollapse(); // Enable outside-click collapse behavior
+    setupNavLinkCollapse();       // Set up nav-link click behavior (smooth scroll + collapse)
+    setupOutsideNavbarCollapse(); // Set up click-outside behavior (collapse navbar)
 }
 
-// Call the initializer function immediately to set up the navbar behaviors
-initNavbarBehavior();
-
-
-
+// When the document is fully loaded, initialize navbar behaviors
+$(document).ready(function () {
+    initNavbarBehavior();
+});
