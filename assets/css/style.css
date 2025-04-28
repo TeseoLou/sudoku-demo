@@ -95,8 +95,8 @@ main {
 
 #setup {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     border: 2px solid #212529;
     padding: 20px;
     max-width: 800px;
@@ -104,18 +104,36 @@ main {
     margin: 0 auto;
 }
 
-/* Make the legends (titles) smaller inside the setup form */
+#setup .setup-options {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px; /* Space between Difficulty and Time */
+    flex-wrap: wrap; /* Allows wrapping on small screens */
+    width: 100%;
+}
+
+#setup fieldset {
+    border: none; /* Remove default ugly fieldset border */
+    text-align: center;
+    min-width: 300px; /* Minimum width so they sit nicely side-by-side */
+    flex: 1;
+}
+
+#setup .start-button {
+    margin-top: 20px;
+}
+
 #setup legend {
     font-size: 1rem;
     font-weight: bold;
 }
 
-/* Make the radio button labels smaller inside the setup form */
 #setup .form-check-label {
     font-size: 0.9rem;
 }
 
-/* Footer style (optional small tweaks) */
+/* Footer style */
 footer {
     flex-shrink: 0;
     /* Prevent footer from shrinking */
