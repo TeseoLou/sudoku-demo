@@ -61,9 +61,10 @@ header {
     padding-bottom: 10px;
 }
 
-h1 {
+#title {
     font-family: var(--font-heading);
     font-weight: bold;
+    font-size: 4rem;
 }
 
 /* Navbar Customization */
