@@ -16,6 +16,19 @@
 
 /* Base Styles */
 /* General default styles applied across the entire site */
+/* Layout for full-height page */
+html,
+body {
+    height: 100%;
+    /* Make html and body stretch to full viewport height */
+    margin: 0;
+    /* Remove default margins */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    /* Arrange children vertically */
+}
+
 body {
     font-family: var(--font-body);
     /* Apply Quicksand font to body */
@@ -72,4 +85,16 @@ header {
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
     /* This SVG defines the 3-line hamburger icon in black instead of Bootstrap's default white */
+}
+
+/* Make main content grow to fill space */
+main {
+    flex: 1 0 auto;
+    /* Allow main to grow and push footer down */
+}
+
+/* Footer style (optional small tweaks) */
+footer {
+    flex-shrink: 0;
+    /* Prevent footer from shrinking */
 }
