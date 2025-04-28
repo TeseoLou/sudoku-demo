@@ -1,45 +1,69 @@
 /* Global Variables */
 /* Define reusable values like fonts using CSS custom properties */
 :root {
-  --font-body: "Quicksand", sans-serif; /* Main font for body text */
-  --font-heading: "Space Mono", monospace; /* Font for game title */
+    --font-body: "Quicksand", sans-serif;
+    /* Main font for body text */
+    --font-heading: "Space Mono", monospace;
+    /* Font for game title */
 }
 
 /* Utility Classes */
 /* Small reusable classes for behaviors like hiding elements */
 .hidden {
-  display: none; /* Hide elements visually but still in the DOM */
+    display: none;
+    /* Hide elements visually but still in the DOM */
 }
 
 /* Base Styles */
 /* General default styles applied across the entire site */
 body {
-  font-family: var(--font-body);
-  background: url(../backgrounds/light-background.png) no-repeat center
-    center/cover; /*Ensures the background image is responsive and covers the entire section*/
-  position: relative; /*Allows the image to crop dynamically instead of resizing*/
-  background-attachment: fixed; /*Keeps the background image static while scrolling*/
-  height: 100%; /*Ensures the section maintains a consistent height across all screen sizes*/
-  width: 100vw; /*Makes the section span full viewport width*/
+    font-family: var(--font-body);
+    /* Apply Quicksand font to body */
+    background-color: #f8f9fa;
+    /* Fallback light off-white color */
+    background-image: url(../backgrounds/light-background.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    /* Responsive background sizing */
+    position: relative;
+    /* Allows background image to crop rather than resize awkwardly */
+    background-attachment: fixed;
+    /* Keeps background static while content scrolls */
+    height: 100%;
+    /* Maintain consistent height */
+    width: 100vw;
+    /* Full viewport width */
 }
 
+/* Dark Mode Background */
+/* Changes background image and fallback color when dark mode is activated */
 body.dark {
-  background: url(../backgrounds/dark-background.png) no-repeat center
-    center/cover; /*Ensures the background image is responsive and covers the entire section*/
-  position: relative; /*Allows the image to crop dynamically instead of resizing*/
-  background-attachment: fixed; /*Keeps the background image static while scrolling*/
-  height: 100%; /*Ensures the section maintains a consistent height across all screen sizes*/
-  width: 100vw; /*Makes the section span full viewport width*/
+    background-color: #212529;
+    /* Fallback dark off-black color */
+    background-image: url(../backgrounds/dark-background.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    /* Responsive dark mode background */
+    position: relative;
+    /* Maintain dynamic cropping */
+    background-attachment: fixed;
+    /* Fixed background during scroll */
+    height: 100%;
+    /* Full height */
+    width: 100vw;
+    /* Full viewport width */
 }
 
 h1 {
-  font-family: var(--font-heading);
-  font-weight: bold;
+    font-family: var(--font-heading);
+    font-weight: bold;
 }
 
 /* Navbar Customization */
 /* Override Bootstrap's hamburger icon to make it black */
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  /* This SVG defines the 3-line hamburger icon in black instead of Bootstrap's default white */
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    /* This SVG defines the 3-line hamburger icon in black instead of Bootstrap's default white */
 }
