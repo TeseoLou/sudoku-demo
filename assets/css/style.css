@@ -96,19 +96,23 @@ main {
 #setup {
     display: flex;
     align-items: center;
-    /* Center the content horizontally */
     justify-content: center;
-    /* Center vertically if needed */
     border: 2px solid #212529;
-    /* Light grey border */
     padding: 20px;
-    /* Padding inside the form so content doesn’t touch the edges */
     max-width: 800px;
-    /* Set a maximum width */
     width: 90%;
-    /* Responsive: take 90% of viewport width on small screens */
     margin: 0 auto;
-    /* Center horizontally */
+}
+
+/* Make the legends (titles) smaller inside the setup form */
+#setup legend {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Make the radio button labels smaller inside the setup form */
+#setup .form-check-label {
+    font-size: 0.9rem;
 }
 
 /* Footer style (optional small tweaks) */
