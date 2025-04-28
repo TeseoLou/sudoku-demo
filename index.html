@@ -53,23 +53,38 @@
     <!-- Page Content -->
     <!-- Header Section -->
     <header>
-        <h1>Sudoku Game Demo</h1>
-        <!-- Setup area for game settings -->
-        <section id="setup">
-          <!-- Difficulty selection options -->
-          <div id="difficulty">
-            <h2>Select Difficulty: </h2>
+      <h1>Sudoku Game Demo</h1>
+      <!-- Setup area for game settings -->
+      <section id="setup">
+        <!-- Difficulty selection options -->
+        <div id="difficulty">
+          <h2>Select Difficulty:</h2>
+          <!-- Difficulty level labels with accessible for attributes -->
+          <div>
+            <input type="radio" id="easy" name="difficulty" value="easy" />
+            <label for="easy">Easy</label>
           </div>
-          <!-- Timer display -->
-          <div id="time">
-            <h2>Choose Time: </h2>
+
+          <div>
+            <input type="radio" id="medium" name="difficulty" value="medium" />
+            <label for="medium">Medium</label>
           </div>
-          <!-- Theme selection (light/dark mode) -->
-          <div id="theme">
-            <h2>Set Display: </h2>
+
+          <div>
+            <input type="radio" id="hard" name="difficulty" value="hard" />
+            <label for="hard">Hard</label>
           </div>
-        </section>
-      </header>
+        </div>
+        <!-- Timer display -->
+        <div id="time">
+          <h2>Choose Time:</h2>
+        </div>
+        <!-- Theme selection (light/dark mode) -->
+        <div id="theme">
+          <h2>Set Display:</h2>
+        </div>
+      </section>
+    </header>
     <!-- Main Content Placeholder -->
     <main></main>
     <!-- Footer Section -->
