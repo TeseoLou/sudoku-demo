@@ -10,6 +10,7 @@
     />
     <meta name="author" content="Teseo Lou Nicholson" />
     <title>Sudoku Game Demo</title>
+
     <!-- Favicons -->
     <link
       rel="apple-touch-icon"
@@ -34,6 +35,7 @@
       href="assets/favicons/favicon.ico"
       type="image/x-icon"
     />
+
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
@@ -41,143 +43,163 @@
       integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
       crossorigin="anonymous"
     />
+
     <!-- JQuery Mobile CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/jquery-mobile@1.4.1/dist/jquery.mobile.min.css"
       rel="stylesheet"
     />
+
     <!-- Link to external CSS file -->
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
+
     <!-- Page Content -->
+
     <!-- Header Section -->
     <header>
       <h1>Sudoku Game Demo</h1>
+
       <!-- Setup area for game settings -->
       <form id="setup" class="container my-4">
+
         <!-- Difficulty selection -->
         <fieldset id="difficulty" class="mb-4">
           <legend>Select Difficulty:</legend>
 
-          <span class="form-check me-3">
-            <input
-              type="radio"
-              id="easy"
-              name="difficulty"
-              value="easy"
-              class="form-check-input"
-              checked
-            />
-            <label for="easy" class="form-check-label">Easy</label>
-          </span>
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check">
+              <input
+                type="radio"
+                id="easy"
+                name="difficulty"
+                value="easy"
+                class="form-check-input"
+                checked
+              />
+              <label for="easy" class="form-check-label">Easy</label>
+            </div>
 
-          <span class="form-check me-3">
-            <input
-              type="radio"
-              id="medium"
-              name="difficulty"
-              value="medium"
-              class="form-check-input"
-            />
-            <label for="medium" class="form-check-label">Medium</label>
-          </span>
+            <div class="form-check">
+              <input
+                type="radio"
+                id="medium"
+                name="difficulty"
+                value="medium"
+                class="form-check-input"
+              />
+              <label for="medium" class="form-check-label">Medium</label>
+            </div>
 
-          <span class="form-check me-3">
-            <input
-              type="radio"
-              id="hard"
-              name="difficulty"
-              value="hard"
-              class="form-check-input"
-            />
-            <label for="hard" class="form-check-label">Hard</label>
-          </span>
+            <div class="form-check">
+              <input
+                type="radio"
+                id="hard"
+                name="difficulty"
+                value="hard"
+                class="form-check-input"
+              />
+              <label for="hard" class="form-check-label">Hard</label>
+            </div>
+          </div>
         </fieldset>
 
         <!-- Time selection -->
         <fieldset id="time" class="mb-4">
           <legend>Choose Time:</legend>
 
-          <span class="form-check me-3">
-            <input
-              type="radio"
-              id="time-3"
-              name="time"
-              value="3"
-              class="form-check-input"
-            />
-            <label for="time-3" class="form-check-label">3 Minutes</label>
-          </span>
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check">
+              <input
+                type="radio"
+                id="time-3"
+                name="time"
+                value="3"
+                class="form-check-input"
+              />
+              <label for="time-3" class="form-check-label">3 Minutes</label>
+            </div>
 
-          <span class="form-check me-3">
-            <input
-              type="radio"
-              id="time-5"
-              name="time"
-              value="5"
-              class="form-check-input"
-            />
-            <label for="time-5" class="form-check-label">5 Minutes</label>
-          </span>
+            <div class="form-check">
+              <input
+                type="radio"
+                id="time-5"
+                name="time"
+                value="5"
+                class="form-check-input"
+              />
+              <label for="time-5" class="form-check-label">5 Minutes</label>
+            </div>
 
-          <span class="form-check me-3">
-            <input
-              type="radio"
-              id="time-10"
-              name="time"
-              value="10"
-              class="form-check-input"
-              checked
-            />
-            <label for="time-10" class="form-check-label">10 Minutes</label>
-          </span>
+            <div class="form-check">
+              <input
+                type="radio"
+                id="time-10"
+                name="time"
+                value="10"
+                class="form-check-input"
+                checked
+              />
+              <label for="time-10" class="form-check-label">10 Minutes</label>
+            </div>
+          </div>
         </fieldset>
 
         <!-- Theme selection -->
         <fieldset id="theme" class="mb-4">
           <legend>Set Display:</legend>
 
-          <span class="form-check me-3">
-            <input
-              type="radio"
-              id="light"
-              name="theme"
-              value="light"
-              class="form-check-input"
-              checked
-            />
-            <label for="light" class="form-check-label">Light Mode</label>
-          </span>
+          <div class="d-flex align-items-center gap-3">
+            <div class="form-check">
+              <input
+                type="radio"
+                id="light"
+                name="theme"
+                value="light"
+                class="form-check-input"
+                checked
+              />
+              <label for="light" class="form-check-label">Light Mode</label>
+            </div>
 
-          <span class="form-check me-3">
-            <input
-              type="radio"
-              id="dark"
-              name="theme"
-              value="dark"
-              class="form-check-input"
-            />
-            <label for="dark" class="form-check-label">Dark Mode</label>
-          </span>
+            <div class="form-check">
+              <input
+                type="radio"
+                id="dark"
+                name="theme"
+                value="dark"
+                class="form-check-input"
+              />
+              <label for="dark" class="form-check-label">Dark Mode</label>
+            </div>
+          </div>
         </fieldset>
       </form>
     </header>
+
     <!-- Main Content Placeholder -->
     <main></main>
+
     <!-- Footer Section -->
+
     <footer></footer>
+
     <!-- JavaScript Files -->
+
     <!-- JQuery -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
     <!-- JQuery Mobile -->
     <script src="https://cdn.jsdelivr.net/npm/jquery-mobile@1.4.1/dist/jquery.mobile.min.js"></script>
+
     <!-- Bootstrap Bundle JS -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
+    
     <!-- Link to external JavaScript file -->
     <script src="assets/js/index.js"></script>
   </body>
