@@ -81,3 +81,9 @@ function initNavbarBehavior() {
 $(document).ready(function () {
     initNavbarBehavior();
 });
+
+// Close the modal when the Start button is clicked
+document.getElementById('start-button').addEventListener('click', function () {
+    const setupModal = bootstrap.Modal.getInstance(document.getElementById('setupModal'));
+    setupModal.hide();
+  });  
