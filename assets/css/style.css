@@ -177,6 +177,7 @@ main {
     border-radius: 0;
     border: none;
     color: black;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.9);
 }
 
 .modal-body {
