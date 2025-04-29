@@ -93,6 +93,25 @@ button,
     /* Prevent shrinking theme toggle switch */
 }
 
+/* Default color for switch when OFF (left) */
+#theme-switch {
+    background-color: #403A6B;
+    /* Dark purple */
+    border-color: #403A6B;
+}
+
+/* Thumb and background when ON (right) */
+#theme-switch:checked {
+    background-color: #E0B336;
+    /* Gold */
+    border-color: #E0B336;
+}
+
+/* Override Bootstrap's default switch slider dot color */
+#theme-switch:checked::before {
+    background-color: white;
+}
+
 /* Header */
 header {
     text-align: center;
@@ -117,7 +136,8 @@ main {
 }
 
 #game-stats {
-    display: none; /* Hide the Game Stats title */
+    display: none;
+    /* Hide the Game Stats title */
 }
 
 /* Modal */
@@ -198,6 +218,15 @@ main {
 #setup .text-center {
     width: 100%;
     /* Center start button in form */
+}
+
+/* Target radio buttons as well when theme is toggled */
+body.dark .form-check-input[type="radio"] {
+    accent-color: #403A6B;
+}
+
+body:not(.dark) .form-check-input[type="radio"] {
+    accent-color: #E0B336;
 }
 
 /* Footer */
