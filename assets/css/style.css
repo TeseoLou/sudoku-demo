@@ -1,25 +1,33 @@
 /* Global Variables */
 :root {
-    --font-body: "Quicksand", sans-serif; /* Main font for body text */
-    --font-heading: "Space Mono", monospace; /* Font for game title */
-  }
-  
-  /* Utility Classes */
-  .hidden {
-    display: none; /* Hide elements visually but still in the DOM */
-  }
-  
-  /* Base Styles */
-  html, body {
-    height: 100%; /* Stretch to full viewport height */
+    --font-body: "Quicksand", sans-serif;
+    /* Main font for body text */
+    --font-heading: "Space Mono", monospace;
+    /* Font for game title */
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+    /* Hide elements visually but still in the DOM */
+}
+
+/* Base Styles */
+html,
+body {
+    height: 100%;
+    /* Stretch to full viewport height */
     margin: 0;
     padding: 0;
-    display: flex; /* Flex layout for sticky footer */
-    flex-direction: column; /* Arrange children vertically */
-  }
-  
-  body {
-    font-family: var(--font-body); /* Apply Quicksand font */
+    display: flex;
+    /* Flex layout for sticky footer */
+    flex-direction: column;
+    /* Arrange children vertically */
+}
+
+body {
+    font-family: var(--font-body);
+    /* Apply Quicksand font */
     background-color: #f8f9fa;
     background-image: url(../backgrounds/light-background.png);
     background-repeat: no-repeat;
@@ -28,10 +36,10 @@
     position: relative;
     background-attachment: fixed;
     width: 100vw;
-  }
-  
-  /* Dark Mode */
-  body.dark {
+}
+
+/* Dark Mode */
+body.dark {
     background-color: #212529;
     background-image: url(../backgrounds/dark-background.png);
     background-repeat: no-repeat;
@@ -39,31 +47,31 @@
     background-size: cover;
     background-attachment: fixed;
     width: 100vw;
-  }
-  
-  /* Buttons */
-  button,
-  #setupModalLabel {
+}
+
+/* Buttons */
+button,
+#setupModalLabel {
     font-family: var(--font-heading);
     font-weight: bold;
     text-align: center;
-  }
-  
-  .btn {
+}
+
+.btn {
     border-radius: 0;
-  }
-  
-  /* Navbar */
-  .navbar-toggler-icon {
+}
+
+/* Navbar */
+.navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-  }
-  
-  #theme-toggle {
+}
+
+#theme-toggle {
     min-width: 150px;
-  }
-  
-  /* Theme Switch: base appearance */
-  .form-check-input[type="checkbox"] {
+}
+
+/* Theme Switch: base appearance */
+.form-check-input[type="checkbox"] {
     appearance: none;
     width: 3rem;
     height: 1.5rem;
@@ -73,10 +81,10 @@
     position: relative;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
-  }
-  
-  /* White thumb circle (default) */
-  .form-check-input[type="checkbox"]::before {
+}
+
+/* White thumb circle (default) */
+.form-check-input[type="checkbox"]::before {
     content: "";
     position: absolute;
     top: 2px;
@@ -86,121 +94,126 @@
     background-color: white;
     border-radius: 50%;
     transition: transform 0.3s ease;
-  }
-  
-  /* Light mode: gold track, purple glow, white thumb */
-  body:not(.dark) .form-check-input[type="checkbox"]:checked {
+}
+
+/* Light mode: gold track, purple glow, white thumb */
+body:not(.dark) .form-check-input[type="checkbox"]:checked {
     background-color: #E0B336;
     border-color: #E0B336;
     box-shadow: 0 0 8px #403A6B;
-  }
-  
-  body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
+}
+
+body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
-  }
-  
-  /* Dark mode: purple track, gold glow, white thumb */
-  body.dark .form-check-input[type="checkbox"] {
+}
+
+/* Dark mode: purple track, gold glow, white thumb */
+body.dark .form-check-input[type="checkbox"] {
     background-color: #403A6B;
     border-color: #403A6B;
     box-shadow: 0 0 10px 2px #E0B336;
-  }
-  
-  body.dark .form-check-input[type="checkbox"]::before {
+}
+
+body.dark .form-check-input[type="checkbox"]::before {
     background-color: white;
-  }
-  
-  body.dark .form-check-input[type="checkbox"]:checked::before {
+}
+
+body.dark .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
-  }
-  
-  /* Header */
-  header {
+}
+
+/* Header */
+header {
     text-align: center;
     padding-bottom: 10px;
-  }
-  
-  #title {
+}
+
+#title {
     font-family: var(--font-heading);
     font-weight: bold;
     font-size: 4rem;
-  }
-  
-  /* Main Content */
-  main {
+}
+
+/* Main Content */
+main {
     flex: 1 0 auto;
-  }
-  
-  #game-stats {
+}
+
+.game-stat {
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#game-stats {
     display: none;
-  }
-  
-  /* Modal */
-  .modal-body {
+}
+
+/* Modal */
+.modal-body {
     background-color: #f8f9fa;
     background-image: url(../backgrounds/light-background.png);
     border-radius: 0;
-  }
-  
-  .modal-footer {
+}
+
+.modal-footer {
     justify-content: center;
-  }
-  
-  /* Setup Form Inside Modal */
-  #setup {
+}
+
+/* Setup Form Inside Modal */
+#setup {
     background-color: transparent;
     border: 2px solid #212529;
     border-radius: 0;
     padding: 1.5rem;
     width: 100%;
-  }
-  
-  #setup .setup-options {
+}
+
+#setup .setup-options {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 40px;
     flex-wrap: wrap;
     width: 100%;
-  }
-  
-  #setup fieldset {
+}
+
+#setup fieldset {
     border: none;
     text-align: center;
     min-width: 300px;
     flex: 1;
-  }
-  
-  #setup .start-button {
+}
+
+#setup .start-button {
     margin-top: 20px;
-  }
-  
-  #setup legend {
+}
+
+#setup legend {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
-  }
-  
-  #setup .form-check-label {
+}
+
+#setup .form-check-label {
     font-size: 0.9rem;
-  }
-  
-  #setup .text-center {
+}
+
+#setup .text-center {
     width: 100%;
-  }
-  
-  /* Radio button accent colors based on theme */
-  body.dark .form-check-input[type="radio"] {
+}
+
+/* Radio button accent colors based on theme */
+body.dark .form-check-input[type="radio"] {
     accent-color: #403A6B;
-  }
-  
-  body:not(.dark) .form-check-input[type="radio"] {
+}
+
+body:not(.dark) .form-check-input[type="radio"] {
     accent-color: #E0B336;
-  }
-  
-  /* Footer */
-  footer {
+}
+
+/* Footer */
+footer {
     flex-shrink: 0;
-  }
-  
+}
