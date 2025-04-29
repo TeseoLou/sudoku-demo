@@ -51,7 +51,7 @@ function setupOutsideNavbarCollapse() {
         if (!isClickInsideNavbar && !isNavbarToggler && $navbarCollapse.hasClass("show")) {
             // Get the existing Bootstrap Collapse instance associated with the navbar
             const bsCollapse = bootstrap.Collapse.getInstance($navbarCollapse[0]);
-            
+
             // If an instance exists, call hide() to collapse the navbar
             if (bsCollapse) {
                 bsCollapse.hide();
@@ -59,6 +59,15 @@ function setupOutsideNavbarCollapse() {
         }
     });
 }
+
+// JavaScript to toggle dark mode class when switch is flipped
+document.getElementById('theme-switch').addEventListener('change', function () {
+    if (this.checked) {
+        document.body.classList.remove('dark'); // Light mode
+    } else {
+        document.body.classList.add('dark'); // Dark mode
+    }
+});
 
 /**
  * Initialize all navbar behaviors for collapse and smooth scrolling.
