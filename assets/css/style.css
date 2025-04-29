@@ -66,6 +66,33 @@ body.dark {
     /* Full viewport width */
 }
 
+/* Buttons */
+button,
+#setupModalLabel {
+    font-family: var(--font-heading);
+    /* Apply Space Mono to buttons and modal title */
+    font-weight: bold;
+    /* Bold text */
+    text-align: center;
+    /* Center text */
+}
+
+.btn {
+    border-radius: 0;
+    /* Remove button rounding */
+}
+
+/* Navbar */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    /* Black hamburger icon */
+}
+
+#theme-toggle {
+    min-width: 150px;
+    /* Prevent shrinking theme toggle switch */
+}
+
 /* Header */
 header {
     text-align: center;
@@ -89,18 +116,11 @@ main {
     /* Allow main to grow and push footer down */
 }
 
-/* Navbar Customization */
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-    /* Black hamburger icon */
+#game-stats {
+    display: none; /* Hide the Game Stats title */
 }
 
-#theme-toggle {
-    min-width: 150px;
-    /* Prevent shrinking theme toggle switch */
-}
-
-/* Modal Styles */
+/* Modal */
 .modal-body {
     background-color: #f8f9fa;
     /* Modal body background color */
@@ -178,30 +198,6 @@ main {
 #setup .text-center {
     width: 100%;
     /* Center start button in form */
-}
-
-/* Theme Switch Styling */
-#theme .form-check-input {
-    width: 3rem;
-    /* Wider toggle switch */
-    height: 1.5rem;
-    /* Taller toggle switch */
-}
-
-/* Button Styling */
-button,
-#setupModalLabel {
-    font-family: var(--font-heading);
-    /* Apply Space Mono to buttons and modal title */
-    font-weight: bold;
-    /* Bold text */
-    text-align: center;
-    /* Center text */
-}
-
-.btn {
-    border-radius: 0;
-    /* Remove button rounding */
 }
 
 /* Footer */
