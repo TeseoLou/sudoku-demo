@@ -97,18 +97,17 @@
                 <div class="modal-content setup-modal-custom">
 
                     <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="setupModalLabel">Game Setup</h5>
+                    <header class="modal-header">
+                        <h2 class="modal-title fs-5" id="setupModalLabel">Game Setup</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                    </header>
 
                     <!-- Modal Body -->
-                    <div class="modal-body">
+                    <section class="modal-body">
+                        <form id="setup" class="d-flex flex-column align-items-center">
 
-                        <!-- Setup Options inside modal -->
-                        <form id="setup">
-                            <fieldset id="difficulty" class="text-center mb-4">
-                                <legend>Difficulty:</legend>
+                            <fieldset id="difficulty" class="text-center mb-4 w-100">
+                                <legend class="mb-3">Difficulty</legend>
                                 <div class="d-flex flex-wrap justify-content-center gap-3">
                                     <div class="form-check">
                                         <input type="radio" id="easy" name="difficulty" value="easy"
@@ -130,8 +129,8 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset id="time" class="text-center">
-                                <legend>Timer</legend>
+                            <fieldset id="time" class="text-center w-100">
+                                <legend class="mb-3">Timer</legend>
                                 <div class="d-flex flex-wrap justify-content-center gap-3">
                                     <div class="form-check">
                                         <input type="radio" id="time-none" name="time" value="none"
@@ -158,17 +157,19 @@
                             </fieldset>
 
                         </form>
-
-                    </div>
+                    </section>
 
                     <!-- Modal Footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Confirm</button>
-                    </div>
+                    <footer class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Start</button>
+                    </footer>
+
                 </div>
             </div>
         </div>
+
     </header>
+
 
     <!-- Main Content Placeholder -->
     <main class="container">

@@ -98,26 +98,21 @@ main {
     /* Allow main to grow and push footer down */
 }
 
-/* Custom modal styling */
 .setup-modal-custom {
-    background-color: #f8f9fa;
-    /* Fallback light off-white color */
+    background-color: #f8f9fa; /* Fallback light off-white color */
     background-image: url(../backgrounds/light-background.png);
-    border: 2px solid #212529; /* Same as #setup section border color */
-    border-radius: 8px; /* Smooth rounded corners */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25); /* Strong shadow for modal */
+    border: none; /* Remove default modal border */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25); /* Add shadow */
+    padding: 0.5rem; /* Inner padding to inset content */
   }
   
-#setup {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #212529;
-    padding: 20px;
-    max-width: 800px;
-    width: 90%;
-    margin: 0 auto;
-}
+  #setup {
+    background-color: #ffffff; /* Optional: make form pop slightly */
+    border: 2px solid #212529; /* Same as #setup form border */
+    border-radius: 8px; /* Smooth rounded corners */
+    padding: 1rem; /* Internal padding */
+    width: 100%;
+  }
 
 #setup .setup-options {
     display: flex;
