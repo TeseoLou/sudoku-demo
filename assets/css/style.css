@@ -285,13 +285,22 @@ body:not(.dark) .form-check-input[type="radio"] {
 }
 
 /* Game Section */
+#game {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 0.5rem; /* Adjust this padding as needed */
+}
+
 /* Each number tile takes 20% width on small screens (5 per row) */
 #numbers-container {
     display: grid;
     gap: 1rem;
     justify-content: center;
-    padding: 1rem 0.5rem;
-  } 
+    padding: 0 0.5rem;
+    margin-top: auto;
+}
 
 /* Each tile styling */
 #numbers-container h2 {
