@@ -44,21 +44,26 @@ function setupOutsideNavbarCollapse() {
 }
 
 /**
- * Handle theme switch toggle (light/dark mode) and update aria-checked for accessibility.
+ * Handle theme switch toggle (light/dark mode)
  */
 function setupThemeSwitch() {
     const themeSwitch = document.getElementById('theme-switch');
-
+    const themeLabel = document.getElementById('theme-label');
+    const themeIcon = document.getElementById('theme-icon');
+  
     themeSwitch.addEventListener('change', function () {
-        if (this.checked) {
-            document.body.classList.remove('dark'); // Switch to Light Mode
-            themeSwitch.setAttribute('aria-checked', 'true'); // Accessibility
-        } else {
-            document.body.classList.add('dark'); // Switch to Dark Mode
-            themeSwitch.setAttribute('aria-checked', 'false'); // Accessibility
-        }
+      if (this.checked) {
+        document.body.classList.remove('dark'); // Switch to Light Mode
+        themeSwitch.setAttribute('aria-checked', 'true'); // Accessibility
+        themeIcon.className = 'fa-solid fa-sun'; // Change to sun icon
+      } else {
+        document.body.classList.add('dark'); // Switch to Dark Mode
+        themeSwitch.setAttribute('aria-checked', 'false'); // Accessibility
+        themeIcon.className = 'fa-solid fa-moon'; // Change to moon icon
+      }
     });
-}
+  }
+  
 
 /**
  * Close the setup modal when the Start button is clicked.
