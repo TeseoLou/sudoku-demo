@@ -1,49 +1,47 @@
-/* =================== */
 /* Global Variables */
-/* =================== */
 :root {
-    --font-body: "Quicksand", sans-serif;
-    --font-heading: "Space Mono", monospace;
+    --font-body: "Quicksand", sans-serif; /* Main font for body text */
+    --font-heading: "Space Mono", monospace; /* Main font for headings */
 }
 
-/* =================== */
 /* Utility Classes */
-/* =================== */
 .hidden {
-    display: none;
+    display: none; /* Utility to hide elements but keep them in the DOM */
 }
 
-/* =================== */
-/* Base Layout */
-/* =================== */
-html,
+/* Base Styles */
+
+/* Full height layout setup for html and body */
+html, body {
+    height: 100%; /* Stretch to full viewport height */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Stack children vertically */
+}
+
+/* Main body styling for background and layout */
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+    font-family: var(--font-body); 
+    background-color: #f8f9fa; /* Fallback color if background image fails */
+    background-image: url(../backgrounds/light-background.png); 
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    background-position: center center; /* Center the background image */
+    background-size: cover; /* Make background image cover the whole viewport */
+    background-attachment: fixed; /* Keep background static while scrolling */
+    position: relative; /* Needed for layering if child elements use absolute positioning */
+    width: 100vw; 
 }
 
-body {
-    font-family: var(--font-body);
-    background-color: #f8f9fa;
-    background-image: url(../backgrounds/light-background.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-    position: relative;
-    width: 100vw;
-}
+/* Dark Mode Styles for Body */
 
-/* Dark Mode Base */
+/* Background styling for dark mode */
 body.dark {
-    background-color: #212529;
-    background-image: url(../backgrounds/dark-background.png);
+    background-color: #212529; /* Dark fallback background color */
+    background-image: url(../backgrounds/dark-background.png); 
 }
 
-/* Dark Mode Text */
+/* Global text color override in dark mode applies white text to all common text elements */
 body.dark,
 body.dark h1,
 body.dark h2,
@@ -56,21 +54,22 @@ body.dark li,
 body.dark label,
 body.dark legend,
 body.dark a {
-    color: white;
+    color: white; 
 }
 
-/* =================== */
 /* Buttons */
-/* =================== */
+
+/* General button and modal label font styling */
 button,
 #setupModalLabel {
-    font-family: var(--font-heading);
-    font-weight: bold;
-    text-align: center;
+    font-family: var(--font-heading); 
+    font-weight: bold; 
+    text-align: center; 
 }
 
+/* Bootstrap button override */
 .btn {
-    border-radius: 0;
+    border-radius: 0; 
 }
 
 /* =================== */
@@ -80,19 +79,19 @@ button,
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-/* Dark Mode Navbar */
-body.dark .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
 #theme-toggle {
-    min-width: 150px;
+    min-width: 150px; /* Prevent shrinking theme toggle */
 }
 
 /* Navbar Links */
 body:not(.dark) .nav-link.active {
     color: #403a6b !important;
     text-decoration: underline;
+}
+
+/* Dark Mode Hamburger Menu */
+body.dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 body.dark .nav-link {
@@ -104,9 +103,7 @@ body.dark .nav-link.active {
     text-decoration: underline;
 }
 
-/* =================== */
-/* Theme Switch */
-/* =================== */
+/* Display Switch */
 .form-check-input[type="checkbox"] {
     appearance: none;
     width: 3rem;
@@ -119,6 +116,7 @@ body.dark .nav-link.active {
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+/* Switch Thumb */
 .form-check-input[type="checkbox"]::before {
     content: "";
     position: absolute;
@@ -131,7 +129,7 @@ body.dark .nav-link.active {
     transition: transform 0.3s ease;
 }
 
-/* Light Mode Theme Switch Active */
+/* Light Mode Switch */
 body:not(.dark) .form-check-input[type="checkbox"]:checked {
     background-color: #e0b336;
     border-color: #e0b336;
@@ -142,7 +140,7 @@ body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
 }
 
-/* Dark Mode Theme Switch */
+/* Dark Mode Switch */
 body.dark .form-check-input[type="checkbox"] {
     background-color: #403a6b;
     border-color: #403a6b;
@@ -173,7 +171,7 @@ header {
 }
 
 /* =================== */
-/* Modal */
+/* Modal (Light and Dark) */
 /* =================== */
 .modal-content {
     background-color: #f8f9fa;
@@ -211,14 +209,14 @@ body.dark .modal-footer {
 }
 
 /* =================== */
-/* Main (Game Stats, Game, Numbers) */
+/* Main (Game Stats, Game Board, Numbers) */
 /* =================== */
 main {
     flex: 1 0 auto;
 }
 
 #game-stats {
-    display: none;
+    display: none; /* Hide until needed */
 }
 
 .game-stat {
@@ -226,7 +224,7 @@ main {
     font-size: 0.9rem;
 }
 
-/* Game Section */
+/* Game Section Layout */
 #game {
     flex: 1;
     display: flex;
@@ -252,7 +250,7 @@ main {
 }
 
 /* =================== */
-/* Setup Form (inside Modal) */
+/* Setup Form */
 /* =================== */
 #setup {
     background-color: transparent;
@@ -299,7 +297,7 @@ body.dark #setup {
     width: 100%;
 }
 
-/* Radio Button Dark Mode */
+/* Radio Inputs for Light/Dark Mode */
 body.dark .form-check-input[type="radio"] {
     appearance: none;
     width: 1rem;
@@ -328,7 +326,7 @@ body.dark .form-check-input[type="radio"]::before {
     border-radius: 50%;
 }
 
-/* Light Mode Radio */
+/* Light Mode Radio Accent */
 body:not(.dark) .form-check-input[type="radio"] {
     accent-color: #403a6b;
 }
