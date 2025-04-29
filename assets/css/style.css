@@ -1,27 +1,24 @@
 /* Global Variables */
 :root {
     --font-body: "Quicksand", sans-serif;
-    /* Body font */
     --font-heading: "Space Mono", monospace;
-    /* Heading font */
-}
-
-/* Utility Classes */
-.hidden {
+  }
+  
+  /* Utility Classes */
+  .hidden {
     display: none;
-}
-
-/* Base Layout */
-html,
-body {
+  }
+  
+  /* Base Layout */
+  html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-}
-
-body {
+  }
+  
+  body {
     font-family: var(--font-body);
     background-color: #f8f9fa;
     background-image: url(../backgrounds/light-background.png);
@@ -31,93 +28,91 @@ body {
     background-attachment: fixed;
     position: relative;
     width: 100vw;
-}
-
-/* Dark Mode for Body */
-body.dark {
+  }
+  
+  /* Dark Mode Base */
+  body.dark {
     background-color: #212529;
     background-image: url(../backgrounds/dark-background.png);
-}
-
-/* Global Text Color in Dark Mode */
-body.dark,
-body.dark h1,
-body.dark h2,
-body.dark h3,
-body.dark h4,
-body.dark h5,
-body.dark h6,
-body.dark p,
-body.dark li,
-body.dark label,
-body.dark legend,
-body.dark a {
+  }
+  
+  /* Global Text Color in Dark Mode */
+  body.dark,
+  body.dark h1,
+  body.dark h2,
+  body.dark h3,
+  body.dark h4,
+  body.dark h5,
+  body.dark h6,
+  body.dark p,
+  body.dark li,
+  body.dark label,
+  body.dark legend,
+  body.dark a {
     color: white;
-}
-
-/* Typography */
-button,
-#setupModalLabel {
+  }
+  
+  /* Typography */
+  button,
+  #setupModalLabel {
     font-family: var(--font-heading);
     font-weight: bold;
     text-align: center;
-}
-
-.game-stat {
+  }
+  
+  .game-stat {
     font-family: var(--font-heading);
     font-weight: bold;
     font-size: 1.2rem;
-}
-
-#title {
+  }
+  
+  #title {
     font-family: var(--font-heading);
     font-weight: bold;
     font-size: 4rem;
-}
-
-/* Hide Game Stats Title */
-#game-stats {
+  }
+  
+  #game-stats {
     display: none;
-}
-
-/* Buttons General */
-.btn {
+  }
+  
+  /* Buttons */
+  .btn {
     border-radius: 0;
-}
-
-/* Navbar */
-.navbar-toggler-icon {
+  }
+  
+  /* Navbar */
+  .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
-#theme-toggle {
+  }
+  
+  #theme-toggle {
     min-width: 150px;
-}
-
-/* Navbar Links in Dark Mode */
-body.dark .nav-link {
+  }
+  
+  /* Navbar in Dark Mode */
+  body.dark .nav-link {
     color: white !important;
-}
-
-body.dark .nav-link.active {
-    color: #e0b336 !important;
-}
-
-/* Theme Switch Styling */
-.form-check-input[type="checkbox"] {
+  }
+  
+  body.dark .nav-link.active {
+    color: #E0B336 !important;
+  }
+  
+  /* Theme Switch Styling */
+  .form-check-input[type="checkbox"] {
     appearance: none;
     width: 3rem;
     height: 1.5rem;
-    background-color: #403a6b;
-    border: 2px solid #403a6b;
+    background-color: #403A6B;
+    border: 2px solid #403A6B;
     border-radius: 2rem;
     position: relative;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-/* Theme Switch Thumb */
-.form-check-input[type="checkbox"]::before {
+  }
+  
+  .form-check-input[type="checkbox"]::before {
     content: "";
     position: absolute;
     top: 2px;
@@ -127,46 +122,45 @@ body.dark .nav-link.active {
     background-color: white;
     border-radius: 50%;
     transition: transform 0.3s ease;
-}
-
-/* Theme Switch Behavior */
-body:not(.dark) .form-check-input[type="checkbox"]:checked {
-    background-color: #e0b336;
-    border-color: #e0b336;
-    box-shadow: 0 0 8px #403a6b;
-}
-
-body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
+  }
+  
+  body:not(.dark) .form-check-input[type="checkbox"]:checked {
+    background-color: #E0B336;
+    border-color: #E0B336;
+    box-shadow: 0 0 8px #403A6B;
+  }
+  
+  body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
-}
-
-body.dark .form-check-input[type="checkbox"] {
-    background-color: #403a6b;
-    border-color: #403a6b;
-    box-shadow: 0 0 10px 2px #e0b336;
-}
-
-body.dark .form-check-input[type="checkbox"]::before {
+  }
+  
+  body.dark .form-check-input[type="checkbox"] {
+    background-color: #403A6B;
+    border-color: #403A6B;
+    box-shadow: 0 0 10px 2px #E0B336;
+  }
+  
+  body.dark .form-check-input[type="checkbox"]::before {
     background-color: white;
-}
-
-body.dark .form-check-input[type="checkbox"]:checked::before {
+  }
+  
+  body.dark .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
-}
-
-/* Header */
-header {
+  }
+  
+  /* Header */
+  header {
     text-align: center;
     padding-bottom: 10px;
-}
-
-/* Main Section */
-main {
+  }
+  
+  /* Main Section */
+  main {
     flex: 1 0 auto;
-}
-
-/* Modal Styles */
-.modal-content {
+  }
+  
+  /* Modal General */
+  .modal-content {
     background-color: #f8f9fa;
     background-image: url(../backgrounds/light-background.png);
     background-repeat: no-repeat;
@@ -175,95 +169,123 @@ main {
     border-radius: 0;
     border: none;
     color: black;
-}
-
-.modal-body {
+  }
+  
+  .modal-body {
     border-radius: 0;
-}
-
-.modal-footer {
+  }
+  
+  .modal-footer {
     justify-content: center;
-}
-
-/* Modal in Dark Mode */
-body.dark .modal-content {
+  }
+  
+  /* Dark Mode Modal Styles */
+  body.dark .modal-dialog {
     background-color: #212529;
     background-image: url(../backgrounds/dark-background.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    border-radius: 0;
+    box-shadow: 0 0 20px 5px white; /* White glow */
+  }
+  
+  body.dark .modal-content {
+    background-color: transparent;
+    background-image: none;
     color: white;
-}
-
-/* Modal Sections inherit dark background */
-body.dark .modal-header,
-body.dark .modal-body,
-body.dark .modal-footer {
+  }
+  
+  body.dark .modal-header,
+  body.dark .modal-body,
+  body.dark .modal-footer {
     background-color: inherit;
     color: white;
-}
-
-/* Setup Form */
-#setup {
+  }
+  
+  /* Setup Form */
+  #setup {
     background-color: transparent;
     border: 2px solid #212529;
     border-radius: 0;
     padding: 1.5rem;
     width: 100%;
-}
-
-/* Setup Form border changes in dark mode */
-body.dark #setup {
+  }
+  
+  body.dark #setup {
     border-color: white;
-}
-
-/* Setup Layout */
-#setup .setup-options {
+  }
+  
+  #setup .setup-options {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 40px;
     flex-wrap: wrap;
-}
-
-#setup fieldset {
+  }
+  
+  #setup fieldset {
     border: none;
     text-align: center;
     min-width: 300px;
     flex: 1;
-}
-
-#setup .start-button {
+  }
+  
+  #setup .start-button {
     margin-top: 20px;
-}
-
-#setup legend {
+  }
+  
+  #setup legend {
     font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
-}
-
-#setup .form-check-label {
+  }
+  
+  #setup .form-check-label {
     font-size: 0.9rem;
-}
-
-#setup .text-center {
+  }
+  
+  #setup .text-center {
     width: 100%;
-}
-
-/* Radio Button Accent Colors */
-body.dark .form-check-input[type="radio"] {
-    accent-color: #e0b336;
-    /* Gold in dark mode */
-}
-
-body:not(.dark) .form-check-input[type="radio"] {
-    accent-color: #403a6b;
-    /* Purple in light mode */
-}
-
-/* Footer */
-footer {
+  }
+  
+  /* Radio Button Accent Color in Dark Mode */
+  body.dark .form-check-input[type="radio"] {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 2px solid white;
+    background-color: transparent;
+    position: relative;
+    cursor: pointer;
+    margin-top: 0.3rem;
+  }
+  
+  body.dark .form-check-input[type="radio"]:checked {
+    background-color: #E0B336;
+    border-color: #E0B336;
+  }
+  
+  body.dark .form-check-input[type="radio"]::before {
+    content: "";
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: auto;
+    margin-top: 0.15rem;
+    background-color: white;
+    border-radius: 50%;
+  }
+  
+  /* Radio Button Accent Color in Light Mode */
+  body:not(.dark) .form-check-input[type="radio"] {
+    accent-color: #403A6B;
+  }
+  
+  /* Footer */
+  footer {
     flex-shrink: 0;
-}
+  }
+  
