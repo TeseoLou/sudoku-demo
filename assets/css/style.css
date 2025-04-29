@@ -1,55 +1,46 @@
 /* Global Variables */
 :root {
     --font-body: "Quicksand", sans-serif;
-    /* Main font for body text */
+    /* Body font */
     --font-heading: "Space Mono", monospace;
-    /* Font for game title */
+    /* Heading font */
 }
 
 /* Utility Classes */
 .hidden {
     display: none;
-    /* Hide elements visually but still in the DOM */
+    /* Visually hidden but present in DOM */
 }
 
-/* Base Styles */
+/* Base Layout Styles */
 html,
 body {
     height: 100%;
-    /* Stretch to full viewport height */
     margin: 0;
     padding: 0;
     display: flex;
-    /* Flex layout for sticky footer */
     flex-direction: column;
-    /* Arrange children vertically */
 }
 
 body {
     font-family: var(--font-body);
-    /* Apply Quicksand font */
     background-color: #f8f9fa;
     background-image: url(../backgrounds/light-background.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    position: relative;
     background-attachment: fixed;
+    position: relative;
     width: 100vw;
 }
 
-/* Dark Mode */
+/* Dark Mode for Body */
 body.dark {
     background-color: #212529;
     background-image: url(../backgrounds/dark-background.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-    width: 100vw;
 }
 
-/* Change global text color in dark mode */
+/* Global Text Color in Dark Mode */
 body.dark,
 body.dark h1,
 body.dark h2,
@@ -65,7 +56,7 @@ body.dark a {
     color: white;
 }
 
-/* Buttons */
+/* Typography */
 button,
 #setupModalLabel {
     font-family: var(--font-heading);
@@ -73,6 +64,24 @@ button,
     text-align: center;
 }
 
+.game-stat {
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#title {
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+/* Hide Game Stats Title */
+#game-stats {
+    display: none;
+}
+
+/* Buttons General */
 .btn {
     border-radius: 0;
 }
@@ -86,18 +95,16 @@ button,
     min-width: 150px;
 }
 
-/* Navbar link color in dark mode */
+/* Navbar Links in Dark Mode */
 body.dark .nav-link {
     color: white !important;
-    /* Force white text for nav links */
 }
 
 body.dark .nav-link.active {
     color: #E0B336 !important;
-    /* Highlight active page in gold */
 }
 
-/* Theme Switch: base appearance */
+/* Theme Switch Styling */
 .form-check-input[type="checkbox"] {
     appearance: none;
     width: 3rem;
@@ -110,7 +117,7 @@ body.dark .nav-link.active {
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-/* White thumb circle (default) */
+/* Theme Switch Thumb */
 .form-check-input[type="checkbox"]::before {
     content: "";
     position: absolute;
@@ -123,37 +130,18 @@ body.dark .nav-link.active {
     transition: transform 0.3s ease;
 }
 
-/* Light mode: gold track, purple glow, white thumb */
+/* Light Mode Switch State */
 body:not(.dark) .form-check-input[type="checkbox"]:checked {
     background-color: #E0B336;
     border-color: #E0B336;
     box-shadow: 0 0 8px #403A6B;
 }
 
-/* Modal in dark mode */
-body.dark .modal-body {
-    background-color: #212529;
-    background-image: url(../backgrounds/dark-background.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    border: 2px solid white;
-    color: white;
-}
-
-body.dark .modal-header,
-body.dark .modal-body,
-body.dark .modal-footer {
-    background-color: transparent;
-    /* Transparent to show background */
-    color: white;
-}
-
 body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
 }
 
-/* Dark mode: purple track, gold glow, white thumb */
+/* Dark Mode Switch State */
 body.dark .form-check-input[type="checkbox"] {
     background-color: #403A6B;
     border-color: #403A6B;
@@ -174,25 +162,9 @@ header {
     padding-bottom: 10px;
 }
 
-#title {
-    font-family: var(--font-heading);
-    font-weight: bold;
-    font-size: 4rem;
-}
-
-/* Main Content */
+/* Main Section */
 main {
     flex: 1 0 auto;
-}
-
-.game-stat {
-    font-family: var(--font-heading);
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-#game-stats {
-    display: none;
 }
 
 /* Modal */
@@ -202,17 +174,26 @@ main {
     border-radius: 0;
 }
 
-/* Dark mode modal styling */
+/* Modal Footer */
+.modal-footer {
+    justify-content: center;
+}
+
+/* Modal in Dark Mode */
 body.dark .modal-content {
     background-color: #212529;
     background-image: url(../backgrounds/dark-background.png);
     background-size: cover;
+    background-position: center center;
     border: 2px solid white;
     color: white;
 }
 
-.modal-footer {
-    justify-content: center;
+body.dark .modal-header,
+body.dark .modal-body,
+body.dark .modal-footer {
+    background-color: transparent;
+    color: white;
 }
 
 /* Setup Form Inside Modal */
@@ -230,7 +211,6 @@ body.dark .modal-content {
     align-items: flex-start;
     gap: 40px;
     flex-wrap: wrap;
-    width: 100%;
 }
 
 #setup fieldset {
@@ -259,7 +239,7 @@ body.dark .modal-content {
     width: 100%;
 }
 
-/* Radio button accent colors based on theme */
+/* Radio Button Accent Colors Based on Theme */
 body.dark .form-check-input[type="radio"] {
     accent-color: #403A6B;
 }
