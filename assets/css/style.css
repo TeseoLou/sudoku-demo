@@ -1,255 +1,206 @@
 /* Global Variables */
 :root {
-    --font-body: "Quicksand", sans-serif;
-    /* Main font for body text */
-    --font-heading: "Space Mono", monospace;
-    /* Font for game title */
-}
-
-/* Utility Classes */
-.hidden {
-    display: none;
-    /* Hide elements visually but still in the DOM */
-}
-
-/* Base Styles */
-html,
-body {
-    height: 100%;
-    /* Stretch to full viewport height */
+    --font-body: "Quicksand", sans-serif; /* Main font for body text */
+    --font-heading: "Space Mono", monospace; /* Font for game title */
+  }
+  
+  /* Utility Classes */
+  .hidden {
+    display: none; /* Hide elements visually but still in the DOM */
+  }
+  
+  /* Base Styles */
+  html, body {
+    height: 100%; /* Stretch to full viewport height */
     margin: 0;
-    /* Remove default margins */
     padding: 0;
-    /* Remove default padding */
-    display: flex;
-    /* Flex layout for sticky footer */
-    flex-direction: column;
-    /* Arrange children vertically */
-}
-
-body {
-    font-family: var(--font-body);
-    /* Apply Quicksand font */
+    display: flex; /* Flex layout for sticky footer */
+    flex-direction: column; /* Arrange children vertically */
+  }
+  
+  body {
+    font-family: var(--font-body); /* Apply Quicksand font */
     background-color: #f8f9fa;
-    /* Light background fallback */
     background-image: url(../backgrounds/light-background.png);
-    /* Background image */
     background-repeat: no-repeat;
-    /* No repeat */
     background-position: center center;
-    /* Centered */
     background-size: cover;
-    /* Responsive background sizing */
     position: relative;
-    /* Allow background cropping */
     background-attachment: fixed;
-    /* Fixed while scrolling */
     width: 100vw;
-    /* Full viewport width */
-}
-
-/* Dark Mode */
-body.dark {
+  }
+  
+  /* Dark Mode */
+  body.dark {
     background-color: #212529;
-    /* Dark background fallback */
     background-image: url(../backgrounds/dark-background.png);
-    /* Dark mode background */
     background-repeat: no-repeat;
-    /* No repeat */
     background-position: center center;
-    /* Centered */
     background-size: cover;
-    /* Responsive background sizing */
     background-attachment: fixed;
-    /* Fixed while scrolling */
     width: 100vw;
-    /* Full viewport width */
-}
-
-/* Buttons */
-button,
-#setupModalLabel {
+  }
+  
+  /* Buttons */
+  button,
+  #setupModalLabel {
     font-family: var(--font-heading);
-    /* Apply Space Mono to buttons and modal title */
     font-weight: bold;
-    /* Bold text */
     text-align: center;
-    /* Center text */
-}
-
-.btn {
+  }
+  
+  .btn {
     border-radius: 0;
-    /* Remove button rounding */
-}
-
-/* Navbar */
-.navbar-toggler-icon {
+  }
+  
+  /* Navbar */
+  .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-    /* Black hamburger icon */
-}
-
-#theme-toggle {
+  }
+  
+  #theme-toggle {
     min-width: 150px;
-    /* Prevent shrinking theme toggle switch */
-}
-
-/* Default color for switch when OFF (left) */
-#theme-switch {
+  }
+  
+  /* Theme Switch: base appearance */
+  .form-check-input[type="checkbox"] {
+    appearance: none;
+    width: 3rem;
+    height: 1.5rem;
     background-color: #403A6B;
-    /* Dark purple */
-    border-color: #403A6B;
-}
-
-/* Thumb and background when ON (right) */
-#theme-switch:checked {
-    background-color: #E0B336;
-    /* Gold */
-    border-color: #E0B336;
-}
-
-/* Override Bootstrap's default switch slider dot color */
-#theme-switch:checked::before {
+    border: 2px solid #403A6B;
+    border-radius: 2rem;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  /* White thumb circle (default) */
+  .form-check-input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1.1rem;
+    height: 1.1rem;
     background-color: white;
-}
-
-/* Ensure the switch thumb stays white */
-body.dark .form-check-input[type="checkbox"]::before {
-    background-color: white; /* Force white thumb */
+    border-radius: 50%;
+    transition: transform 0.3s ease;
   }
   
-  /* Golden glow around the switch track in dark mode */
-  body.dark .form-check-input[type="checkbox"] {
-    box-shadow: 0 0 8px 2px #E0B336; /* Golden glow */
-    background-color: #403A6B;       /* Keep track dark purple */
-    border-color: #403A6B;
-  }
-  
-  /* Optional: glow when checked too (in dark mode) */
-  body.dark .form-check-input[type="checkbox"]:checked {
-    background-color: #E0B336;       /* Gold background when checked */
+  /* Light mode: gold track, purple glow, white thumb */
+  body:not(.dark) .form-check-input[type="checkbox"]:checked {
+    background-color: #E0B336;
     border-color: #E0B336;
-    box-shadow: 0 0 10px 3px #E0B336; /* Stronger glow */
+    box-shadow: 0 0 8px #403A6B;
   }
-
-/* Header */
-header {
+  
+  body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
+    transform: translateX(1.5rem);
+  }
+  
+  /* Dark mode: purple track, gold glow, white thumb */
+  body.dark .form-check-input[type="checkbox"] {
+    background-color: #403A6B;
+    border-color: #403A6B;
+    box-shadow: 0 0 10px 2px #E0B336;
+  }
+  
+  body.dark .form-check-input[type="checkbox"]::before {
+    background-color: white;
+  }
+  
+  body.dark .form-check-input[type="checkbox"]:checked::before {
+    transform: translateX(1.5rem);
+  }
+  
+  /* Header */
+  header {
     text-align: center;
-    /* Center header content */
     padding-bottom: 10px;
-    /* Space under header */
-}
-
-#title {
+  }
+  
+  #title {
     font-family: var(--font-heading);
-    /* Apply Space Mono to title */
     font-weight: bold;
-    /* Bold title */
     font-size: 4rem;
-    /* Large title */
-}
-
-/* Main Content */
-main {
+  }
+  
+  /* Main Content */
+  main {
     flex: 1 0 auto;
-    /* Allow main to grow and push footer down */
-}
-
-#game-stats {
+  }
+  
+  #game-stats {
     display: none;
-    /* Hide the Game Stats title */
-}
-
-/* Modal */
-.modal-body {
+  }
+  
+  /* Modal */
+  .modal-body {
     background-color: #f8f9fa;
-    /* Modal body background color */
     background-image: url(../backgrounds/light-background.png);
-    /* Modal body background image */
     border-radius: 0;
-    /* No rounding */
-}
-
-.modal-footer {
+  }
+  
+  .modal-footer {
     justify-content: center;
-    /* Center the Start button */
-}
-
-/* Setup Form Inside Modal */
-#setup {
+  }
+  
+  /* Setup Form Inside Modal */
+  #setup {
     background-color: transparent;
-    /* Transparent to match modal */
     border: 2px solid #212529;
-    /* Dark border */
     border-radius: 0;
-    /* No rounding */
     padding: 1.5rem;
-    /* Padding inside setup */
     width: 100%;
-    /* Full width */
-}
-
-#setup .setup-options {
+  }
+  
+  #setup .setup-options {
     display: flex;
-    /* Flex for setup options */
     justify-content: center;
-    /* Center options horizontally */
     align-items: flex-start;
-    /* Align items at top */
     gap: 40px;
-    /* Space between Difficulty and Time */
     flex-wrap: wrap;
-    /* Allow wrapping on small screens */
     width: 100%;
-}
-
-#setup fieldset {
+  }
+  
+  #setup fieldset {
     border: none;
-    /* Remove default fieldset border */
     text-align: center;
-    /* Center fieldset content */
     min-width: 300px;
-    /* Minimum width for side-by-side layout */
     flex: 1;
-    /* Allow flex growing */
-}
-
-#setup .start-button {
+  }
+  
+  #setup .start-button {
     margin-top: 20px;
-    /* Space above Start button */
-}
-
-#setup legend {
+  }
+  
+  #setup legend {
     font-family: var(--font-heading);
-    /* Apply heading font to legends */
     font-size: 1.5rem;
-    /* Slightly bigger font size for legends */
     font-weight: bold;
-    /* Bold legends */
     text-align: center;
-    /* Center legend text */
-}
-
-#setup .form-check-label {
+  }
+  
+  #setup .form-check-label {
     font-size: 0.9rem;
-    /* Slightly smaller font size for labels */
-}
-
-#setup .text-center {
+  }
+  
+  #setup .text-center {
     width: 100%;
-    /* Center start button in form */
-}
-
-/* Target radio buttons as well when theme is toggled */
-body.dark .form-check-input[type="radio"] {
+  }
+  
+  /* Radio button accent colors based on theme */
+  body.dark .form-check-input[type="radio"] {
     accent-color: #403A6B;
-}
-
-body:not(.dark) .form-check-input[type="radio"] {
+  }
+  
+  body:not(.dark) .form-check-input[type="radio"] {
     accent-color: #E0B336;
-}
-
-/* Footer */
-footer {
+  }
+  
+  /* Footer */
+  footer {
     flex-shrink: 0;
-    /* Prevent footer from shrinking */
-}
+  }
+  
