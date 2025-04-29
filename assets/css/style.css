@@ -91,6 +91,11 @@ button,
     min-width: 150px;
 }
 
+body:not(.dark) .nav-link.active {
+    color: #403A6B !important;
+    text-decoration: underline;
+}
+
 /* Navbar in Dark Mode */
 body.dark .nav-link {
     color: white !important;
@@ -98,6 +103,7 @@ body.dark .nav-link {
 
 body.dark .nav-link.active {
     color: #E0B336 !important;
+    text-decoration: underline;
 }
 
 /* Theme Switch Styling */
@@ -304,5 +310,5 @@ footer a {
 }
 
 footer a:hover {
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
 }
