@@ -9,10 +9,9 @@
 /* Utility Classes */
 .hidden {
     display: none;
-    /* Visually hidden but present in DOM */
 }
 
-/* Base Layout Styles */
+/* Base Layout */
 html,
 body {
     height: 100%;
@@ -101,7 +100,7 @@ body.dark .nav-link {
 }
 
 body.dark .nav-link.active {
-    color: #E0B336 !important;
+    color: #e0b336 !important;
 }
 
 /* Theme Switch Styling */
@@ -109,8 +108,8 @@ body.dark .nav-link.active {
     appearance: none;
     width: 3rem;
     height: 1.5rem;
-    background-color: #403A6B;
-    border: 2px solid #403A6B;
+    background-color: #403a6b;
+    border: 2px solid #403a6b;
     border-radius: 2rem;
     position: relative;
     cursor: pointer;
@@ -130,22 +129,21 @@ body.dark .nav-link.active {
     transition: transform 0.3s ease;
 }
 
-/* Light Mode Switch State */
+/* Theme Switch Behavior */
 body:not(.dark) .form-check-input[type="checkbox"]:checked {
-    background-color: #E0B336;
-    border-color: #E0B336;
-    box-shadow: 0 0 8px #403A6B;
+    background-color: #e0b336;
+    border-color: #e0b336;
+    box-shadow: 0 0 8px #403a6b;
 }
 
 body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
 }
 
-/* Dark Mode Switch State */
 body.dark .form-check-input[type="checkbox"] {
-    background-color: #403A6B;
-    border-color: #403A6B;
-    box-shadow: 0 0 10px 2px #E0B336;
+    background-color: #403a6b;
+    border-color: #403a6b;
+    box-shadow: 0 0 10px 2px #e0b336;
 }
 
 body.dark .form-check-input[type="checkbox"]::before {
@@ -167,14 +165,22 @@ main {
     flex: 1 0 auto;
 }
 
-/* Modal */
-.modal-body {
+/* Modal Styles */
+.modal-content {
     background-color: #f8f9fa;
     background-image: url(../backgrounds/light-background.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 0;
+    border: none;
+    color: black;
+}
+
+.modal-body {
     border-radius: 0;
 }
 
-/* Modal Footer */
 .modal-footer {
     justify-content: center;
 }
@@ -184,20 +190,20 @@ body.dark .modal-content {
     background-color: #212529;
     background-image: url(../backgrounds/dark-background.png);
     background-repeat: no-repeat;
-    background-size: cover;
     background-position: center center;
-    border: 2px solid white;
+    background-size: cover;
     color: white;
 }
 
+/* Modal Sections inherit dark background */
 body.dark .modal-header,
 body.dark .modal-body,
 body.dark .modal-footer {
-  background-color: inherit;
-  color: white;
+    background-color: inherit;
+    color: white;
 }
 
-/* Setup Form Inside Modal */
+/* Setup Form */
 #setup {
     background-color: transparent;
     border: 2px solid #212529;
@@ -206,6 +212,12 @@ body.dark .modal-footer {
     width: 100%;
 }
 
+/* Setup Form border changes in dark mode */
+body.dark #setup {
+    border-color: white;
+}
+
+/* Setup Layout */
 #setup .setup-options {
     display: flex;
     justify-content: center;
@@ -240,13 +252,15 @@ body.dark .modal-footer {
     width: 100%;
 }
 
-/* Radio Button Accent Colors Based on Theme */
+/* Radio Button Accent Colors */
 body.dark .form-check-input[type="radio"] {
-    accent-color: #403A6B;
+    accent-color: #e0b336;
+    /* Gold in dark mode */
 }
 
 body:not(.dark) .form-check-input[type="radio"] {
-    accent-color: #E0B336;
+    accent-color: #403a6b;
+    /* Purple in light mode */
 }
 
 /* Footer */
