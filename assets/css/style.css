@@ -298,33 +298,35 @@ footer {
     background-color: transparent;
     text-decoration: none;
     color: inherit;
-  }
-  
-  footer a {
+}
+
+footer a {
     text-decoration: none;
     display: inline-block;
     line-height: 1;
     vertical-align: middle;
     color: inherit;
-  }
-  
-  footer a i {
+}
+
+footer a i {
     color: inherit;
-  }
-  
-  footer a:hover {
+}
+
+footer a:hover {
     color: #403A6B;
     font-size: 1.2rem;
-  }
-  
-  /* Dark Mode Footer Text and Icons */
-  body.dark footer,
-  body.dark footer a,
-  body.dark footer a i {
+}
+
+/* Dark Mode Footer Text and Icons */
+body.dark footer,
+body.dark footer div,
+body.dark footer span,
+body.dark footer p body.dark footer a,
+body.dark footer a i {
     color: white !important;
-  }
-  
-  body.dark footer a:hover,
-  body.dark footer a:hover i {
+}
+
+body.dark footer a:hover,
+body.dark footer a:hover i {
     color: #E0B336 !important;
-  }  
+}
