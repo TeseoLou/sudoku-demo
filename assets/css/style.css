@@ -293,6 +293,11 @@ body:not(.dark) .form-check-input[type="radio"] {
     accent-color: #403A6B;
 }
 
+/* Game Section */
+#numbers-container h2 {
+    font-size: 1.3rem;
+}
+
 /* Footer */
 footer {
     flex-shrink: 0;
