@@ -161,6 +161,15 @@ header {
     padding-bottom: 10px;
 }
 
+#title {
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 2.5rem;
+    /* Reduced from 4rem */
+    padding-top: 1.5rem;
+    /* Adds space above the title */
+}
+
 /* Main Section */
 main {
     flex: 1 0 auto;
