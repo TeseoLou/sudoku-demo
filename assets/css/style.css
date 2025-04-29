@@ -1,5 +1,4 @@
 /* Global Variables */
-/* Define reusable values like fonts using CSS custom properties */
 :root {
     --font-body: "Quicksand", sans-serif;
     /* Main font for body text */
@@ -8,181 +7,198 @@
 }
 
 /* Utility Classes */
-/* Small reusable classes for behaviors like hiding elements */
 .hidden {
     display: none;
     /* Hide elements visually but still in the DOM */
 }
 
 /* Base Styles */
-/* General default styles applied across the entire site */
-/* Layout for full-height page */
 html,
 body {
     height: 100%;
-    /* Make html and body stretch to full viewport height */
+    /* Stretch to full viewport height */
     margin: 0;
     /* Remove default margins */
     padding: 0;
+    /* Remove default padding */
     display: flex;
+    /* Flex layout for sticky footer */
     flex-direction: column;
     /* Arrange children vertically */
 }
 
 body {
     font-family: var(--font-body);
-    /* Apply Quicksand font to body */
+    /* Apply Quicksand font */
     background-color: #f8f9fa;
-    /* Fallback light off-white color */
+    /* Light background fallback */
     background-image: url(../backgrounds/light-background.png);
+    /* Background image */
     background-repeat: no-repeat;
+    /* No repeat */
     background-position: center center;
+    /* Centered */
     background-size: cover;
     /* Responsive background sizing */
     position: relative;
-    /* Allows background image to crop rather than resize awkwardly */
+    /* Allow background cropping */
     background-attachment: fixed;
-    /* Keeps background static while content scrolls */
-    height: 100%;
-    /* Maintain consistent height */
+    /* Fixed while scrolling */
     width: 100vw;
     /* Full viewport width */
 }
 
-/* Dark Mode Background */
-/* Changes background image and fallback color when dark mode is activated */
+/* Dark Mode */
 body.dark {
     background-color: #212529;
-    /* Fallback dark off-black color */
+    /* Dark background fallback */
     background-image: url(../backgrounds/dark-background.png);
+    /* Dark mode background */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    /* Responsive dark mode background */
-    position: relative;
-    /* Maintain dynamic cropping */
     background-attachment: fixed;
-    /* Fixed background during scroll */
-    height: 100%;
-    /* Full height */
-    width: 100vw;
-    /* Full viewport width */
 }
 
+/* Header */
 header {
     text-align: center;
+    /* Center header content */
     padding-bottom: 10px;
+    /* Space under header */
 }
 
 #title {
     font-family: var(--font-heading);
+    /* Apply Space Mono to title */
     font-weight: bold;
+    /* Bold title */
     font-size: 4rem;
+    /* Large title */
 }
 
-/* Navbar Customization */
-/* Override Bootstrap's hamburger icon to make it black */
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-    /* This SVG defines the 3-line hamburger icon in black instead of Bootstrap's default white */
-}
-
-#theme-toggle {
-    min-width: 150px;
-    /* Prevents the switch from shrinking too much */
-}
-
-/* Make main content grow to fill space */
+/* Main Content */
 main {
     flex: 1 0 auto;
     /* Allow main to grow and push footer down */
 }
 
-/* Button styling */
-button,
-#setupModalLabel {
-  font-family: var(--font-heading); /* Apply heading font */
-  font-weight: bold;
-  text-align: center;
+/* Navbar Customization */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    /* Black hamburger icon */
 }
 
-/* Remove border-radius from buttons */
-.btn {
+#theme-toggle {
+    min-width: 150px;
+    /* Prevent shrinking theme toggle switch */
+}
+
+/* Modal Styles */
+.modal-body {
+    background-color: #f8f9fa;
+    /* Modal body background color */
+    background-image: url(../backgrounds/light-background.png);
+    /* Modal body background image */
     border-radius: 0;
-    /* Remove rounded corners from all Bootstrap buttons */
+    /* No rounding */
 }
 
-/* Center the Start button inside the modal footer */
 .modal-footer {
     justify-content: center;
-    /* Center the footer content (Start button) */
+    /* Center the Start button */
 }
 
-/* Setup form inside modal */
+/* Setup Form Inside Modal */
 #setup {
-    background-color: #ffffff; /* Optional slight white inside */
-    border: 2px solid #212529; /* Dark border */
-    border-radius: 0; /* No rounding */
+    background-color: transparent;
+    /* Transparent to match modal */
+    border: 2px solid #212529;
+    /* Dark border */
+    border-radius: 0;
+    /* No rounding */
     padding: 1.5rem;
+    /* Padding inside setup */
     width: 100%;
-  }
-
-/* Setup form inside modal */
-#setup {
-    background-color: #ffffff; /* Optional slight white inside */
-    border: 2px solid #212529; /* Dark border */
-    border-radius: 0; /* No rounding */
-    padding: 1.5rem;
-    width: 100%;
-  }
+    /* Full width */
+}
 
 #setup .setup-options {
     display: flex;
+    /* Flex for setup options */
     justify-content: center;
+    /* Center options horizontally */
     align-items: flex-start;
+    /* Align items at top */
     gap: 40px;
     /* Space between Difficulty and Time */
     flex-wrap: wrap;
-    /* Allows wrapping on small screens */
+    /* Allow wrapping on small screens */
     width: 100%;
 }
 
 #setup fieldset {
     border: none;
-    /* Remove default ugly fieldset border */
+    /* Remove default fieldset border */
     text-align: center;
+    /* Center fieldset content */
     min-width: 300px;
-    /* Minimum width so they sit nicely side-by-side */
+    /* Minimum width for side-by-side layout */
     flex: 1;
+    /* Allow flex growing */
 }
 
 #setup .start-button {
     margin-top: 20px;
+    /* Space above Start button */
 }
 
-/* Legend styling (Difficulty, Timer titles) */
 #setup legend {
     font-family: var(--font-heading);
-    font-size: 1.5rem; /* Slightly bigger (24px) */
+    /* Apply heading font to legends */
+    font-size: 1.5rem;
+    /* Slightly bigger font size for legends */
     font-weight: bold;
+    /* Bold legends */
     text-align: center;
-  }
+    /* Center legend text */
+}
 
 #setup .form-check-label {
     font-size: 0.9rem;
+    /* Slightly smaller font size for labels */
 }
 
-/* Center Start button inside form */
 #setup .text-center {
     width: 100%;
+    /* Center start button in form */
 }
 
+/* Theme Switch Styling */
 #theme .form-check-input {
     width: 3rem;
+    /* Wider toggle switch */
     height: 1.5rem;
+    /* Taller toggle switch */
 }
 
-/* Footer style */
+/* Button Styling */
+button,
+#setupModalLabel {
+    font-family: var(--font-heading);
+    /* Apply Space Mono to buttons and modal title */
+    font-weight: bold;
+    /* Bold text */
+    text-align: center;
+    /* Center text */
+}
+
+.btn {
+    border-radius: 0;
+    /* Remove button rounding */
+}
+
+/* Footer */
 footer {
     flex-shrink: 0;
     /* Prevent footer from shrinking */
