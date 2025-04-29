@@ -247,8 +247,7 @@ body.dark #setup {
 
 #setup legend {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1rem;
     text-align: center;
 }
 
