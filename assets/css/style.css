@@ -98,15 +98,12 @@ main {
     /* Allow main to grow and push footer down */
 }
 
-/* Apply heading font to buttons and modal title */
+/* Button styling */
 button,
 #setupModalLabel {
-    font-family: var(--font-heading);
-    /* Use Space Mono font */
-    font-weight: bold;
-    /* Make text bold */
-    text-align: center;
-    /* Center text */
+  font-family: var(--font-heading); /* Apply heading font */
+  font-weight: bold;
+  text-align: center;
 }
 
 /* Remove border-radius from buttons */
@@ -121,26 +118,23 @@ button,
     /* Center the footer content (Start button) */
 }
 
-.setup-modal-custom {
-    background-color: #f8f9fa;
-    /* Fallback light off-white color */
-    background-image: url(../backgrounds/light-background.png);
-    border: none;
-    /* Remove default modal border */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
-    /* Add shadow */
-    padding: 0.5rem;
-    /* Inner padding to inset content */
-}
-
+/* Setup form inside modal */
 #setup {
-    background-color: transparent;
-    border: 2px solid #212529;
-    /* Same as #setup form border */
-    padding: 1rem;
-    /* Internal padding */
+    background-color: #ffffff; /* Optional slight white inside */
+    border: 2px solid #212529; /* Dark border */
+    border-radius: 0; /* No rounding */
+    padding: 1.5rem;
     width: 100%;
-}
+  }
+
+/* Setup form inside modal */
+#setup {
+    background-color: #ffffff; /* Optional slight white inside */
+    border: 2px solid #212529; /* Dark border */
+    border-radius: 0; /* No rounding */
+    padding: 1.5rem;
+    width: 100%;
+  }
 
 #setup .setup-options {
     display: flex;
@@ -166,13 +160,21 @@ button,
     margin-top: 20px;
 }
 
+/* Legend styling (Difficulty, Timer titles) */
 #setup legend {
-    font-size: 1rem;
+    font-family: var(--font-heading);
+    font-size: 1.5rem; /* Slightly bigger (24px) */
     font-weight: bold;
-}
+    text-align: center;
+  }
 
 #setup .form-check-label {
     font-size: 0.9rem;
+}
+
+/* Center Start button inside form */
+#setup .text-center {
+    width: 100%;
 }
 
 #theme .form-check-input {
