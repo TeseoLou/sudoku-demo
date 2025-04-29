@@ -1,15 +1,21 @@
+/* =================== */
 /* Global Variables */
+/* =================== */
 :root {
     --font-body: "Quicksand", sans-serif;
     --font-heading: "Space Mono", monospace;
 }
 
+/* =================== */
 /* Utility Classes */
+/* =================== */
 .hidden {
     display: none;
 }
 
+/* =================== */
 /* Base Layout */
+/* =================== */
 html,
 body {
     height: 100%;
@@ -37,7 +43,7 @@ body.dark {
     background-image: url(../backgrounds/dark-background.png);
 }
 
-/* Global Text Color in Dark Mode */
+/* Dark Mode Text */
 body.dark,
 body.dark h1,
 body.dark h2,
@@ -53,7 +59,9 @@ body.dark a {
     color: white;
 }
 
+/* =================== */
 /* Buttons */
+/* =================== */
 button,
 #setupModalLabel {
     font-family: var(--font-heading);
@@ -65,23 +73,26 @@ button,
     border-radius: 0;
 }
 
+/* =================== */
 /* Navbar */
+/* =================== */
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Dark Mode Navbar */
+body.dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 #theme-toggle {
     min-width: 150px;
 }
 
+/* Navbar Links */
 body:not(.dark) .nav-link.active {
     color: #403a6b !important;
     text-decoration: underline;
-}
-
-/* Navbar in Dark Mode */
-body.dark .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 body.dark .nav-link {
@@ -93,7 +104,9 @@ body.dark .nav-link.active {
     text-decoration: underline;
 }
 
-/* Theme Switch Styling */
+/* =================== */
+/* Theme Switch */
+/* =================== */
 .form-check-input[type="checkbox"] {
     appearance: none;
     width: 3rem;
@@ -118,6 +131,7 @@ body.dark .nav-link.active {
     transition: transform 0.3s ease;
 }
 
+/* Light Mode Theme Switch Active */
 body:not(.dark) .form-check-input[type="checkbox"]:checked {
     background-color: #e0b336;
     border-color: #e0b336;
@@ -128,6 +142,7 @@ body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
 }
 
+/* Dark Mode Theme Switch */
 body.dark .form-check-input[type="checkbox"] {
     background-color: #403a6b;
     border-color: #403a6b;
@@ -142,7 +157,9 @@ body.dark .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
 }
 
+/* =================== */
 /* Header */
+/* =================== */
 header {
     text-align: center;
     padding-bottom: 10px;
@@ -152,26 +169,12 @@ header {
     font-family: var(--font-heading);
     font-weight: bold;
     font-size: 2.5rem;
-    /* Reduced from 4rem */
     padding-top: 1.5rem;
-    /* Adds space above the title */
 }
 
-/* Main Section */
-main {
-    flex: 1 0 auto;
-}
-
-.game-stat {
-    font-family: var(--font-heading);
-    font-size: 1rem;
-}
-
-#game-stats {
-    display: none;
-}
-
-/* Modal General */
+/* =================== */
+/* Modal */
+/* =================== */
 .modal-content {
     background-color: #f8f9fa;
     background-image: url(../backgrounds/light-background.png);
@@ -192,13 +195,12 @@ main {
     justify-content: center;
 }
 
-/* Dark Mode Modal Styles */
+/* Dark Mode Modal */
 body.dark .modal-content {
     background-color: #212529;
     background-image: url(../backgrounds/dark-background.png);
     color: white;
     box-shadow: 0 0 20px 5px white;
-    /* White glow */
 }
 
 body.dark .modal-header,
@@ -208,7 +210,50 @@ body.dark .modal-footer {
     color: white;
 }
 
-/* Setup Form */
+/* =================== */
+/* Main (Game Stats, Game, Numbers) */
+/* =================== */
+main {
+    flex: 1 0 auto;
+}
+
+#game-stats {
+    display: none;
+}
+
+.game-stat {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+}
+
+/* Game Section */
+#game {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 0.5rem;
+}
+
+/* Numbers Container */
+#numbers-container {
+    display: grid;
+    gap: 1rem;
+    justify-content: center;
+    padding: 0 0.5rem;
+    margin-top: auto;
+}
+
+#numbers-container h2 {
+    font-size: 1.3rem;
+    margin: 0.7rem;
+    text-align: center;
+    min-width: 0.8rem;
+}
+
+/* =================== */
+/* Setup Form (inside Modal) */
+/* =================== */
 #setup {
     background-color: transparent;
     border: 2px solid #212529;
@@ -254,7 +299,7 @@ body.dark #setup {
     width: 100%;
 }
 
-/* Radio Button Accent Color in Dark Mode */
+/* Radio Button Dark Mode */
 body.dark .form-check-input[type="radio"] {
     appearance: none;
     width: 1rem;
@@ -283,38 +328,14 @@ body.dark .form-check-input[type="radio"]::before {
     border-radius: 50%;
 }
 
-/* Radio Button Accent Color in Light Mode */
+/* Light Mode Radio */
 body:not(.dark) .form-check-input[type="radio"] {
     accent-color: #403a6b;
 }
 
-/* Game Section */
-#game {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 0.5rem; /* Adjust this padding as needed */
-}
-
-/* Each number tile takes 20% width on small screens (5 per row) */
-#numbers-container {
-    display: grid;
-    gap: 1rem;
-    justify-content: center;
-    padding: 0 0.5rem;
-    margin-top: auto;
-}
-
-/* Each tile styling */
-#numbers-container h2 {
-    font-size: 1.3rem;
-    margin: 0.7rem;
-    text-align: center;
-    min-width: 0.8rem;
-}
-
+/* =================== */
 /* Footer */
+/* =================== */
 footer {
     flex-shrink: 0;
     background-color: transparent;
@@ -339,11 +360,12 @@ footer a:hover {
     font-size: 1.2rem;
 }
 
-/* Dark Mode Footer Text and Icons */
+/* Dark Mode Footer */
 body.dark footer,
 body.dark footer div,
 body.dark footer span,
-body.dark footer p body.dark footer a,
+body.dark footer p,
+body.dark footer a,
 body.dark footer a i {
     color: white !important;
 }
