@@ -112,6 +112,25 @@ button,
     background-color: white;
 }
 
+/* Ensure the switch thumb stays white */
+body.dark .form-check-input[type="checkbox"]::before {
+    background-color: white; /* Force white thumb */
+  }
+  
+  /* Golden glow around the switch track in dark mode */
+  body.dark .form-check-input[type="checkbox"] {
+    box-shadow: 0 0 8px 2px #E0B336; /* Golden glow */
+    background-color: #403A6B;       /* Keep track dark purple */
+    border-color: #403A6B;
+  }
+  
+  /* Optional: glow when checked too (in dark mode) */
+  body.dark .form-check-input[type="checkbox"]:checked {
+    background-color: #E0B336;       /* Gold background when checked */
+    border-color: #E0B336;
+    box-shadow: 0 0 10px 3px #E0B336; /* Stronger glow */
+  }
+
 /* Header */
 header {
     text-align: center;
