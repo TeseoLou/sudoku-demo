@@ -50,19 +50,19 @@ body.dark {
 }
 
 /* Change global text color in dark mode */
-body.dark, 
-body.dark h1, 
-body.dark h2, 
-body.dark h3, 
-body.dark h4, 
-body.dark h5, 
-body.dark h6, 
-body.dark p, 
-body.dark li, 
-body.dark label, 
-body.dark legend, 
+body.dark,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6,
+body.dark p,
+body.dark li,
+body.dark label,
+body.dark legend,
 body.dark a {
-  color: white;
+    color: white;
 }
 
 /* Buttons */
@@ -84,6 +84,17 @@ button,
 
 #theme-toggle {
     min-width: 150px;
+}
+
+/* Navbar link color in dark mode */
+body.dark .nav-link {
+    color: white !important;
+    /* Force white text for nav links */
+}
+
+body.dark .nav-link.active {
+    color: #E0B336 !important;
+    /* Highlight active page in gold */
 }
 
 /* Theme Switch: base appearance */
@@ -117,6 +128,25 @@ body:not(.dark) .form-check-input[type="checkbox"]:checked {
     background-color: #E0B336;
     border-color: #E0B336;
     box-shadow: 0 0 8px #403A6B;
+}
+
+/* Modal in dark mode */
+body.dark .modal-body {
+    background-color: #212529;
+    background-image: url(../backgrounds/dark-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border: 2px solid white;
+    color: white;
+}
+
+body.dark .modal-header,
+body.dark .modal-body,
+body.dark .modal-footer {
+    background-color: transparent;
+    /* Transparent to show background */
+    color: white;
 }
 
 body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
@@ -179,7 +209,7 @@ body.dark .modal-content {
     background-size: cover;
     border: 2px solid white;
     color: white;
-  }
+}
 
 .modal-footer {
     justify-content: center;
