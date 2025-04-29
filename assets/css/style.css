@@ -98,6 +98,16 @@ main {
     /* Allow main to grow and push footer down */
 }
 
+/* Custom modal styling */
+.setup-modal-custom {
+    background-color: #f8f9fa;
+    /* Fallback light off-white color */
+    background-image: url(../backgrounds/light-background.png);
+    border: 2px solid #212529; /* Same as #setup section border color */
+    border-radius: 8px; /* Smooth rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25); /* Strong shadow for modal */
+  }
+  
 #setup {
     display: flex;
     flex-direction: column;

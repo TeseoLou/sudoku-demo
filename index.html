@@ -83,69 +83,91 @@
     <header class="container">
         <h1 id="title">Code-oku</h1>
 
-        <!-- Setup area for game settings -->
-        <form id="setup" class="container my-4">
+        <!-- New Game Button (to open modal) -->
+        <div class="text-center my-4">
+            <button type="button" class="btn btn-dark border-0 px-5 py-2" data-bs-toggle="modal"
+                data-bs-target="#setupModal">
+                New Game
+            </button>
+        </div>
 
-            <!-- Setup Options Section: Difficulty and Time side-by-side -->
-            <div class="setup-options">
+        <!-- Modal Structure -->
+        <div class="modal fade" id="setupModal" tabindex="-1" aria-labelledby="setupModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content setup-modal-custom">
 
-                <!-- Difficulty Fieldset -->
-                <fieldset id="difficulty">
-                    <legend>Difficulty Level:</legend>
-                    <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <div class="form-check">
-                            <input type="radio" id="easy" name="difficulty" value="easy" class="form-check-input"
-                                checked>
-                            <label for="easy" class="form-check-label">Easy</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input type="radio" id="medium" name="difficulty" value="medium" class="form-check-input">
-                            <label for="medium" class="form-check-label">Medium</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input type="radio" id="hard" name="difficulty" value="hard" class="form-check-input">
-                            <label for="hard" class="form-check-label">Hard</label>
-                        </div>
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="setupModalLabel">Game Setup</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </fieldset>
 
-                <!-- Time Fieldset -->
-                <fieldset id="time">
-                    <legend>Timer (Minutes):</legend>
-                    <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <div class="form-check">
-                            <input type="radio" id="time-3" name="time" value="3" class="form-check-input">
-                            <label for="time-3" class="form-check-label">3</label>
-                        </div>
+                    <!-- Modal Body -->
+                    <div class="modal-body">
 
-                        <div class="form-check">
-                            <input type="radio" id="time-5" name="time" value="5" class="form-check-input">
-                            <label for="time-5" class="form-check-label">5</label>
-                        </div>
+                        <!-- Setup Options inside modal -->
+                        <form id="setup">
+                            <fieldset id="difficulty" class="text-center mb-4">
+                                <legend>Difficulty:</legend>
+                                <div class="d-flex flex-wrap justify-content-center gap-3">
+                                    <div class="form-check">
+                                        <input type="radio" id="easy" name="difficulty" value="easy"
+                                            class="form-check-input" checked>
+                                        <label for="easy" class="form-check-label">Easy</label>
+                                    </div>
 
-                        <div class="form-check">
-                            <input type="radio" id="time-10" name="time" value="10" class="form-check-input">
-                            <label for="time-10" class="form-check-label">10</label>
-                        </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="medium" name="difficulty" value="medium"
+                                            class="form-check-input">
+                                        <label for="medium" class="form-check-label">Medium</label>
+                                    </div>
 
-                        <div class="form-check">
-                            <input type="radio" id="time-none" name="time" value="none" class="form-check-input"
-                                checked>
-                            <label for="time-none" class="form-check-label">X</label>
-                        </div>
+                                    <div class="form-check">
+                                        <input type="radio" id="hard" name="difficulty" value="hard"
+                                            class="form-check-input">
+                                        <label for="hard" class="form-check-label">Hard</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset id="time" class="text-center">
+                                <legend>Timer</legend>
+                                <div class="d-flex flex-wrap justify-content-center gap-3">
+                                    <div class="form-check">
+                                        <input type="radio" id="time-none" name="time" value="none"
+                                            class="form-check-input" checked>
+                                        <label for="time-none" class="form-check-label">None</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input type="radio" id="time-3" name="time" value="3" class="form-check-input">
+                                        <label for="time-3" class="form-check-label">3</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input type="radio" id="time-5" name="time" value="5" class="form-check-input">
+                                        <label for="time-5" class="form-check-label">5</label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input type="radio" id="time-10" name="time" value="10"
+                                            class="form-check-input">
+                                        <label for="time-10" class="form-check-label">10</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </form>
+
                     </div>
-                </fieldset>
-            </div>
 
-            <!-- Start Button Section -->
-            <div class="start-button text-center">
-                <button id="new-game" type="button" class="btn btn-dark border-0 px-5 py-2">
-                    Start
-                </button>
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Confirm</button>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
     </header>
 
     <!-- Main Content Placeholder -->
