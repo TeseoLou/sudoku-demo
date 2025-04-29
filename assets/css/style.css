@@ -55,9 +55,15 @@ body.dark {
     background-image: url(../backgrounds/dark-background.png);
     /* Dark mode background */
     background-repeat: no-repeat;
+    /* No repeat */
     background-position: center center;
+    /* Centered */
     background-size: cover;
+    /* Responsive background sizing */
     background-attachment: fixed;
+    /* Fixed while scrolling */
+    width: 100vw;
+    /* Full viewport width */
 }
 
 /* Header */
