@@ -50,20 +50,33 @@ function setupThemeSwitch() {
     const themeSwitch = document.getElementById('theme-switch');
     const themeLabel = document.getElementById('theme-label');
     const themeIcon = document.getElementById('theme-icon');
-  
+    const newGameButton = document.querySelector('button[data-bs-target="#setupModal"]');
+    const startButton = document.getElementById('start-button');
+
     themeSwitch.addEventListener('change', function () {
-      if (this.checked) {
-        document.body.classList.remove('dark'); // Switch to Light Mode
-        themeSwitch.setAttribute('aria-checked', 'true'); // Accessibility
-        themeIcon.className = 'fa-solid fa-sun'; // Change to sun icon
-      } else {
-        document.body.classList.add('dark'); // Switch to Dark Mode
-        themeSwitch.setAttribute('aria-checked', 'false'); // Accessibility
-        themeIcon.className = 'fa-solid fa-moon'; // Change to moon icon
-      }
+        if (this.checked) {
+            document.body.classList.remove('dark');
+            themeSwitch.setAttribute('aria-checked', 'true');
+            themeIcon.className = 'fa-solid fa-sun';
+
+            // Set buttons to dark mode
+            newGameButton.classList.remove('btn-light');
+            newGameButton.classList.add('btn-dark');
+            startButton.classList.remove('btn-light');
+            startButton.classList.add('btn-dark');
+        } else {
+            document.body.classList.add('dark');
+            themeSwitch.setAttribute('aria-checked', 'false');
+            themeIcon.className = 'fa-solid fa-moon';
+
+            // Invert buttons to light mode
+            newGameButton.classList.remove('btn-dark');
+            newGameButton.classList.add('btn-light');
+            startButton.classList.remove('btn-dark');
+            startButton.classList.add('btn-light');
+        }
     });
-  }
-  
+}
 
 /**
  * Close the setup modal when the Start button is clicked.

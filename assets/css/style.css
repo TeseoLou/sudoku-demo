@@ -49,6 +49,22 @@ body.dark {
     width: 100vw;
 }
 
+/* Change global text color in dark mode */
+body.dark, 
+body.dark h1, 
+body.dark h2, 
+body.dark h3, 
+body.dark h4, 
+body.dark h5, 
+body.dark h6, 
+body.dark p, 
+body.dark li, 
+body.dark label, 
+body.dark legend, 
+body.dark a {
+  color: white;
+}
+
 /* Buttons */
 button,
 #setupModalLabel {
@@ -155,6 +171,15 @@ main {
     background-image: url(../backgrounds/light-background.png);
     border-radius: 0;
 }
+
+/* Dark mode modal styling */
+body.dark .modal-content {
+    background-color: #212529;
+    background-image: url(../backgrounds/dark-background.png);
+    background-size: cover;
+    border: 2px solid white;
+    color: white;
+  }
 
 .modal-footer {
     justify-content: center;
