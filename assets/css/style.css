@@ -75,7 +75,7 @@ button,
 }
 
 body:not(.dark) .nav-link.active {
-    color: #403A6B !important;
+    color: #403a6b !important;
     text-decoration: underline;
 }
 
@@ -85,7 +85,7 @@ body.dark .nav-link {
 }
 
 body.dark .nav-link.active {
-    color: #E0B336 !important;
+    color: #e0b336 !important;
     text-decoration: underline;
 }
 
@@ -94,8 +94,8 @@ body.dark .nav-link.active {
     appearance: none;
     width: 3rem;
     height: 1.5rem;
-    background-color: #403A6B;
-    border: 2px solid #403A6B;
+    background-color: #403a6b;
+    border: 2px solid #403a6b;
     border-radius: 2rem;
     position: relative;
     cursor: pointer;
@@ -115,9 +115,9 @@ body.dark .nav-link.active {
 }
 
 body:not(.dark) .form-check-input[type="checkbox"]:checked {
-    background-color: #E0B336;
-    border-color: #E0B336;
-    box-shadow: 0 0 8px #403A6B;
+    background-color: #e0b336;
+    border-color: #e0b336;
+    box-shadow: 0 0 8px #403a6b;
 }
 
 body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
@@ -125,9 +125,9 @@ body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
 }
 
 body.dark .form-check-input[type="checkbox"] {
-    background-color: #403A6B;
-    border-color: #403A6B;
-    box-shadow: 0 0 10px 2px #E0B336;
+    background-color: #403a6b;
+    border-color: #403a6b;
+    box-shadow: 0 0 10px 2px #e0b336;
 }
 
 body.dark .form-check-input[type="checkbox"]::before {
@@ -189,27 +189,18 @@ main {
 }
 
 /* Dark Mode Modal Styles */
-body.dark .modal-dialog {
+body.dark .modal-content {
     background-color: #212529;
     background-image: url(../backgrounds/dark-background.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    border-radius: 0;
+    color: white;
     box-shadow: 0 0 20px 5px white;
     /* White glow */
-}
-
-body.dark .modal-content {
-    background-color: transparent;
-    background-image: none;
-    color: white;
 }
 
 body.dark .modal-header,
 body.dark .modal-body,
 body.dark .modal-footer {
-    background-color: inherit;
+    background-color: transparent;
     color: white;
 }
 
@@ -273,8 +264,8 @@ body.dark .form-check-input[type="radio"] {
 }
 
 body.dark .form-check-input[type="radio"]:checked {
-    background-color: #E0B336;
-    border-color: #E0B336;
+    background-color: #e0b336;
+    border-color: #e0b336;
 }
 
 body.dark .form-check-input[type="radio"]::before {
@@ -290,12 +281,24 @@ body.dark .form-check-input[type="radio"]::before {
 
 /* Radio Button Accent Color in Light Mode */
 body:not(.dark) .form-check-input[type="radio"] {
-    accent-color: #403A6B;
+    accent-color: #403a6b;
 }
 
 /* Game Section */
+/* Each number tile takes 20% width on small screens (5 per row) */
+#numbers-container {
+    display: grid;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem 0.5rem;
+  } 
+
+/* Each tile styling */
 #numbers-container h2 {
     font-size: 1.3rem;
+    margin: 0.7rem;
+    text-align: center;
+    min-width: 0.8rem;
 }
 
 /* Footer */
@@ -319,7 +322,7 @@ footer a i {
 }
 
 footer a:hover {
-    color: #403A6B;
+    color: #403a6b;
     font-size: 1.2rem;
 }
 
@@ -334,5 +337,5 @@ body.dark footer a i {
 
 body.dark footer a:hover,
 body.dark footer a:hover i {
-    color: #E0B336 !important;
+    color: #e0b336 !important;
 }
