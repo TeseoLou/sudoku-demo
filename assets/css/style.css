@@ -53,7 +53,7 @@ body.dark a {
     color: white;
 }
 
-/* Typography */
+/* Buttons */
 button,
 #setupModalLabel {
     font-family: var(--font-heading);
@@ -61,23 +61,6 @@ button,
     text-align: center;
 }
 
-.game-stat {
-    font-family: var(--font-heading);
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-#title {
-    font-family: var(--font-heading);
-    font-weight: bold;
-    font-size: 4rem;
-}
-
-#game-stats {
-    display: none;
-}
-
-/* Buttons */
 .btn {
     border-radius: 0;
 }
@@ -173,6 +156,15 @@ header {
 /* Main Section */
 main {
     flex: 1 0 auto;
+}
+
+.game-stat {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+}
+
+#game-stats {
+    display: none;
 }
 
 /* Modal General */
