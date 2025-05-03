@@ -13,7 +13,7 @@
 
 /* Full height layout setup for html and body */
 html, body {
-    height: 100%; /* Stretch to full viewport height */
+    height: 100%; 
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
     display: flex; /* Enable flexbox layout */
@@ -25,9 +25,9 @@ body {
     font-family: var(--font-body); 
     background-color: #f8f9fa; /* Fallback color if background image fails */
     background-image: url(../backgrounds/light-background.png); 
-    background-repeat: no-repeat; /* Prevent background image from repeating */
-    background-position: center center; /* Center the background image */
-    background-size: cover; /* Make background image cover the whole viewport */
+    background-repeat: no-repeat; 
+    background-position: center center; 
+    background-size: cover; 
     background-attachment: fixed; /* Keep background static while scrolling */
     position: relative; /* Needed for layering if child elements use absolute positioning */
     width: 100vw; 
@@ -67,102 +67,110 @@ button,
     text-align: center; 
 }
 
-/* Bootstrap button override */
+/* Bootstrap button styling override */
 .btn {
     border-radius: 0; 
 }
 
-/* =================== */
+
 /* Navbar */
-/* =================== */
+
+/* Custom hamburger icon for navbar toggler (light mode) */
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-#theme-toggle {
-    min-width: 150px; /* Prevent shrinking theme toggle */
+/* Custom hamburger icon for navbar toggler (dark mode) */
+body.dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-/* Navbar Links */
+/* Highlight active nav link in light mode */
 body:not(.dark) .nav-link.active {
     color: #403a6b !important;
     text-decoration: underline;
 }
 
-/* Dark Mode Hamburger Menu */
-body.dark .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
+/* Set nav link color to white in dark mode for better contrast */
 body.dark .nav-link {
     color: white !important;
 }
 
+/* Highlight active nav link in dark mode */
 body.dark .nav-link.active {
     color: #e0b336 !important;
     text-decoration: underline;
 }
 
-/* Display Switch */
-.form-check-input[type="checkbox"] {
-    appearance: none;
-    width: 3rem;
-    height: 1.5rem;
-    background-color: #403a6b;
-    border: 2px solid #403a6b;
-    border-radius: 2rem;
-    position: relative;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
+/* Theme toggle container to maintain layout spacing */
+#theme-toggle {
+    min-width: 150px; 
 }
 
-/* Switch Thumb */
+/* Custom toggle switch styling (base appearance) */
+.form-check-input[type="checkbox"] {
+    appearance: none; /* Remove default browser checkbox styling */
+    width: 3rem; 
+    height: 1.5rem; 
+    background-color: #403a6b; 
+    border: 2px solid #403a6b; 
+    border-radius: 2rem; /* Rounded pill shape */
+    position: relative; /* Allow absolute positioning of inner thumb */
+    cursor: pointer; /* Indicate interactivity */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth color/glow transitions */
+}
+
+/* Creates the circular thumb inside the custom switch */
 .form-check-input[type="checkbox"]::before {
-    content: "";
-    position: absolute;
+    content: ""; /* Required for pseudo-element to render */
+    position: absolute; /* Position relative to the parent input */
     top: 2px;
     left: 2px;
     width: 1.1rem;
     height: 1.1rem;
     background-color: white;
     border-radius: 50%;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease; /* Smooth movement when toggled */
 }
 
-/* Light Mode Switch */
+/* Styles applied when the theme switch is toggled ON in light mode */
 body:not(.dark) .form-check-input[type="checkbox"]:checked {
     background-color: #e0b336;
     border-color: #e0b336;
-    box-shadow: 0 0 8px #403a6b;
+    box-shadow: 0 0 8px #403a6b; /* Add purple glow for visual feedback */
 }
 
+/* Moves the switch thumb to the right when toggled ON in light mode */
 body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
 }
 
-/* Dark Mode Switch */
+/* Sets purple background and border with a gold glow when in dark mode */
 body.dark .form-check-input[type="checkbox"] {
     background-color: #403a6b;
     border-color: #403a6b;
-    box-shadow: 0 0 10px 2px #e0b336;
+    box-shadow: 0 0 10px 2px #e0b336; /* Gold outer glow effect */
 }
 
+/* Ensures the toggle thumb remains white in dark mode */
 body.dark .form-check-input[type="checkbox"]::before {
     background-color: white;
 }
 
+/* Moves the thumb to the right to visually indicate the "on" state */
 body.dark .form-check-input[type="checkbox"]:checked::before {
     transform: translateX(1.5rem);
 }
 
-/* =================== */
 /* Header */
-/* =================== */
+
+/* Align header content centrally and add spacing below */
 header {
     text-align: center;
     padding-bottom: 10px;
 }
 
+/* Style for the main game title */
 #title {
     font-family: var(--font-heading);
     font-weight: bold;
@@ -170,205 +178,233 @@ header {
     padding-top: 1.5rem;
 }
 
-/* =================== */
-/* Modal (Light and Dark) */
-/* =================== */
-.modal-content {
-    background-color: #f8f9fa;
-    background-image: url(../backgrounds/light-background.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    border-radius: 0;
-    border: none;
-    color: black;
-    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.9);
+/* Main (Game Stats, Game Board, Numbers) */
+
+/* Main container grows to fill available vertical space */
+main {
+    flex: 1 0 auto; /* Allow main to grow and push footer to bottom */
 }
 
+/* Game stats heading is hidden by default (shown via JS later) */
+#game-stats {
+    display: none; 
+}
+
+/* Styling for game stats subheadings */
+.game-stat {
+    font-family: var(--font-heading); 
+    font-size: 0.9rem; 
+}
+
+/* Game Section Layout */
+
+/* Container for the game grid and number input panel */
+#game {
+    flex: 1; /* Allow the game area to take up all remaining vertical space */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end; /* Push number container to bottom of the section */
+    padding-bottom: 0.5rem; 
+}
+
+/* Wrapper for the number selection buttons (1–9, X) */
+#numbers-container {
+    display: grid; 
+    gap: 1rem; 
+    justify-content: center; /* Center tiles horizontally */
+    padding: 0 0.5rem; 
+    margin-top: auto; /* Push container to the bottom of the #game section */
+}
+
+/* Add horizontal spacing inside the number key rows */
+.number-keys {
+    padding: 0 8px; 
+}
+
+/* Individual number tiles */
+#numbers-container h2 {
+    font-size: 1.3rem; 
+    margin: 0.7rem; /* Space around each number */
+    text-align: center; /* Center the number text */
+    min-width: 0.8rem; /* Prevent collapsing when content is short */
+}
+
+/* Setup Modal */
+
+/* Light mode modal content styles */
+.modal-content {
+    background-color: #f8f9fa; 
+    background-image: url(../backgrounds/light-background.png); 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+    background-size: cover; 
+    border-radius: 0; 
+    border: none; 
+    color: black; /* Default text color */
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.9); /* Dark shadow for modal elevation */
+}
+
+/* Remove default border-radius from modal body */
 .modal-body {
     border-radius: 0;
 }
 
+/* Center content within the modal footer */
 .modal-footer {
     justify-content: center;
 }
 
-/* Dark Mode Modal */
+/* Dark mode modal content styles */
 body.dark .modal-content {
-    background-color: #212529;
-    background-image: url(../backgrounds/dark-background.png);
-    color: white;
-    box-shadow: 0 0 20px 5px white;
+    background-color: #212529; 
+    background-image: url(../backgrounds/dark-background.png); 
+    color: white; /* Ensure modal text is white for contrast */
+    box-shadow: 0 0 20px 5px white; /* White glow around modal */
 }
 
+/* Transparent background for all modal sections */
 body.dark .modal-header,
 body.dark .modal-body,
 body.dark .modal-footer {
-    background-color: transparent;
-    color: white;
+    background-color: transparent; /* Allow background image to show through */
+    color: white; 
 }
 
-/* =================== */
-/* Main (Game Stats, Game Board, Numbers) */
-/* =================== */
-main {
-    flex: 1 0 auto;
-}
-
-#game-stats {
-    display: none; /* Hide until needed */
-}
-
-.game-stat {
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-}
-
-/* Game Section Layout */
-#game {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 0.5rem;
-}
-
-/* Numbers Container */
-#numbers-container {
-    display: grid;
-    gap: 1rem;
-    justify-content: center;
-    padding: 0 0.5rem;
-    margin-top: auto;
-}
-
-#numbers-container h2 {
-    font-size: 1.3rem;
-    margin: 0.7rem;
-    text-align: center;
-    min-width: 0.8rem;
-}
-
-/* =================== */
 /* Setup Form */
-/* =================== */
+
+/* Container inside the modal */
 #setup {
-    background-color: transparent;
-    border: 2px solid #212529;
-    border-radius: 0;
-    padding: 1.5rem;
-    width: 100%;
+    background-color: transparent; /* Transparent background to show modal theme */
+    border: 2px solid #212529; /* Border for visibility in light mode */
+    border-radius: 0; 
+    padding: 1.5rem; 
+    width: 100%; /* Full width to fit modal */
 }
 
+/* Dark mode override for setup form border */
 body.dark #setup {
-    border-color: white;
+    border-color: white; /* Make border white in dark mode for contrast */
 }
 
+/* Aligns the difficulty/time radio groups */
 #setup .setup-options {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 40px;
-    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: flex-start; 
+    gap: 40px; /* Space between radio button groups */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
+/* Individual fieldset block in the form */
 #setup fieldset {
-    border: none;
-    text-align: center;
-    min-width: 300px;
-    flex: 1;
+    border: none; 
+    text-align: center; /* Center legend and form controls */
+    min-width: 300px; /* Minimum width for readability */
+    flex: 1; 
 }
 
+/* Start button container inside setup form */
 #setup .start-button {
     margin-top: 20px;
 }
 
+/* Legend titles */
 #setup legend {
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    text-align: center;
+    font-family: var(--font-heading); 
+    font-size: 1rem; 
+    text-align: center; 
 }
 
+/* Labels for each radio button */
 #setup .form-check-label {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Slightly smaller font */
 }
 
+/* Utility class to ensure form content spans full width */
 #setup .text-center {
-    width: 100%;
+    width: 100%; 
 }
 
 /* Radio Inputs for Light/Dark Mode */
+
+/* Custom dark mode radio button appearance */
 body.dark .form-check-input[type="radio"] {
-    appearance: none;
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    border: 2px solid white;
-    background-color: transparent;
-    position: relative;
-    cursor: pointer;
-    margin-top: 0.3rem;
+    appearance: none; /* Remove default browser styling */
+    width: 1rem; 
+    height: 1rem; 
+    border-radius: 50%; /* Circular shape */
+    border: 2px solid white; 
+    background-color: transparent; 
+    position: relative; /* For custom indicator placement */
+    cursor: pointer; 
+    margin-top: 0.3rem; /* Align with label text */
 }
 
+/* Checked state styling in dark mode */
 body.dark .form-check-input[type="radio"]:checked {
-    background-color: #e0b336;
-    border-color: #e0b336;
+    background-color: #e0b336; 
+    border-color: #e0b336; 
 }
 
+/* Inner indicator for selected radio */
 body.dark .form-check-input[type="radio"]::before {
-    content: "";
-    display: block;
-    width: 0.5rem;
-    height: 0.5rem;
-    margin: auto;
-    margin-top: 0.15rem;
-    background-color: white;
-    border-radius: 50%;
+    content: ""; /* Empty content block for dot */
+    display: block; /* Block level for proper spacing */
+    width: 0.5rem; 
+    height: 0.5rem; 
+    margin: auto; 
+    margin-top: 0.15rem; 
+    background-color: white; 
+    border-radius: 50%; 
 }
 
-/* Light Mode Radio Accent */
+/* Use purple accent color for radio buttons in light mode */
 body:not(.dark) .form-check-input[type="radio"] {
     accent-color: #403a6b;
 }
 
-/* =================== */
 /* Footer */
-/* =================== */
+
+/* Footer container styles */
 footer {
-    flex-shrink: 0;
-    background-color: transparent;
-    text-decoration: none;
-    color: inherit;
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    background-color: transparent; 
+    text-decoration: none; /* Remove text underline */
+    color: inherit; /* Inherit text color */
 }
 
+/* Footer links */
 footer a {
-    text-decoration: none;
-    display: inline-block;
-    line-height: 1;
-    vertical-align: middle;
-    color: inherit;
+    text-decoration: none; /* Remove link underline */
+    display: inline-block; /* Allow for layout adjustments */
+    line-height: 1; /* Tight vertical spacing */
+    vertical-align: middle; /* Align icons/text neatly */
+    color: inherit; 
 }
 
+/* Footer icon color */
 footer a i {
-    color: inherit;
+    color: inherit; /* Inherit color from parent anchor */
 }
 
+/* Hover effect for links */
 footer a:hover {
-    color: #403a6b;
-    font-size: 1.2rem;
+    color: #403a6b; 
+    font-size: 1.2rem; 
 }
 
-/* Dark Mode Footer */
+/* Set all footer elements to white in dark mode */
 body.dark footer,
 body.dark footer div,
 body.dark footer span,
 body.dark footer p,
 body.dark footer a,
 body.dark footer a i {
-    color: white !important;
+    color: white !important; 
 }
 
+/* Footer link hover in dark mode */
 body.dark footer a:hover,
 body.dark footer a:hover i {
-    color: #e0b336 !important;
+    color: #e0b336 !important; /* Gold hover color for contrast */
 }
