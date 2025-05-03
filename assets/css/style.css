@@ -67,7 +67,7 @@ body.dark a {
 
 /* General button and modal label font styling */
 button,
-#setupModalLabel {
+#setup-modal-label {
     font-family: var(--font-heading); 
     font-weight: bold; 
     text-align: center; 
@@ -390,6 +390,49 @@ body.dark .form-check-input[type="radio"]::before {
 /* Use purple accent color for radio buttons in light mode */
 body:not(.dark) .form-check-input[type="radio"] {
     accent-color: var(--color-primary);
+}
+
+/* Rules Modal Styles */
+#rules-modal .modal-content {
+    background-color: var(--color-bg-light);
+    background-image: url(../backgrounds/light-background.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 0;
+    border: 2px solid var(--color-black); /* Matching border */
+    color: var(--color-black);
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.9);
+    margin: 1rem;
+}
+
+/* Centered and styled modal heading */
+#rules-modal .modal-header {
+    justify-content: center;
+    border-bottom: none;
+    padding-bottom: 0.5rem;
+}
+
+#rules-modal .modal-title {
+    font-family: var(--font-heading);
+    font-weight: normal;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 0;
+}
+
+/* Modal body text styling */
+#rules-modal .modal-body {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    padding-top: 0;
+}
+
+/* Centered Back button */
+#rules-modal .modal-footer {
+    justify-content: center;
+    border-top: none;
+    padding-top: 0;
 }
 
 /* Footer */

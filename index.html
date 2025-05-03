@@ -54,7 +54,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!-- Collapsible Navbar links -->
-            <div class="collapse navbar-collapse" id="navbarContent">
+            <div class="collapse navbar-collapse" id="navbar-content">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link text-black active" aria-current="page" href="index.html">Game</a>
@@ -64,7 +64,7 @@
                     </li>
                     <li class="nav-item">
                         <button class="nav-link text-black bg-transparent border-0" data-bs-toggle="modal"
-                            data-bs-target="#rulesModal">
+                            data-bs-target="#rules-modal">
                             Rules
                         </button>
                     </li>
@@ -78,12 +78,12 @@
         <!-- New Game Button (to open modal) -->
         <div class="text-center">
             <button type="button" class="btn btn-dark btn-sm border-0 p-2" data-bs-toggle="modal"
-                data-bs-target="#setupModal">
+                data-bs-target="#setup-modal">
                 New Game
             </button>
         </div>
         <!-- Modal Structure -->
-        <div class="modal fade" id="setupModal" tabindex="-1" aria-labelledby="setupModalLabel" aria-hidden="true">
+        <div class="modal fade" id="setup-modal" tabindex="-1" aria-labelledby="setup-modal-label" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content setup-modal-custom">
                     <!-- Modal Body -->
@@ -134,7 +134,7 @@
                             </fieldset>
                             <!-- Start Button inside form and border -->
                             <div class="text-center mt-4">
-                                <button type="button" id="start-button" class="btn btn-dark">Enter ↵</button>
+                                <button type="button" id="start-button" class="btn btn-dark">Enter ↲</button>
                             </div>
                         </form>
                     </section>
@@ -174,7 +174,7 @@
         </section>
     </main>
     <!-- Rules Modal -->
-    <section class="modal fade" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="rulesModalLabel"
+    <section class="modal fade" id="rules-modal" tabindex="-1" role="dialog" aria-labelledby="rules-modal-label"
         aria-modal="true" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <article class="modal-content">
@@ -191,7 +191,7 @@
                     </ul>
                 </div>
                 <footer class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Return to Game</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Back ↲</button>
                 </footer>
             </article>
         </div>

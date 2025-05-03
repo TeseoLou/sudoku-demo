@@ -32,11 +32,11 @@ function setupOutsideNavbarCollapse() {
     // Listen for any click on the entire document
     $(document).on("click", function (e) {
         // Select the collapsible navbar element and store it for reuse
-        const $navbarCollapse = $("#navbarContent");
+        const $navbarCollapse = $("#navbar-content");
         // Select the collapsible navbar element and store it for reuse
         if (!$navbarCollapse.length) return;
         // Check if the click happened inside the navbar content
-        const isClickInsideNavbar = $(e.target).closest("#navbarContent").length > 0;
+        const isClickInsideNavbar = $(e.target).closest("#navbar-content").length > 0;
         // Check if the click happened inside the navbar content
         const isNavbarToggler = $(e.target).is(".navbar-toggler") || $(e.target).closest(".navbar-toggler").length > 0;
         // If the click is outside both the navbar and toggler, and the navbar is expanded
@@ -60,7 +60,7 @@ function setupThemeSwitch() {
     // Select the icon element that visually represents the theme
     const $themeIcon = $("#theme-icon");
     // Select the New Game button that opens the setup modal
-    const $newGameButton = $('button[data-bs-target="#setupModal"]');
+    const $newGameButton = $('button[data-bs-target="#setup-modal"]');
     // Select the Start button within the setup modal
     const $startButton = $("#start-button");
     // Set up an event listener for when the theme switch is toggled
@@ -86,7 +86,7 @@ function setupStartButton() {
     // Attach a click event handler to the Start button
     $("#start-button").on("click", function () {
         // Get the existing Bootstrap modal instance for the setup modal
-        const setupModal = bootstrap.Modal.getInstance($("#setupModal")[0]);
+        const setupModal = bootstrap.Modal.getInstance($("#setup-modal")[0]);
         // If the modal instance exists, hide the modal
         if (setupModal) {
             setupModal.hide();
