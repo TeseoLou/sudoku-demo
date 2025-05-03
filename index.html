@@ -63,7 +63,10 @@
                         <a class="nav-link text-black" href="about.html">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-black" href="rules.html">Rules</a>
+                        <button class="nav-link text-black bg-transparent border-0" data-bs-toggle="modal"
+                            data-bs-target="#rulesModal">
+                            Rules
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -150,26 +153,50 @@
         <section id="game" class="container">
             <div id="grid"></div>
             <fieldset id="numbers-container" class="border-0">
-              <legend class="visually-hidden">Select a number</legend>
-              <div class="row justify-content-center">
-                <div class="col-12 col-md-6 d-flex justify-content-center gap-3 number-keys">
-                  <h2 id="one">1</h2>
-                  <h2 id="two">2</h2>
-                  <h2 id="three">3</h2>
-                  <h2 id="four">4</h2>
-                  <h2 id="five">5</h2>
+                <legend class="visually-hidden">Select a number</legend>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-6 d-flex justify-content-center gap-3 number-keys">
+                        <h2 id="one">1</h2>
+                        <h2 id="two">2</h2>
+                        <h2 id="three">3</h2>
+                        <h2 id="four">4</h2>
+                        <h2 id="five">5</h2>
+                    </div>
+                    <div class="col-12 col-md-6 d-flex justify-content-center gap-3 number-keys">
+                        <h2 id="six">6</h2>
+                        <h2 id="seven">7</h2>
+                        <h2 id="eight">8</h2>
+                        <h2 id="nine">9</h2>
+                        <h2 id="clear">X</h2>
+                    </div>
                 </div>
-                <div class="col-12 col-md-6 d-flex justify-content-center gap-3 number-keys">
-                  <h2 id="six">6</h2>
-                  <h2 id="seven">7</h2>
-                  <h2 id="eight">8</h2>
-                  <h2 id="nine">9</h2>
-                  <h2 id="clear">X</h2>
-                </div>
-              </div>
             </fieldset>
-          </section>
+        </section>
     </main>
+    <!-- Rules Modal -->
+    <div class="modal fade" id="rulesModal" tabindex="-1" aria-labelledby="rulesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rulesModalLabel">Game Rules</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Replace with your actual rules content -->
+                    <p>The goal of Codoku is to complete the grid so that every row, column, and 3x3 box contains the
+                        numbers 1 through 9.</p>
+                    <ul>
+                        <li>Only use each number once per row, column, and box.</li>
+                        <li>Use the number keys below the grid to make selections.</li>
+                        <li>Choose your difficulty and time before starting a new game.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Return to Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Footer Section -->
     <footer class="py-3">
         <div class="container d-flex justify-content-between align-items-center text-white">
@@ -205,4 +232,5 @@
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/00ece23e82.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
