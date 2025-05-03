@@ -2,6 +2,12 @@
 :root {
     --font-body: "Quicksand", sans-serif; /* Main font for body text */
     --font-heading: "Space Mono", monospace; /* Main font for headings */
+    --color-primary: #403a6b;                    /* Used for dark purple accents */
+    --color-accent: #e0b336;                     /* Used for gold highlights */
+    --color-bg-light: #f8f9fa;                   /* Default light background */
+    --color-bg-dark: #212529;                    /* Default dark background */
+    --color-white: #ffffff;                      /* Pure white */
+    --color-black: #000000;                      /* Pure black */
 }
 
 /* Utility Classes */
@@ -23,7 +29,7 @@ html, body {
 /* Main body styling for background and layout */
 body {
     font-family: var(--font-body); 
-    background-color: #f8f9fa; /* Fallback color if background image fails */
+    background-color: var(--color-bg-light); /* Fallback color if background image fails */
     background-image: url(../backgrounds/light-background.png); 
     background-repeat: no-repeat; 
     background-position: center center; 
@@ -37,7 +43,7 @@ body {
 
 /* Background styling for dark mode */
 body.dark {
-    background-color: #212529; /* Dark fallback background color */
+    background-color: var(--color-bg-dark); /* Dark fallback background color */
     background-image: url(../backgrounds/dark-background.png); 
 }
 
@@ -54,7 +60,7 @@ body.dark li,
 body.dark label,
 body.dark legend,
 body.dark a {
-    color: white; 
+    color: var(--color-white); 
 }
 
 /* Buttons */
@@ -87,18 +93,18 @@ body.dark .navbar-toggler-icon {
 
 /* Highlight active nav link in light mode */
 body:not(.dark) .nav-link.active {
-    color: #403a6b !important;
+    color: var(--color-primary) !important;
     text-decoration: underline;
 }
 
 /* Set nav link color to white in dark mode for better contrast */
 body.dark .nav-link {
-    color: white !important;
+    color: var(--color-white) !important;
 }
 
 /* Highlight active nav link in dark mode */
 body.dark .nav-link.active {
-    color: #e0b336 !important;
+    color: var(--color-accent) !important;
     text-decoration: underline;
 }
 
@@ -112,8 +118,8 @@ body.dark .nav-link.active {
     appearance: none; /* Remove default browser checkbox styling */
     width: 3rem; 
     height: 1.5rem; 
-    background-color: #403a6b; 
-    border: 2px solid #403a6b; 
+    background-color: var(--color-primary); 
+    border: 2px solid var(--color-primary); 
     border-radius: 2rem; /* Rounded pill shape */
     position: relative; /* Allow absolute positioning of inner thumb */
     cursor: pointer; /* Indicate interactivity */
@@ -128,16 +134,16 @@ body.dark .nav-link.active {
     left: 2px;
     width: 1.1rem;
     height: 1.1rem;
-    background-color: white;
+    background-color: var(--color-white);
     border-radius: 50%;
     transition: transform 0.3s ease; /* Smooth movement when toggled */
 }
 
 /* Styles applied when the theme switch is toggled ON in light mode */
 body:not(.dark) .form-check-input[type="checkbox"]:checked {
-    background-color: #e0b336;
-    border-color: #e0b336;
-    box-shadow: 0 0 8px #403a6b; /* Add purple glow for visual feedback */
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-primary); /* Add purple glow for visual feedback */
 }
 
 /* Moves the switch thumb to the right when toggled ON in light mode */
@@ -147,14 +153,14 @@ body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
 
 /* Sets purple background and border with a gold glow when in dark mode */
 body.dark .form-check-input[type="checkbox"] {
-    background-color: #403a6b;
-    border-color: #403a6b;
-    box-shadow: 0 0 10px 2px #e0b336; /* Gold outer glow effect */
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px 2px var(--color-accent); /* Gold outer glow effect */
 }
 
 /* Ensures the toggle thumb remains white in dark mode */
 body.dark .form-check-input[type="checkbox"]::before {
-    background-color: white;
+    background-color: var(--color-white);
 }
 
 /* Moves the thumb to the right to visually indicate the "on" state */
@@ -233,14 +239,14 @@ main {
 
 /* Light mode modal content styles */
 .modal-content {
-    background-color: #f8f9fa; 
+    background-color: var(--color-bg-light); 
     background-image: url(../backgrounds/light-background.png); 
     background-repeat: no-repeat; 
     background-position: center center; 
     background-size: cover; 
     border-radius: 0; 
     border: none; 
-    color: black; /* Default text color */
+    color: var(--color-black); /* Default text color */
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.9); /* Dark shadow for modal elevation */
 }
 
@@ -256,10 +262,10 @@ main {
 
 /* Dark mode modal content styles */
 body.dark .modal-content {
-    background-color: #212529; 
+    background-color: var(--color-bg-dark); 
     background-image: url(../backgrounds/dark-background.png); 
-    color: white; /* Ensure modal text is white for contrast */
-    box-shadow: 0 0 20px 5px white; /* White glow around modal */
+    color: var(--color-white); /* Ensure modal text is white for contrast */
+    box-shadow: 0 0 20px 5px var(--color-white); /* White glow around modal */
 }
 
 /* Transparent background for all modal sections */
@@ -267,7 +273,7 @@ body.dark .modal-header,
 body.dark .modal-body,
 body.dark .modal-footer {
     background-color: transparent; /* Allow background image to show through */
-    color: white; 
+    color: var(--color-white); 
 }
 
 /* Setup Form */
@@ -275,7 +281,7 @@ body.dark .modal-footer {
 /* Container inside the modal */
 #setup {
     background-color: transparent; /* Transparent background to show modal theme */
-    border: 2px solid #212529; /* Border for visibility in light mode */
+    border: 2px solid var(--color-bg-dark); /* Border for visibility in light mode */
     border-radius: 0; 
     padding: 1.5rem; 
     width: 100%; /* Full width to fit modal */
@@ -283,7 +289,7 @@ body.dark .modal-footer {
 
 /* Dark mode override for setup form border */
 body.dark #setup {
-    border-color: white; /* Make border white in dark mode for contrast */
+    border-color: var(--color-white); /* Make border white in dark mode for contrast */
 }
 
 /* Aligns the difficulty/time radio groups */
@@ -333,7 +339,7 @@ body.dark .form-check-input[type="radio"] {
     width: 1rem; 
     height: 1rem; 
     border-radius: 50%; /* Circular shape */
-    border: 2px solid white; 
+    border: 2px solid var(--color-white); 
     background-color: transparent; 
     position: relative; /* For custom indicator placement */
     cursor: pointer; 
@@ -342,8 +348,8 @@ body.dark .form-check-input[type="radio"] {
 
 /* Checked state styling in dark mode */
 body.dark .form-check-input[type="radio"]:checked {
-    background-color: #e0b336; 
-    border-color: #e0b336; 
+    background-color: var(--color-accent); 
+    border-color: var(--color-accent); 
 }
 
 /* Inner indicator for selected radio */
@@ -354,13 +360,13 @@ body.dark .form-check-input[type="radio"]::before {
     height: 0.5rem; 
     margin: auto; 
     margin-top: 0.15rem; 
-    background-color: white; 
+    background-color: var(--color-white); 
     border-radius: 50%; 
 }
 
 /* Use purple accent color for radio buttons in light mode */
 body:not(.dark) .form-check-input[type="radio"] {
-    accent-color: #403a6b;
+    accent-color: var(--color-primary);
 }
 
 /* Footer */
@@ -389,7 +395,7 @@ footer a i {
 
 /* Hover effect for links */
 footer a:hover {
-    color: #403a6b; 
+    color: var(--color-primary); 
     font-size: 1.2rem; 
 }
 
@@ -400,11 +406,11 @@ body.dark footer span,
 body.dark footer p,
 body.dark footer a,
 body.dark footer a i {
-    color: white !important; 
+    color: var(--color-white) !important; 
 }
 
 /* Footer link hover in dark mode */
 body.dark footer a:hover,
 body.dark footer a:hover i {
-    color: #e0b336 !important; /* Gold hover color for contrast */
+    color: var(--color-accent) !important; /* Gold hover color for contrast */
 }
