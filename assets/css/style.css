@@ -230,9 +230,27 @@ main {
 /* Individual number tiles */
 #numbers-container h2 {
     font-size: 1.3rem; 
-    margin: 0.7rem; /* Space around each number */
+    margin: 0.1rem; /* Space around each number */
     text-align: center; /* Center the number text */
-    min-width: 0.8rem; /* Prevent collapsing when content is short */
+    min-width: 2.5rem;
+    padding: 0.6rem 0;
+    background-color: var(--color-bg-light); /* Light background */
+    border: 2px solid var(--color-black); /* Solid black border */
+    border-radius: 6px; /* Rounded corners like keys */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Inner shadow for depth */
+    user-select: none; /* Prevent text selection */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.1s ease-in-out; /* Smooth press effect */
+}
+
+/* Enlarged shadow on hover */
+#numbers-container h2:hover {
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.35); /* Deeper, darker shadow */
+}
+
+/* Press animation */
+#numbers-container h2:active {
+    transform: scale(0.96);
 }
 
 /* Setup Modal */
