@@ -253,6 +253,11 @@ main {
     transform: scale(0.96);
 }
 
+/* Preserve black text color on number keys in dark mode */
+body.dark #numbers-container h2 {
+    color: var(--color-black);
+}
+
 /* Setup Modal */
 
 /* Light mode modal content styles */
