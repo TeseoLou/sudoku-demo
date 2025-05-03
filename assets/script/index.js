@@ -3,22 +3,24 @@
  * Also smooth scrolls to the linked section, adjusting for navbar height.
  */
 function setupNavLinkCollapse() {
+    // Attach a click event to all nav links inside the collapsed navbar
     $(".navbar-collapse .nav-link").on("click", function (e) {
+        // Get the href attribute (anchor link) of the clicked nav link
         const href = $(this).attr("href");
+         // Select the target section based on the href 
         const $section = $(href);
-
+        // Only proceed if the target section exists in the DOM
         if ($section.length) {
-            e.preventDefault();
-            const navbarHeight = $(".navbar-toggler").outerHeight() || 0;
-
-            $("html, body").animate(
-                {
-                    scrollTop: $section.offset().top - navbarHeight,
-                },
-                600
-            );
-
-            $(".navbar-collapse").removeClass("show");
+            // Prevent the default anchor jump behavior for smoother scrolling
+            e.preventDefault(); 
+            // Get the height of the navbar toggle button to adjust the scroll offset
+            const navbarHeight = $(".navbar-toggler").outerHeight() || 0; 
+             // Smoothly scroll to the section's position minus the navbar height for better visibility
+            $("html, body").animate({
+                scrollTop: $section.offset().top - navbarHeight,
+            }, 600);
+            // Collapse the navbar menu (remove Bootstrap 'show' class) after selection
+            $(".navbar-collapse").removeClass("show"); 
         }
     });
 }
@@ -27,15 +29,21 @@ function setupNavLinkCollapse() {
  * Collapse the Bootstrap navbar when clicking outside of the open menu.
  */
 function setupOutsideNavbarCollapse() {
+    // Listen for any click on the entire document
     $(document).on("click", function (e) {
+        // Select the collapsible navbar element and store it for reuse
         const $navbarCollapse = $("#navbarContent");
+        // Select the collapsible navbar element and store it for reuse
         if (!$navbarCollapse.length) return;
-
+        // Check if the click happened inside the navbar content
         const isClickInsideNavbar = $(e.target).closest("#navbarContent").length > 0;
+        // Check if the click happened inside the navbar content
         const isNavbarToggler = $(e.target).is(".navbar-toggler") || $(e.target).closest(".navbar-toggler").length > 0;
-
+        // If the click is outside both the navbar and toggler, and the navbar is expanded
         if (!isClickInsideNavbar && !isNavbarToggler && $navbarCollapse.hasClass("show")) {
+            // Get the Bootstrap Collapse instance associated with the navbar
             const bsCollapse = bootstrap.Collapse.getInstance($navbarCollapse[0]);
+            // If the instance exists, programmatically hide the navbar
             if (bsCollapse) {
                 bsCollapse.hide();
             }
@@ -47,45 +55,39 @@ function setupOutsideNavbarCollapse() {
  * Handle theme switch toggle (light/dark mode)
  */
 function setupThemeSwitch() {
-    const themeSwitch = document.getElementById('theme-switch');
-    const themeLabel = document.getElementById('theme-label');
-    const themeIcon = document.getElementById('theme-icon');
-    const newGameButton = document.querySelector('button[data-bs-target="#setupModal"]');
-    const startButton = document.getElementById('start-button');
-
-    themeSwitch.addEventListener('change', function () {
-        if (this.checked) {
-            document.body.classList.remove('dark');
-            themeSwitch.setAttribute('aria-checked', 'true');
-            themeIcon.className = 'fa-solid fa-sun';
-
-            // Set buttons to dark mode
-            newGameButton.classList.remove('btn-light');
-            newGameButton.classList.add('btn-dark');
-            startButton.classList.remove('btn-light');
-            startButton.classList.add('btn-dark');
-        } else {
-            document.body.classList.add('dark');
-            themeSwitch.setAttribute('aria-checked', 'false');
-            themeIcon.className = 'fa-solid fa-moon';
-
-            // Invert buttons to light mode
-            newGameButton.classList.remove('btn-dark');
-            newGameButton.classList.add('btn-light');
-            startButton.classList.remove('btn-dark');
-            startButton.classList.add('btn-light');
-        }
+    // Select the checkbox input for theme switching
+    const $themeSwitch = $("#theme-switch");
+    // Select the icon element that visually represents the theme
+    const $themeIcon = $("#theme-icon");
+    // Select the New Game button that opens the setup modal
+    const $newGameButton = $('button[data-bs-target="#setupModal"]');
+    // Select the Start button within the setup modal
+    const $startButton = $("#start-button");
+    // Set up an event listener for when the theme switch is toggled
+    $themeSwitch.on("change", function () {
+        // Determine if the switch is in the "light mode" position
+        const isLightMode = $(this).is(":checked");
+        // Toggle the 'dark' class on the body based on switch state
+        $("body").toggleClass("dark", !isLightMode);
+        // Update the ARIA attribute for accessibility
+        $(this).attr("aria-checked", isLightMode ? "true" : "false");
+        // Update the theme icon to match the current mode
+        $themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
+        // Toggle button styles based on the theme
+        $newGameButton.toggleClass("btn-light", !isLightMode).toggleClass("btn-dark", isLightMode);
+        $startButton.toggleClass("btn-light", !isLightMode).toggleClass("btn-dark", isLightMode);
     });
 }
 
 /**
- * Close the setup modal when the Start button is clicked.
+ * Close the setup modal when the Enter button is clicked.
  */
 function setupStartButton() {
-    const startButton = document.getElementById('start-button');
-
-    startButton.addEventListener('click', function () {
-        const setupModal = bootstrap.Modal.getInstance(document.getElementById('setupModal'));
+    // Attach a click event handler to the Start button
+    $("#start-button").on("click", function () {
+        // Get the existing Bootstrap modal instance for the setup modal
+        const setupModal = bootstrap.Modal.getInstance($("#setupModal")[0]);
+        // If the modal instance exists, hide the modal
         if (setupModal) {
             setupModal.hide();
         }
@@ -96,13 +98,18 @@ function setupStartButton() {
  * Initialize all behaviors on page load.
  */
 function initPage() {
+    // Setup smooth scroll and collapse for navbar links
     setupNavLinkCollapse();
+    // Setup logic to collapse the navbar when clicking outside of it
     setupOutsideNavbarCollapse();
+    // Setup the theme switch toggle functionality 
     setupThemeSwitch();
+    // Setup functionality to close the setup modal when the start button is clicked
     setupStartButton();
 }
 
 // When the document is fully loaded, initialize everything
 $(document).ready(function () {
+    // Call the main initialization function to set up all interactivity
     initPage();
 });
