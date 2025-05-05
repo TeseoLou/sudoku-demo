@@ -78,7 +78,6 @@ button,
     border-radius: 0; 
 }
 
-
 /* Navbar */
 
 /* Custom hamburger icon for navbar toggler (light mode) */
@@ -392,7 +391,7 @@ body:not(.dark) .form-check-input[type="radio"] {
     accent-color: var(--color-primary);
 }
 
-/* Rules Modal Styles */
+/* Rules Modal */
 #rules-modal .modal-content {
     background-color: var(--color-bg-light);
     background-image: url(../backgrounds/light-background.png);
@@ -402,6 +401,7 @@ body:not(.dark) .form-check-input[type="radio"] {
     border-radius: 0;
     color: var(--color-black);
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.9);
+    margin: 1rem;
 }
 
 #modal-border {
@@ -437,6 +437,19 @@ body:not(.dark) .form-check-input[type="radio"] {
     justify-content: center;
     border-top: none;
     padding-top: 0;
+}
+
+/* Dark mode styles for Rules modal */
+body.dark #rules-modal .modal-content {
+    background-color: var(--color-bg-dark); 
+    background-image: url(../backgrounds/dark-background.png); 
+    color: var(--color-white); 
+    box-shadow: 0 0 20px 5px var(--color-white); 
+}
+
+/* Inner modal border in dark mode */
+body.dark #rules-modal #modal-border {
+    border: 2px solid var(--color-white); 
 }
 
 /* Footer */

@@ -1,6 +1,5 @@
 /**
  * Collapse the Bootstrap navbar when a nav-link is clicked.
- * Also smooth scrolls to the linked section, adjusting for navbar height.
  */
 function setupNavLinkCollapse() {
     // Attach a click event to all nav links inside the collapsed navbar
@@ -11,7 +10,7 @@ function setupNavLinkCollapse() {
         const $section = $(href);
         // Only proceed if the target section exists in the DOM
         if ($section.length) {
-            // Prevent the default anchor jump behavior for smoother scrolling
+            // Prevent the default anchor jump behavior for smoother scrolling (w3schools how to smooth scroll)
             e.preventDefault(); 
             // Get the height of the navbar toggle button to adjust the scroll offset
             const navbarHeight = $(".navbar-toggler").outerHeight() || 0; 
@@ -43,7 +42,7 @@ function setupOutsideNavbarCollapse() {
         if (!isClickInsideNavbar && !isNavbarToggler && $navbarCollapse.hasClass("show")) {
             // Get the Bootstrap Collapse instance associated with the navbar
             const bsCollapse = bootstrap.Collapse.getInstance($navbarCollapse[0]);
-            // If the instance exists, programmatically hide the navbar
+            // If the instance exists hide the navbar
             if (bsCollapse) {
                 bsCollapse.hide();
             }
@@ -63,6 +62,8 @@ function setupThemeSwitch() {
     const $newGameButton = $('button[data-bs-target="#setup-modal"]');
     // Select the Start button within the setup modal
     const $startButton = $("#start-button");
+    // Select the Back button in the Rules modal
+    const $rulesBackButton = $("#rules-back-button");
     // Set up an event listener for when the theme switch is toggled
     $themeSwitch.on("change", function () {
         // Determine if the switch is in the "light mode" position
@@ -74,8 +75,15 @@ function setupThemeSwitch() {
         // Update the theme icon to match the current mode
         $themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
         // Toggle button styles based on the theme
-        $newGameButton.toggleClass("btn-light", !isLightMode).toggleClass("btn-dark", isLightMode);
-        $startButton.toggleClass("btn-light", !isLightMode).toggleClass("btn-dark", isLightMode);
+        $newGameButton
+            .toggleClass("btn-light", !isLightMode)
+            .toggleClass("btn-dark", isLightMode);
+        $startButton
+            .toggleClass("btn-light", !isLightMode)
+            .toggleClass("btn-dark", isLightMode);
+        $rulesBackButton
+            .toggleClass("btn-light", !isLightMode)
+            .toggleClass("btn-dark", isLightMode);
     });
 }
 
