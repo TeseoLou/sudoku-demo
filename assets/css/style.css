@@ -400,9 +400,13 @@ body:not(.dark) .form-check-input[type="radio"] {
     background-position: center center;
     background-size: cover;
     border-radius: 0;
-    border: 2px solid var(--color-black); /* Matching border */
     color: var(--color-black);
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.9);
+}
+
+#modal-border {
+    border-radius: 0;
+    border: 2px solid var(--color-black); /* Matching border */
     margin: 1rem;
 }
 

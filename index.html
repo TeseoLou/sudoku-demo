@@ -178,21 +178,24 @@
         aria-modal="true" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <article class="modal-content">
-                <header class="modal-header">
-                    <h2 class="modal-title" id="rulesModalLabel">Game Rules</h2>
-                </header>
-                <div class="modal-body">
-                    <p>The goal of Codoku is to complete the grid so that every row, column, and 3x3 box contains the
-                        numbers 1 through 9.</p>
-                    <ul>
-                        <li>Only use each number once per row, column, and box.</li>
-                        <li>Use the number keys below the grid to make selections.</li>
-                        <li>Choose your difficulty and time before starting a new game.</li>
-                    </ul>
+                <div id="modal-border">
+                    <header class="modal-header">
+                        <h2 class="modal-title" id="rulesModalLabel">Game Rules</h2>
+                    </header>
+                    <div class="modal-body">
+                        <p>The goal of Codoku is to complete the grid so that every row, column, and 3x3 box contains
+                            the
+                            numbers 1 through 9.</p>
+                        <ul>
+                            <li>Only use each number once per row, column, and box.</li>
+                            <li>Use the number keys below the grid to make selections.</li>
+                            <li>Choose your difficulty and time before starting a new game.</li>
+                        </ul>
+                    </div>
+                    <footer class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Back ↲</button>
+                    </footer>
                 </div>
-                <footer class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Back ↲</button>
-                </footer>
             </article>
         </div>
     </section>
