@@ -4,21 +4,25 @@
 function setupNavLinkCollapse() {
     // Attach a click event to all nav links inside the collapsed navbar
     $(".navbar-collapse .nav-link").on("click", function (e) {
-        // Get the href attribute (anchor link) of the clicked nav link
+        // Set the href attribute of the clicked nav link
         const href = $(this).attr("href");
-         // Select the target section based on the href 
+         // Set the target section based on the href 
         const $section = $(href);
         // Only proceed if the target section exists in the DOM
         if ($section.length) {
-            // Prevent the default anchor jump behavior for smoother scrolling (w3schools how to smooth scroll)
+            // Prevent the default anchor jump behavior for smoother scrolling
+            // Reference: https://www.w3schools.com/howto/howto_css_smooth_scroll.asp
             e.preventDefault(); 
             // Get the height of the navbar toggle button to adjust the scroll offset
+            // Reference: https://templatesherpa.com/blog/bootstrap-navbar
             const navbarHeight = $(".navbar-toggler").outerHeight() || 0; 
-             // Smoothly scroll to the section's position minus the navbar height for better visibility
+            // Smoothly scroll to the section's position minus the navbar height for better visibility
+            // Reference: https://css-tricks.com/snippets/jquery/smooth-scrolling/
             $("html, body").animate({
                 scrollTop: $section.offset().top - navbarHeight,
             }, 600);
-            // Collapse the navbar menu (remove Bootstrap 'show' class) after selection
+            // Remove Bootstrap 'show' class after selection
+            // Reference: https://stackoverflow.com/a/42401606
             $(".navbar-collapse").removeClass("show"); 
         }
     });
@@ -30,17 +34,21 @@ function setupNavLinkCollapse() {
 function setupOutsideNavbarCollapse() {
     // Listen for any click on the entire document
     $(document).on("click", function (e) {
-        // Select the collapsible navbar element and store it for reuse
+        // Set the collapsible navbar element and store it for reuse
         const $navbarCollapse = $("#navbar-content");
-        // Select the collapsible navbar element and store it for reuse
+        // Return early if navbar content element is not found in the DOM
+        // Reference: https://www.sitepoint.com/jquery-check-element-exists/
         if (!$navbarCollapse.length) return;
         // Check if the click happened inside the navbar content
+        // Reference: https://stackoverflow.com/questions/62375324
         const isClickInsideNavbar = $(e.target).closest("#navbar-content").length > 0;
-        // Check if the click happened inside the navbar content
+        // Check if the click target is the navbar toggler or inside it
+        // Reference: https://stackoverflow.com/questions/46736823
         const isNavbarToggler = $(e.target).is(".navbar-toggler") || $(e.target).closest(".navbar-toggler").length > 0;
         // If the click is outside both the navbar and toggler, and the navbar is expanded
         if (!isClickInsideNavbar && !isNavbarToggler && $navbarCollapse.hasClass("show")) {
             // Get the Bootstrap Collapse instance associated with the navbar
+            // https://getbootstrap.com/docs/5.3/components/collapse/#methods
             const bsCollapse = bootstrap.Collapse.getInstance($navbarCollapse[0]);
             // If the instance exists hide the navbar
             if (bsCollapse) {
@@ -54,23 +62,25 @@ function setupOutsideNavbarCollapse() {
  * Handle theme switch toggle (light/dark mode)
  */
 function setupThemeSwitch() {
-    // Select the checkbox input for theme switching
+    // Set the checkbox input for theme switching
     const $themeSwitch = $("#theme-switch");
-    // Select the icon element that visually represents the theme
+    // Set the icon element that visually represents the theme
     const $themeIcon = $("#theme-icon");
-    // Select the New Game button that opens the setup modal
+    // Set the New Game button that opens the Setup modal
     const $newGameButton = $('button[data-bs-target="#setup-modal"]');
-    // Select the Start button within the setup modal
+    // Set the Start button within the Setup modal
     const $startButton = $("#start-button");
-    // Select the Back button in the Rules modal
+    // Set the Back button in the Rules modal
     const $rulesBackButton = $("#rules-back-button");
     // Set up an event listener for when the theme switch is toggled
+    // Reference: https://dev.to/whitep4nth3r/the-best-lightdark-mode-theme-toggle-in-javascript-368f
     $themeSwitch.on("change", function () {
         // Determine if the switch is in the "light mode" position
         const isLightMode = $(this).is(":checked");
         // Toggle the 'dark' class on the body based on switch state
         $("body").toggleClass("dark", !isLightMode);
         // Update the ARIA attribute for accessibility
+        // Reference: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-checked
         $(this).attr("aria-checked", isLightMode ? "true" : "false");
         // Update the theme icon to match the current mode
         $themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
