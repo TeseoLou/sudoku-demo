@@ -5,26 +5,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="description" content="Learn more about the Codoku Sudoku Game project and its creator." />
+  <meta name="description" content="Oops! The page you're looking for isn't here. Looks like you're a bit... puzzled." />
   <meta name="author" content="Teseo Lou Nicholson" />
-  <title>About - Codoku</title>
+  <title>404 - Page Not Found | Codoku</title>
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png" />
   <link rel="manifest" href="assets/favicons/site.webmanifest" />
   <link rel="shortcut icon" href="assets/favicons/favicon.ico" type="image/x-icon" />
-  <!-- Google Fonts Preconnect -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
-  <!-- Custom Styles -->
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <!-- Navigation Bar -->
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg bg-transparent sticky-top">
     <div class="container d-flex align-items-center justify-content-between">
       <!-- Theme toggle -->
@@ -48,7 +48,7 @@
             <a class="nav-link text-black" href="index.html">Game</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-black active" aria-current="page" href="about.html">About</a>
+            <a class="nav-link text-black" href="about.html">About</a>
           </li>
           <li class="nav-item">
             <button class="nav-link text-black bg-transparent border-0" data-bs-toggle="modal" data-bs-target="#rules-modal">Rules</button>
@@ -57,13 +57,11 @@
       </div>
     </div>
   </nav>
-  <!-- Header Section -->
-  <header class="container text-center py-4">
-    <h1 class="display-5" id="about-title"><b>About</b></h1>
-  </header>
-  <!-- Main Content Section -->
-  <main class="container pb-5">
-    <p class="lead text-center">Welcome to the Codoku project. This page will tell you more about the purpose, design, and future plans for the game.</p>
+  <!-- 404 Main Content -->
+  <main class="container text-center py-5" id="not-found">
+    <h1 id="error-title"><b>404</b> ⚠︎</h1>
+    <p id="error-text">How... puzzling! The page you're looking for cannot be found. Try retracing your steps or head back home.</p>
+    <a href="index.html" class="btn btn-dark mt-3">Home</a>
   </main>
   <!-- Rules Modal -->
   <section class="modal fade" id="rules-modal" tabindex="-1" role="dialog" aria-labelledby="rules-modal-label" aria-modal="true" aria-hidden="true">
@@ -71,7 +69,7 @@
       <article class="modal-content">
         <div id="modal-border">
           <header class="modal-header">
-            <h2 class="modal-title" id="rulesModalLabel">Game Rules</h2>
+            <h2 class="modal-title" id="rules-modal-label">Game Rules</h2>
           </header>
           <div class="modal-body">
             <p>The goal of Codoku is to complete the grid so that every row, column, and 3x3 box contains the numbers 1 through 9.</p>
@@ -88,16 +86,14 @@
       </article>
     </div>
   </section>
-  <!-- Footer Section -->
+  <!-- Footer -->
   <footer class="py-3">
     <div class="container d-flex justify-content-between align-items-center text-white">
-      <!-- Social Media Icons -->
       <div>
         <a href="https://www.facebook.com" target="_blank" class="text-black me-3" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="https://www.instagram.com" target="_blank" class="text-black me-3" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
         <a href="https://www.twitter.com" target="_blank" class="text-black" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
       </div>
-      <!-- Copyright -->
       <div class="small text-black text-end">
         &copy; 2025 Codoku Game Project
       </div>

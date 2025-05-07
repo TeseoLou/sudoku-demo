@@ -212,10 +212,10 @@ header {
     padding-bottom: 10px;
 }
 
-/* Style for the main game title */
-#title, #about-title {
+/* Style for the titles */
+#title, #about-title, #error-title {
     font-family: var(--font-heading);
-    font-weight: bold;
+    font-weight: normal;
     font-size: 2.5rem;
     padding-top: 1.5rem;
 }
