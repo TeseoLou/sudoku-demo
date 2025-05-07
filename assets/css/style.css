@@ -213,7 +213,7 @@ header {
 }
 
 /* Style for the main game title */
-#title {
+#title, #about-title {
     font-family: var(--font-heading);
     font-weight: bold;
     font-size: 2.5rem;
