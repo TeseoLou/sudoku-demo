@@ -100,16 +100,21 @@ button,
 
 .navbar-nav {
     display: inline-block;
+    flex-direction: row !important;
+    justify-content: center;
     float: none;
+    flex-wrap: nowrap;       
+    gap: 1rem;
 }
 
 .navbar-nav .nav-item {
     float: none;
-    display: block;
+    display: inline-block;
 }
 
 .navbar-nav .nav-link {
     font-family: "Space Mono", monospace;
+    padding: 0 1rem;
 }
 
 /* Custom hamburger icon for navbar toggler (light mode) */
