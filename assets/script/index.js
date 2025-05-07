@@ -3,28 +3,31 @@
  */
 function setupNavLinkCollapse() {
     // Attach a click event to all nav links inside the collapsed navbar
-    $(".navbar-collapse .nav-link").on("click", function (e) {
-        // Set the href attribute of the clicked nav link
-        const href = $(this).attr("href");
-        // Set the target section based on the href 
-        const $section = $(href);
-        // Only proceed if the target section exists in the DOM
-        if ($section.length) {
-            // Prevent the default anchor jump behavior for smoother scrolling
-            // Reference: https://www.w3schools.com/howto/howto_css_smooth_scroll.asp
-            e.preventDefault();
-            // Get the height of the navbar toggle button to adjust the scroll offset
-            // Reference: https://templatesherpa.com/blog/bootstrap-navbar
-            const navbarHeight = $(".navbar-toggler").outerHeight() || 0;
-            // Smoothly scroll to the section's position minus the navbar height for better visibility
-            // Reference: https://css-tricks.com/snippets/jquery/smooth-scrolling/
-            $("html, body").animate({
-                scrollTop: $section.offset().top - navbarHeight,
-            }, 600);
-            // Remove Bootstrap 'show' class after selection
-            // Reference: https://stackoverflow.com/a/42401606
-            $(".navbar-collapse").removeClass("show");
-        }
+    document.querySelectorAll(".navbar-collapse .nav-link").forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            // Set the href attribute of the clicked nav link using jQuery
+            const href = $(this).attr("href");
+            // Set the target section based on the href using jQuery
+            const $section = $(href);
+            // Only proceed if the target section exists in the DOM
+            if ($section.length) {
+                // Prevent the default anchor jump behavior for smoother scrolling
+                // Reference: https://www.w3schools.com/howto/howto_css_smooth_scroll.asp
+                e.preventDefault();
+                // Get the height of the navbar toggle button to adjust the scroll offset
+                // Reference: https://templatesherpa.com/blog/bootstrap-navbar
+                const navbarToggler = document.querySelector(".navbar-toggler");
+                const navbarHeight = navbarToggler ? navbarToggler.offsetHeight : 0;
+                // Smoothly scroll to the section's position minus the navbar height for better visibility
+                // Reference: https://css-tricks.com/snippets/jquery/smooth-scrolling/
+                $("html, body").animate({
+                    scrollTop: $section.offset().top - navbarHeight
+                }, 600);
+                // Remove Bootstrap 'show' class after selection
+                // Reference: https://stackoverflow.com/a/42401606
+                $(".navbar-collapse").removeClass("show");
+            }
+        });
     });
 }
 
@@ -33,18 +36,21 @@ function setupNavLinkCollapse() {
  */
 function setupOutsideNavbarCollapse() {
     // Listen for any click on the entire document
-    $(document).on("click", function (e) {
-        // Set the collapsible navbar element and store it for reuse
+    document.addEventListener("click", function (e) {
+        // Set the collapsible navbar element using jQuery
         const $navbarCollapse = $("#navbar-content");
         // Return early if navbar content element is not found in the DOM
         // Reference: https://www.sitepoint.com/jquery-check-element-exists/
         if (!$navbarCollapse.length) return;
-        // Check if the click happened inside the navbar content
+
+        // Check if the click happened inside the navbar content using jQuery
         // Reference: https://stackoverflow.com/questions/62375324
         const isClickInsideNavbar = $(e.target).closest("#navbar-content").length > 0;
-        // Check if the click target is the navbar toggler or inside it
+
+        // Check if the click target is the navbar toggler or inside it using jQuery
         // Reference: https://stackoverflow.com/questions/46736823
         const isNavbarToggler = $(e.target).is(".navbar-toggler") || $(e.target).closest(".navbar-toggler").length > 0;
+
         // If the click is outside both the navbar and toggler, and the navbar is expanded
         if (!isClickInsideNavbar && !isNavbarToggler && $navbarCollapse.hasClass("show")) {
             // Get the Bootstrap Collapse instance associated with the navbar
@@ -58,12 +64,13 @@ function setupOutsideNavbarCollapse() {
     });
 }
 
+
 /**
  * Handle theme switch toggle (light/dark mode)
  */
 function setupThemeSwitch() {
     // Set the checkbox input for theme switching
-    const $themeSwitch = $("#theme-switch");
+    const themeSwitch = document.getElementById("theme-switch");
     // Set the icon element that visually represents the theme
     const $themeIcon = $("#theme-icon");
     // Set the New Game button that opens the Setup modal
@@ -73,11 +80,17 @@ function setupThemeSwitch() {
     // Set the Back button in the Rules modal
     const $rulesBackButton = $("#rules-back-button");
     // Load stored theme preference on page load
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+    // Reference: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#toggling-manually
     const savedTheme = localStorage.getItem("theme");
     const isLightMode = savedTheme !== "dark"; // default to light mode if unset
+    // Toggle the 'dark' class on the <body> based on the user's saved preference
     $("body").toggleClass("dark", !isLightMode);
-    $themeSwitch.prop("checked", isLightMode);
+    // Update the checkbox's checked property to reflect the current mode
+    $(themeSwitch).prop("checked", isLightMode);
+    // Change the icon class to a sun or moon based on the mode
     $themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
+    // Toggle button styles based on theme
     $newGameButton
         .toggleClass("btn-light", !isLightMode)
         .toggleClass("btn-dark", isLightMode);
@@ -89,17 +102,17 @@ function setupThemeSwitch() {
         .toggleClass("btn-dark", isLightMode);
     // Set up an event listener for when the theme switch is toggled
     // Reference: https://dev.to/whitep4nth3r/the-best-lightdark-mode-theme-toggle-in-javascript-368f
-    $themeSwitch.on("change", function () {
-        // Determine if the switch is in the "light mode" position
-        const isLightMode = $(this).is(":checked");
-        // Toggle the 'dark' class on the body based on switch state
+    themeSwitch.addEventListener("change", function () {
+        const isLightMode = this.checked;
+        // Toggle the 'dark' class on the body
         $("body").toggleClass("dark", !isLightMode);
         // Update the ARIA attribute for accessibility
         // Reference: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-checked
-        $(this).attr("aria-checked", isLightMode ? "true" : "false");
+        this.setAttribute("aria-checked", isLightMode ? "true" : "false");
         // Update the theme icon to match the current mode
         $themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
         // Save user preference to localStorage
+        // Reference: https://www.w3schools.com/jsref/prop_win_localstorage.asp
         localStorage.setItem("theme", isLightMode ? "light" : "dark");
         // Toggle button styles based on the theme
         $newGameButton
@@ -119,9 +132,14 @@ function setupThemeSwitch() {
  */
 function setupStartButton() {
     // Attach a click event handler to the Start button
-    $("#start-button").on("click", function () {
+    const startButton = document.getElementById("start-button");
+    if (!startButton) return; 
+    startButton.addEventListener("click", function () {
+        // Get the setup modal element
+        const $setupModal = $("#setup-modal");
         // Get the existing Bootstrap modal instance for the setup modal
-        const setupModal = bootstrap.Modal.getInstance($("#setup-modal")[0]);
+        // Reference: https://getbootstrap.com/docs/5.3/components/modal/#methods
+        const setupModal = bootstrap.Modal.getInstance($setupModal[0]);
         // If the modal instance exists, hide the modal
         if (setupModal) {
             setupModal.hide();
