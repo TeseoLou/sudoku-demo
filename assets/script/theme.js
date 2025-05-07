@@ -1,0 +1,55 @@
+/**
+ * Handle theme switch toggle (light/dark mode)
+ */
+function setupThemeSwitch() {
+    // Set the checkbox input for theme switching
+    const themeSwitch = document.getElementById("theme-switch");
+    // Set the icon element that visually represents the theme
+    const $themeIcon = $("#theme-icon");
+    // Set the New Game button that opens the Setup modal
+    const $newGameButton = $('button[data-bs-target="#setup-modal"]');
+    // Set the Start button within the Setup modal
+    const $startButton = $("#start-button");
+    // Set the Back button in the Rules modal
+    const $rulesBackButton = $("#rules-back-button");
+    // Load stored theme preference on page load
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+    // Reference: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#toggling-manually
+    const savedTheme = localStorage.getItem("theme");
+    const isLightMode = savedTheme !== "dark"; // default to light mode if unset
+    // Toggle the 'dark' class on the <body> based on the user's saved preference
+    $("body").toggleClass("dark", !isLightMode);
+    // Update the checkbox's checked property to reflect the current mode
+    $(themeSwitch).prop("checked", isLightMode);
+    // Change the icon class to a sun or moon based on the mode
+    $themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
+    // Toggle button styles based on theme
+    $newGameButton
+        .toggleClass("btn-light", !isLightMode)
+        .toggleClass("btn-dark", isLightMode);
+    $startButton
+        .toggleClass("btn-light", !isLightMode)
+        .toggleClass("btn-dark", isLightMode);
+    $rulesBackButton
+        .toggleClass("btn-light", !isLightMode)
+        .toggleClass("btn-dark", isLightMode);
+    // Set up an event listener for when the theme switch is toggled
+    // Reference: https://dev.to/whitep4nth3r/the-best-lightdark-mode-theme-toggle-in-javascript-368f
+    themeSwitch.addEventListener("change", function () {
+        const isLightMode = this.checked;
+        $("body").toggleClass("dark", !isLightMode);
+        this.setAttribute("aria-checked", isLightMode ? "true" : "false");
+        $themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
+        // Reference: https://www.w3schools.com/jsref/prop_win_localstorage.asp
+        localStorage.setItem("theme", isLightMode ? "light" : "dark");
+        $newGameButton
+            .toggleClass("btn-light", !isLightMode)
+            .toggleClass("btn-dark", isLightMode);
+        $startButton
+            .toggleClass("btn-light", !isLightMode)
+            .toggleClass("btn-dark", isLightMode);
+        $rulesBackButton
+            .toggleClass("btn-light", !isLightMode)
+            .toggleClass("btn-dark", isLightMode);
+    });
+}
