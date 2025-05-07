@@ -39,6 +39,15 @@ body {
     width: 100vw; 
 }
 
+/* Auto-apply dark mode if user's system prefers it */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--color-bg-dark);
+        background-image: url(../backgrounds/dark-background.png);
+        color: var(--color-white);
+    }
+}
+
 /* Dark Mode Styles for Body */
 
 /* Background styling for dark mode */
@@ -61,6 +70,11 @@ body.dark label,
 body.dark legend,
 body.dark a {
     color: var(--color-white); 
+}
+
+/* Smooth transition on theme toggle to fade background and text colors */
+body, body * {
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* Buttons */

@@ -6,16 +6,16 @@ function setupNavLinkCollapse() {
     $(".navbar-collapse .nav-link").on("click", function (e) {
         // Set the href attribute of the clicked nav link
         const href = $(this).attr("href");
-         // Set the target section based on the href 
+        // Set the target section based on the href 
         const $section = $(href);
         // Only proceed if the target section exists in the DOM
         if ($section.length) {
             // Prevent the default anchor jump behavior for smoother scrolling
             // Reference: https://www.w3schools.com/howto/howto_css_smooth_scroll.asp
-            e.preventDefault(); 
+            e.preventDefault();
             // Get the height of the navbar toggle button to adjust the scroll offset
             // Reference: https://templatesherpa.com/blog/bootstrap-navbar
-            const navbarHeight = $(".navbar-toggler").outerHeight() || 0; 
+            const navbarHeight = $(".navbar-toggler").outerHeight() || 0;
             // Smoothly scroll to the section's position minus the navbar height for better visibility
             // Reference: https://css-tricks.com/snippets/jquery/smooth-scrolling/
             $("html, body").animate({
@@ -23,7 +23,7 @@ function setupNavLinkCollapse() {
             }, 600);
             // Remove Bootstrap 'show' class after selection
             // Reference: https://stackoverflow.com/a/42401606
-            $(".navbar-collapse").removeClass("show"); 
+            $(".navbar-collapse").removeClass("show");
         }
     });
 }
@@ -72,6 +72,21 @@ function setupThemeSwitch() {
     const $startButton = $("#start-button");
     // Set the Back button in the Rules modal
     const $rulesBackButton = $("#rules-back-button");
+    // Load stored theme preference on page load
+    const savedTheme = localStorage.getItem("theme");
+    const isLightMode = savedTheme !== "dark"; // default to light mode if unset
+    $("body").toggleClass("dark", !isLightMode);
+    $themeSwitch.prop("checked", isLightMode);
+    $themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
+    $newGameButton
+        .toggleClass("btn-light", !isLightMode)
+        .toggleClass("btn-dark", isLightMode);
+    $startButton
+        .toggleClass("btn-light", !isLightMode)
+        .toggleClass("btn-dark", isLightMode);
+    $rulesBackButton
+        .toggleClass("btn-light", !isLightMode)
+        .toggleClass("btn-dark", isLightMode);
     // Set up an event listener for when the theme switch is toggled
     // Reference: https://dev.to/whitep4nth3r/the-best-lightdark-mode-theme-toggle-in-javascript-368f
     $themeSwitch.on("change", function () {
@@ -84,6 +99,8 @@ function setupThemeSwitch() {
         $(this).attr("aria-checked", isLightMode ? "true" : "false");
         // Update the theme icon to match the current mode
         $themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
+        // Save user preference to localStorage
+        localStorage.setItem("theme", isLightMode ? "light" : "dark");
         // Toggle button styles based on the theme
         $newGameButton
             .toggleClass("btn-light", !isLightMode)
