@@ -26,7 +26,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous" />
-    <!-- Link to external CSS file -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
@@ -35,6 +35,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg bg-transparent sticky-top">
         <div class="container d-flex align-items-center justify-content-between">
+            <!-- Theme toggle -->
             <div id="theme-toggle" class="d-flex align-items-center">
                 <div class="form-check form-switch m-0">
                     <label class="form-check-label d-flex align-items-center gap-2 ms-2" for="theme-switch"
@@ -45,13 +46,13 @@
                     </label>
                 </div>
             </div>
-            <!-- Hamburger menu toggle button -->
+            <!-- Hamburger -->
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false"
                 aria-label="Toggle navigation menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <!-- Collapsible Navbar links -->
+            <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbar-content">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -181,9 +182,7 @@
                         <h2 class="modal-title" id="rulesModalLabel">Game Rules</h2>
                     </header>
                     <div class="modal-body">
-                        <p>The goal of Codoku is to complete the grid so that every row, column, and 3x3 box contains
-                            the
-                            numbers 1 through 9.</p>
+                        <p>The goal of Codoku is to complete the grid so that every row, column, and 3x3 box contains the numbers 1 through 9.</p>
                         <ul>
                             <li>Only use each number once per row, column, and box.</li>
                             <li>Use the number keys below the grid to make selections.</li>
