@@ -329,11 +329,13 @@ body.dark #grid p {
     align-items: center;
 }
 
-#grid p:hover {
+/* Light theme hover effect (only non-generated cells) */
+#grid p:hover:not(.generated) {
     background-color: #bcb6e998;
 }
 
-body.dark #grid p:hover {
+/* Dark theme hover effect (only non-generated cells) */
+body.dark #grid p:hover:not(.generated) {
     background-color: #e0b33671;
 }
 
