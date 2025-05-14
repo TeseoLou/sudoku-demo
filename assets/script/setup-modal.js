@@ -15,5 +15,7 @@ function setupStartButton() {
         if (setupModal) {
             setupModal.hide();
         }
+        // Call the board generator after modal closes
+        fetchSudokuBoard();
     });
 }

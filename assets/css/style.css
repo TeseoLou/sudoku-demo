@@ -294,20 +294,71 @@ main {
     padding-bottom: 0.5rem;
 }
 
-p.select {
-    background-color: #cac3fc;
+#grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Default grid cell appearance (light mode) */
+#grid p {
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    border-top: none;
+    border-left: none;
+    color: var(--color-black);
+}
+
+/* Dark mode override for grid cells */
+body.dark #grid p {
+    border-right: 1px solid var(--color-white);
+    border-bottom: 1px solid var(--color-white);
+    border-top: none;
+    border-left: none;
+    color: var(--color-white);
+}
+
+#grid p:hover {
+    background-color: #bcb6e998;
+}
+
+body.dark #grid p:hover {
+    background-color: #e0b33671;
 }
 
 p.incorrect {
     color: red;
 }
 
-.right-border {
-    border-right: 4px solid black;
+/* Thick 3x3 borders in light mode */
+#grid p.right-border {
+    border-right: 4px solid var(--color-black);
 }
 
-.bottom-border {
-    border-bottom: 4px solid black;
+#grid p.bottom-border {
+    border-bottom: 4px solid var(--color-black);
+}
+
+#grid p.no-border-top {
+    border-top: 1px solid transparent !important;
+}
+#grid p.no-border-right {
+    border-right: 1px solid transparent !important;
+}
+#grid p.no-border-bottom {
+    border-bottom: 1px solid transparent !important;
+}
+#grid p.no-border-left {
+    border-left: 1px solid transparent !important;
+}
+
+/* Thick 3x3 borders in dark mode */
+body.dark #grid p.right-border {
+    border-right: 4px solid var(--color-white);
+}
+
+body.dark #grid p.bottom-border {
+    border-bottom: 4px solid var(--color-white);
 }
 
 /* Wrapper for the number selection buttons (1–9, X) */
