@@ -1,42 +1,59 @@
 /* Global Variables */
 :root {
-    --font-body: "Quicksand", sans-serif; /* Main font for body text */
-    --font-heading: "Space Mono", monospace; /* Main font for headings */
-    --color-primary: #403a6b;                    /* Used for dark purple accents */
-    --color-accent: #e0b336;                     /* Used for gold highlights */
-    --color-bg-light: #f8f9fa;                   /* Default light background */
-    --color-bg-dark: #212529;                    /* Default dark background */
-    --color-white: #ffffff;                      /* Pure white */
-    --color-black: #000000;                      /* Pure black */
+    --font-body: "Quicksand", sans-serif;
+    /* Main font for body text */
+    --font-heading: "Space Mono", monospace;
+    /* Main font for headings */
+    --color-primary: #403a6b;
+    /* Used for dark purple accents */
+    --color-accent: #e0b336;
+    /* Used for gold highlights */
+    --color-bg-light: #f8f9fa;
+    /* Default light background */
+    --color-bg-dark: #212529;
+    /* Default dark background */
+    --color-white: #ffffff;
+    /* Pure white */
+    --color-black: #000000;
+    /* Pure black */
 }
 
 /* Utility Classes */
 .hidden {
-    display: none; /* Utility to hide elements but keep them in the DOM */
+    display: none;
+    /* Utility to hide elements but keep them in the DOM */
 }
 
 /* Base Styles */
 
 /* Full height layout setup for html and body */
-html, body {
-    height: 100%; 
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
-    display: flex; /* Enable flexbox layout */
-    flex-direction: column; /* Stack children vertically */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    /* Remove default margin */
+    padding: 0;
+    /* Remove default padding */
+    display: flex;
+    /* Enable flexbox layout */
+    flex-direction: column;
+    /* Stack children vertically */
 }
 
 /* Main body styling for background and layout */
 body {
-    font-family: var(--font-body); 
-    background-color: var(--color-bg-light); /* Fallback color if background image fails */
-    background-image: url(../backgrounds/light-background.png); 
-    background-repeat: no-repeat; 
-    background-position: center center; 
-    background-size: cover; 
-    background-attachment: fixed; /* Keep background static while scrolling */
-    position: relative; /* Needed for layering if child elements use absolute positioning */
-    width: 100vw; 
+    font-family: var(--font-body);
+    background-color: var(--color-bg-light);
+    /* Fallback color if background image fails */
+    background-image: url(../backgrounds/light-background.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    /* Keep background static while scrolling */
+    position: relative;
+    /* Needed for layering if child elements use absolute positioning */
+    width: 100vw;
 }
 
 /* Auto-apply dark mode if user's system prefers it */
@@ -48,12 +65,24 @@ body {
     }
 }
 
+/* Headings styling */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    /* This references Space Mono */
+}
+
 /* Dark Mode Styles for Body */
 
 /* Background styling for dark mode */
 body.dark {
-    background-color: var(--color-bg-dark); /* Dark fallback background color */
-    background-image: url(../backgrounds/dark-background.png); 
+    background-color: var(--color-bg-dark);
+    /* Dark fallback background color */
+    background-image: url(../backgrounds/dark-background.png);
 }
 
 /* Global text color override in dark mode applies white text to all common text elements */
@@ -69,11 +98,12 @@ body.dark li,
 body.dark label,
 body.dark legend,
 body.dark a {
-    color: var(--color-white); 
+    color: var(--color-white);
 }
 
 /* Smooth transition on theme toggle to fade background and text colors */
-body, body * {
+body,
+body * {
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -82,14 +112,14 @@ body, body * {
 /* General button and modal label font styling */
 button,
 #setup-modal-label {
-    font-family: var(--font-heading); 
-    font-weight: bold; 
-    text-align: center; 
+    font-family: var(--font-heading);
+    font-weight: bold;
+    text-align: center;
 }
 
 /* Bootstrap button styling override */
 .btn {
-    border-radius: 0; 
+    border-radius: 0;
 }
 
 /* Navbar */
@@ -103,7 +133,7 @@ button,
     flex-direction: row !important;
     justify-content: center;
     float: none;
-    flex-wrap: nowrap;       
+    flex-wrap: nowrap;
     gap: 1rem;
 }
 
@@ -146,40 +176,49 @@ body.dark .nav-link.active {
 
 /* Theme toggle container to maintain layout spacing */
 #theme-toggle {
-    min-width: 150px; 
+    min-width: 150px;
 }
 
 /* Custom toggle switch styling (base appearance) */
 .form-check-input[type="checkbox"] {
-    appearance: none; /* Remove default browser checkbox styling */
-    width: 3rem; 
-    height: 1.5rem; 
-    background-color: var(--color-primary); 
-    border: 2px solid var(--color-primary); 
-    border-radius: 2rem; /* Rounded pill shape */
-    position: relative; /* Allow absolute positioning of inner thumb */
-    cursor: pointer; /* Indicate interactivity */
-    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth color/glow transitions */
+    appearance: none;
+    /* Remove default browser checkbox styling */
+    width: 3rem;
+    height: 1.5rem;
+    background-color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: 2rem;
+    /* Rounded pill shape */
+    position: relative;
+    /* Allow absolute positioning of inner thumb */
+    cursor: pointer;
+    /* Indicate interactivity */
+    transition: background-color 0.3s, box-shadow 0.3s;
+    /* Smooth color/glow transitions */
 }
 
 /* Creates the circular thumb inside the custom switch */
 .form-check-input[type="checkbox"]::before {
-    content: ""; /* Required for pseudo-element to render */
-    position: absolute; /* Position relative to the parent input */
+    content: "";
+    /* Required for pseudo-element to render */
+    position: absolute;
+    /* Position relative to the parent input */
     top: 2px;
     left: 2px;
     width: 1.1rem;
     height: 1.1rem;
     background-color: var(--color-white);
     border-radius: 50%;
-    transition: transform 0.3s ease; /* Smooth movement when toggled */
+    transition: transform 0.3s ease;
+    /* Smooth movement when toggled */
 }
 
 /* Styles applied when the theme switch is toggled ON in light mode */
 body:not(.dark) .form-check-input[type="checkbox"]:checked {
     background-color: var(--color-accent);
     border-color: var(--color-accent);
-    box-shadow: 0 0 8px var(--color-primary); /* Add purple glow for visual feedback */
+    box-shadow: 0 0 8px var(--color-primary);
+    /* Add purple glow for visual feedback */
 }
 
 /* Moves the switch thumb to the right when toggled ON in light mode */
@@ -191,7 +230,8 @@ body:not(.dark) .form-check-input[type="checkbox"]:checked::before {
 body.dark .form-check-input[type="checkbox"] {
     background-color: var(--color-primary);
     border-color: var(--color-primary);
-    box-shadow: 0 0 10px 2px var(--color-accent); /* Gold outer glow effect */
+    box-shadow: 0 0 10px 2px var(--color-accent);
+    /* Gold outer glow effect */
 }
 
 /* Ensures the toggle thumb remains white in dark mode */
@@ -213,7 +253,9 @@ header {
 }
 
 /* Style for the titles */
-#title, #about-title, #error-title {
+#title,
+#about-title,
+#error-title {
     font-family: var(--font-heading);
     font-weight: normal;
     font-size: 2.5rem;
@@ -224,64 +266,79 @@ header {
 
 /* Main container grows to fill available vertical space */
 main {
-    flex: 1 0 auto; /* Allow main to grow and push footer to bottom */
+    flex: 1 0 auto;
+    /* Allow main to grow and push footer to bottom */
 }
 
 /* Game stats heading is hidden by default (shown via JS later) */
 #game-stats {
-    display: none; 
+    display: none;
 }
 
 /* Styling for game stats subheadings */
 .game-stat {
-    font-family: var(--font-heading); 
-    font-size: 0.9rem; 
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
 }
 
 /* Game Section Layout */
 
 /* Container for the game grid and number input panel */
 #game {
-    flex: 1; /* Allow the game area to take up all remaining vertical space */
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-end; /* Push number container to bottom of the section */
-    padding-bottom: 0.5rem; 
+    flex: 1;
+    /* Allow the game area to take up all remaining vertical space */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Push number container to bottom of the section */
+    padding-bottom: 0.5rem;
 }
 
 /* Wrapper for the number selection buttons (1–9, X) */
 #numbers-container {
-    display: grid; 
-    gap: 1rem; 
-    justify-content: center; /* Center tiles horizontally */
-    padding: 0 0.5rem; 
-    margin-top: auto; /* Push container to the bottom of the #game section */
+    display: grid;
+    gap: 1rem;
+    justify-content: center;
+    /* Center tiles horizontally */
+    padding: 0 0.5rem;
+    margin-top: auto;
+    /* Push container to the bottom of the #game section */
 }
 
 /* Add horizontal spacing inside the number key rows */
 .number-keys {
-    padding: 0 8px; 
+    padding: 0 8px;
 }
 
 /* Individual number tiles */
 #numbers-container h2 {
-    font-size: 1.3rem; 
-    margin: 0.1rem; /* Space around each number */
-    text-align: center; /* Center the number text */
+    font-size: 1.3rem;
+    margin: 0.1rem;
+    /* Space around each number */
+    text-align: center;
+    /* Center the number text */
     min-width: 2.5rem;
     padding: 0.6rem 0;
-    background-color: var(--color-bg-light); /* Light background */
-    border: 2px solid var(--color-black); /* Solid black border */
-    border-radius: 6px; /* Rounded corners like keys */
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Inner shadow for depth */
-    user-select: none; /* Prevent text selection */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: transform 0.1s ease-in-out; /* Smooth press effect */
+    background-color: var(--color-bg-light);
+    /* Light background */
+    border: 2px solid var(--color-black);
+    /* Solid black border */
+    border-radius: 6px;
+    /* Rounded corners like keys */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Inner shadow for depth */
+    user-select: none;
+    /* Prevent text selection */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: transform 0.1s ease-in-out;
+    /* Smooth press effect */
 }
 
 /* Enlarged shadow on hover */
 #numbers-container h2:hover {
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.35); /* Deeper, darker shadow */
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.35);
+    /* Deeper, darker shadow */
 }
 
 /* Press animation */
@@ -298,15 +355,17 @@ body.dark #numbers-container h2 {
 
 /* Light mode modal content styles */
 .modal-content {
-    background-color: var(--color-bg-light); 
-    background-image: url(../backgrounds/light-background.png); 
-    background-repeat: no-repeat; 
-    background-position: center center; 
-    background-size: cover; 
-    border-radius: 0; 
-    border: none; 
-    color: var(--color-black); /* Default text color */
-    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.9); /* Dark shadow for modal elevation */
+    background-color: var(--color-bg-light);
+    background-image: url(../backgrounds/light-background.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 0;
+    border: none;
+    color: var(--color-black);
+    /* Default text color */
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.9);
+    /* Dark shadow for modal elevation */
 }
 
 /* Remove default border-radius from modal body */
@@ -321,51 +380,62 @@ body.dark #numbers-container h2 {
 
 /* Dark mode modal content styles */
 body.dark .modal-content {
-    background-color: var(--color-bg-dark); 
-    background-image: url(../backgrounds/dark-background.png); 
-    color: var(--color-white); /* Ensure modal text is white for contrast */
-    box-shadow: 0 0 20px 5px var(--color-white); /* White glow around modal */
+    background-color: var(--color-bg-dark);
+    background-image: url(../backgrounds/dark-background.png);
+    color: var(--color-white);
+    /* Ensure modal text is white for contrast */
+    box-shadow: 0 0 20px 5px var(--color-white);
+    /* White glow around modal */
 }
 
 /* Transparent background for all modal sections */
 body.dark .modal-header,
 body.dark .modal-body,
 body.dark .modal-footer {
-    background-color: transparent; /* Allow background image to show through */
-    color: var(--color-white); 
+    background-color: transparent;
+    /* Allow background image to show through */
+    color: var(--color-white);
 }
 
 /* Setup Form */
 
 /* Container inside the modal */
 #setup {
-    background-color: transparent; /* Transparent background to show modal theme */
-    border: 2px solid var(--color-bg-dark); /* Border for visibility in light mode */
-    border-radius: 0; 
-    padding: 1.5rem; 
-    width: 100%; /* Full width to fit modal */
+    background-color: transparent;
+    /* Transparent background to show modal theme */
+    border: 2px solid var(--color-bg-dark);
+    /* Border for visibility in light mode */
+    border-radius: 0;
+    padding: 1.5rem;
+    width: 100%;
+    /* Full width to fit modal */
 }
 
 /* Dark mode override for setup form border */
 body.dark #setup {
-    border-color: var(--color-white); /* Make border white in dark mode for contrast */
+    border-color: var(--color-white);
+    /* Make border white in dark mode for contrast */
 }
 
 /* Aligns the difficulty/time radio groups */
 #setup .setup-options {
     display: flex;
-    justify-content: center; 
-    align-items: flex-start; 
-    gap: 40px; /* Space between radio button groups */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    /* Space between radio button groups */
+    flex-wrap: wrap;
+    /* Allow wrapping on smaller screens */
 }
 
 /* Individual fieldset block in the form */
 #setup fieldset {
-    border: none; 
-    text-align: center; /* Center legend and form controls */
-    min-width: 300px; /* Minimum width for readability */
-    flex: 1; 
+    border: none;
+    text-align: center;
+    /* Center legend and form controls */
+    min-width: 300px;
+    /* Minimum width for readability */
+    flex: 1;
 }
 
 /* Start button container inside setup form */
@@ -375,52 +445,59 @@ body.dark #setup {
 
 /* Legend titles */
 #setup legend {
-    font-family: var(--font-heading); 
-    font-size: 1rem; 
-    text-align: center; 
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    text-align: center;
 }
 
 /* Labels for each radio button */
 #setup .form-check-label {
-    font-size: 0.9rem; /* Slightly smaller font */
+    font-size: 0.9rem;
+    /* Slightly smaller font */
 }
 
 /* Utility class to ensure form content spans full width */
 #setup .text-center {
-    width: 100%; 
+    width: 100%;
 }
 
 /* Radio Inputs for Light/Dark Mode */
 
 /* Custom dark mode radio button appearance */
 body.dark .form-check-input[type="radio"] {
-    appearance: none; /* Remove default browser styling */
-    width: 1rem; 
-    height: 1rem; 
-    border-radius: 50%; /* Circular shape */
-    border: 2px solid var(--color-white); 
-    background-color: transparent; 
-    position: relative; /* For custom indicator placement */
-    cursor: pointer; 
-    margin-top: 0.3rem; /* Align with label text */
+    appearance: none;
+    /* Remove default browser styling */
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    /* Circular shape */
+    border: 2px solid var(--color-white);
+    background-color: transparent;
+    position: relative;
+    /* For custom indicator placement */
+    cursor: pointer;
+    margin-top: 0.3rem;
+    /* Align with label text */
 }
 
 /* Checked state styling in dark mode */
 body.dark .form-check-input[type="radio"]:checked {
-    background-color: var(--color-accent); 
-    border-color: var(--color-accent); 
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
 }
 
 /* Inner indicator for selected radio */
 body.dark .form-check-input[type="radio"]::before {
-    content: ""; /* Empty content block for dot */
-    display: block; /* Block level for proper spacing */
-    width: 0.5rem; 
-    height: 0.5rem; 
-    margin: auto; 
-    margin-top: 0.15rem; 
-    background-color: var(--color-white); 
-    border-radius: 50%; 
+    content: "";
+    /* Empty content block for dot */
+    display: block;
+    /* Block level for proper spacing */
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: auto;
+    margin-top: 0.15rem;
+    background-color: var(--color-white);
+    border-radius: 50%;
 }
 
 /* Use purple accent color for radio buttons in light mode */
@@ -443,7 +520,8 @@ body:not(.dark) .form-check-input[type="radio"] {
 
 #modal-border {
     border-radius: 0;
-    border: 2px solid var(--color-black); /* Matching border */
+    border: 2px solid var(--color-black);
+    /* Matching border */
     margin: 1rem;
 }
 
@@ -478,45 +556,53 @@ body:not(.dark) .form-check-input[type="radio"] {
 
 /* Dark mode styles for Rules modal */
 body.dark #rules-modal .modal-content {
-    background-color: var(--color-bg-dark); 
-    background-image: url(../backgrounds/dark-background.png); 
-    color: var(--color-white); 
-    box-shadow: 0 0 20px 5px var(--color-white); 
+    background-color: var(--color-bg-dark);
+    background-image: url(../backgrounds/dark-background.png);
+    color: var(--color-white);
+    box-shadow: 0 0 20px 5px var(--color-white);
 }
 
 /* Inner modal border in dark mode */
 body.dark #rules-modal #modal-border {
-    border: 2px solid var(--color-white); 
+    border: 2px solid var(--color-white);
 }
 
 /* Footer */
 
 /* Footer container styles */
 footer {
-    flex-shrink: 0; /* Prevent footer from shrinking */
-    background-color: transparent; 
-    text-decoration: none; /* Remove text underline */
-    color: inherit; /* Inherit text color */
+    flex-shrink: 0;
+    /* Prevent footer from shrinking */
+    background-color: transparent;
+    text-decoration: none;
+    /* Remove text underline */
+    color: inherit;
+    /* Inherit text color */
 }
 
 /* Footer links */
 footer a {
-    text-decoration: none; /* Remove link underline */
-    display: inline-block; /* Allow for layout adjustments */
-    line-height: 1; /* Tight vertical spacing */
-    vertical-align: middle; /* Align icons/text neatly */
-    color: inherit; 
+    text-decoration: none;
+    /* Remove link underline */
+    display: inline-block;
+    /* Allow for layout adjustments */
+    line-height: 1;
+    /* Tight vertical spacing */
+    vertical-align: middle;
+    /* Align icons/text neatly */
+    color: inherit;
 }
 
 /* Footer icon color */
 footer a i {
-    color: inherit; /* Inherit color from parent anchor */
+    color: inherit;
+    /* Inherit color from parent anchor */
 }
 
 /* Hover effect for links */
 footer a:hover {
-    color: var(--color-primary); 
-    font-size: 1.2rem; 
+    color: var(--color-primary);
+    font-size: 1.2rem;
 }
 
 /* Set all footer elements to white in dark mode */
@@ -526,13 +612,14 @@ body.dark footer span,
 body.dark footer p,
 body.dark footer a,
 body.dark footer a i {
-    color: var(--color-white) !important; 
+    color: var(--color-white) !important;
 }
 
 /* Footer link hover in dark mode */
 body.dark footer a:hover,
 body.dark footer a:hover i {
-    color: var(--color-accent) !important; /* Gold hover color for contrast */
+    color: var(--color-accent) !important;
+    /* Gold hover color for contrast */
 }
 
 /* About Page */
