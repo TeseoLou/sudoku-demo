@@ -294,6 +294,22 @@ main {
     padding-bottom: 0.5rem;
 }
 
+p.select {
+    background-color: #cac3fc;
+}
+
+p.incorrect {
+    color: red;
+}
+
+.right-border {
+    border-right: 4px solid black;
+}
+
+.bottom-border {
+    border-bottom: 4px solid black;
+}
+
 /* Wrapper for the number selection buttons (1–9, X) */
 #numbers-container {
     display: grid;
