@@ -19,7 +19,6 @@ function setupThemeSwitch() {
     // Reference: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#toggling-manually
     const savedTheme = localStorage.getItem("theme");
     const isLightMode = savedTheme !== "dark"; // default to light mode if unset
-
     // Toggle the 'dark' class on the <body> based on the user's saved preference
     $("body").toggleClass("dark", !isLightMode);
     // Update the checkbox's checked property to reflect the current mode
@@ -52,7 +51,6 @@ function setupThemeSwitch() {
         // Save user preference to localStorage
         // Reference: https://www.w3schools.com/jsref/prop_win_localstorage.asp
         localStorage.setItem("theme", isLightMode ? "light" : "dark");
-
         // Toggle button styles based on theme
         $newGameButton
             .toggleClass("btn-light", !isLightMode)

@@ -534,3 +534,9 @@ body.dark footer a:hover,
 body.dark footer a:hover i {
     color: var(--color-accent) !important; /* Gold hover color for contrast */
 }
+
+/* About Page */
+/* Fix text color for the donate button in dark mode */
+body.dark #donate-button.btn-light {
+    color: var(--color-black);
+}

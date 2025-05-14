@@ -71,25 +71,26 @@
   </header>
   <!-- Main Content Section -->
   <main class="container pb-5" id="about-content">
-    <section class="mb-4">
-      <p class="text-center">
+    <section class="mb-4 text-center">
+      <h2 class="h5">Where Code Meets Puzzle</h2>
+      <p>
         <strong>Codoku</strong> is a browser-based Sudoku game designed to engage your mind, challenge your logic,
         and bring a bit of fun to your day. Whether you're a beginner looking to sharpen your skills or a Sudoku
         master seeking your next challenge, Codoku offers an accessible and visually pleasing experience for everyone.
       </p>
     </section>
-
     <section class="mb-4 text-center">
+      <h2 class="h5">Where Code Meets Puzzle</h2>
       <p>
         The name <strong>Codoku</strong> is a playful twist on "code" and "Sudoku" — inspired by the intersection of
         programming
-        logic and puzzle-solving. The game is built using HTML, CSS, JavaScript, and Bootstrap, with an emphasis on
+        logic and puzzle-solving. The game is built using HTML, CSS, JavaScript, Bootstrap, and JQuery with an emphasis on
         accessibility,
         responsiveness, and user-friendly design.
       </p>
     </section>
-
     <section class="mb-4 text-center">
+      <h2 class="h5">A Tribute to Cognitive Health</h2>
       <p>
         This project is also about more than just code. It’s a tribute to cognitive health and mental agility — two
         things
@@ -98,17 +99,39 @@
         a UK charity supporting people affected by dementia.
       </p>
     </section>
-
-    <section class="text-center mb-5">
+    <section class="text-center">
       <h2 class="h5">Support the Cause</h2>
-      <p>
+      <p class="mb-4">
         If you’ve enjoyed playing Codoku and want to support a great cause, please consider donating to Alzheimer’s
         Society.
       </p>
       <a href="https://www.alzheimers.org.uk/get-involved/make-donation" id="donate-button" class="btn btn-dark"
-        target="_blank" rel="noopener noreferrer">
-        Donate to Alzheimer’s Society
-      </a>
+        target="_blank" rel="noopener noreferrer">Donate</a>
+    </section>
+    <!-- Rules Modal -->
+    <section class="modal fade" id="rules-modal" tabindex="-1" role="dialog" aria-labelledby="rules-modal-label"
+        aria-modal="true" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <article class="modal-content">
+                <div id="modal-border">
+                    <header class="modal-header">
+                        <h2 class="modal-title" id="rulesModalLabel">Game Rules</h2>
+                    </header>
+                    <div class="modal-body">
+                        <p>The goal of Codoku is to complete the grid so that every row, column, and 3x3 box contains the numbers 1 through 9.</p>
+                        <ul>
+                            <li>Only use each number once per row, column, and box.</li>
+                            <li>Use the number keys below the grid to make selections.</li>
+                            <li>Choose your difficulty and time before starting a new game.</li>
+                        </ul>
+                    </div>
+                    <footer class="modal-footer">
+                        <button type="button" id="rules-back-button" class="btn btn-dark" data-bs-dismiss="modal">Back
+                            ↲</button>
+                    </footer>
+                </div>
+            </article>
+        </div>
     </section>
   </main>
   <!-- Footer Section -->
