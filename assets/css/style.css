@@ -318,6 +318,17 @@ body.dark #grid p {
     color: var(--color-white);
 }
 
+#grid .number {
+    line-height: 40px;
+    vertical-align: middle;
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #grid p:hover {
     background-color: #bcb6e998;
 }
@@ -342,12 +353,15 @@ p.incorrect {
 #grid p.no-border-top {
     border-top: 1px solid transparent !important;
 }
+
 #grid p.no-border-right {
     border-right: 1px solid transparent !important;
 }
+
 #grid p.no-border-bottom {
     border-bottom: 1px solid transparent !important;
 }
+
 #grid p.no-border-left {
     border-left: 1px solid transparent !important;
 }

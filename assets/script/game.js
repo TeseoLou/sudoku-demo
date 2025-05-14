@@ -14,7 +14,7 @@ function renderEmptyGrid() {
 
         for (let col = 0; col < 9; col++) {
             const cell = document.createElement('p');
-            cell.classList.add('m-0', 'text-center');
+            cell.classList.add('m-0', 'text-center', 'number');
             cell.style.width = '40px';
             cell.style.height = '40px';
             cell.dataset.row = row;
