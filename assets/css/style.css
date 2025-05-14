@@ -332,6 +332,7 @@ body.dark #grid p {
 /* Light theme hover effect (only non-generated cells) */
 #grid p:hover:not(.generated) {
     background-color: #bcb6e998;
+    cursor: pointer;
 }
 
 /* Dark theme hover effect (only non-generated cells) */
