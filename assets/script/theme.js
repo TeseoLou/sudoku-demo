@@ -12,11 +12,14 @@ function setupThemeSwitch() {
     const $startButton = $("#start-button");
     // Set the Back button in the Rules modal
     const $rulesBackButton = $("#rules-back-button");
+    // Set the Donate button on the About page
+    const $donateButton = $("#donate-button");
     // Load stored theme preference on page load
     // Reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
     // Reference: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#toggling-manually
     const savedTheme = localStorage.getItem("theme");
     const isLightMode = savedTheme !== "dark"; // default to light mode if unset
+
     // Toggle the 'dark' class on the <body> based on the user's saved preference
     $("body").toggleClass("dark", !isLightMode);
     // Update the checkbox's checked property to reflect the current mode
@@ -33,15 +36,24 @@ function setupThemeSwitch() {
     $rulesBackButton
         .toggleClass("btn-light", !isLightMode)
         .toggleClass("btn-dark", isLightMode);
+    $donateButton
+        .toggleClass("btn-light", !isLightMode)
+        .toggleClass("btn-dark", isLightMode);
     // Set up an event listener for when the theme switch is toggled
     // Reference: https://dev.to/whitep4nth3r/the-best-lightdark-mode-theme-toggle-in-javascript-368f
     themeSwitch.addEventListener("change", function () {
         const isLightMode = this.checked;
         $("body").toggleClass("dark", !isLightMode);
+        // Update the ARIA attribute for accessibility
+        // Reference: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-checked
         this.setAttribute("aria-checked", isLightMode ? "true" : "false");
+        // Update the theme icon to match the current mode
         $themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
+        // Save user preference to localStorage
         // Reference: https://www.w3schools.com/jsref/prop_win_localstorage.asp
         localStorage.setItem("theme", isLightMode ? "light" : "dark");
+
+        // Toggle button styles based on theme
         $newGameButton
             .toggleClass("btn-light", !isLightMode)
             .toggleClass("btn-dark", isLightMode);
@@ -49,6 +61,9 @@ function setupThemeSwitch() {
             .toggleClass("btn-light", !isLightMode)
             .toggleClass("btn-dark", isLightMode);
         $rulesBackButton
+            .toggleClass("btn-light", !isLightMode)
+            .toggleClass("btn-dark", isLightMode);
+        $donateButton
             .toggleClass("btn-light", !isLightMode)
             .toggleClass("btn-dark", isLightMode);
     });
