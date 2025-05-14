@@ -350,6 +350,14 @@ body.dark .generated {
     background-color: #ffffff20; /* semi-transparent white */
 }
 
+#grid .selected {
+    background-color: #e0b33671;
+}
+
+body.dark #grid .selected {
+    background-color: #bcb6e998;
+}
+
 p.incorrect {
     color: red;
 }
