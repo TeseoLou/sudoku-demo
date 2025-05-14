@@ -53,10 +53,10 @@ function populateGrid(puzzle) {
 
             if (value !== null) {
                 cell.textContent = value;
-                cell.classList.add('fw-bold'); // Make given values bold
+                cell.classList.add('generated'); 
             } else {
                 cell.textContent = '';
-                cell.classList.remove('fw-bold');
+                cell.classList.remove('fw-bold', 'generated');
             }
         }
     }

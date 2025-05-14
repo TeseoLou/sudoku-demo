@@ -337,6 +337,16 @@ body.dark #grid p:hover {
     background-color: #e0b33671;
 }
 
+/* Background for generated cells (light mode) */
+.generated {
+    background-color: #00000020; /* semi-transparent black */
+}
+
+/* Background override for dark mode */
+body.dark .generated {
+    background-color: #ffffff20; /* semi-transparent white */
+}
+
 p.incorrect {
     color: red;
 }
