@@ -133,7 +133,12 @@ function checkUserInput() {
 document.addEventListener('DOMContentLoaded', function () {
     const checkButton = document.getElementById('check-button');
     if (checkButton) {
-        checkButton.addEventListener('click', checkUserInput);
+        // Use slight delay to ensure mobile DOM updates are applied before checking
+        checkButton.addEventListener('click', () => {
+            setTimeout(() => {
+                checkUserInput();
+            }, 10);
+        });
     }
 });
 
