@@ -113,6 +113,13 @@ button,
     border-radius: 0;
 }
 
+.equal-width-buttons {
+    display: inline-block;
+    width: 100%;
+    max-width: 70px; /* Prevent overly wide buttons on large screens */
+    text-align: center;
+}
+
 /* Navbar */
 
 .navbar-collapse {
