@@ -56,15 +56,6 @@ body {
     width: 100vw;
 }
 
-/* Auto-apply dark mode if user's system prefers it */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: var(--color-bg-dark);
-        background-image: url(../backgrounds/dark-background.png);
-        color: var(--color-white);
-    }
-}
-
 /* Headings styling */
 h1,
 h2,
