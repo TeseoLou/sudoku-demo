@@ -14,6 +14,8 @@ function setupThemeSwitch() {
     const $rulesBackButton = $("#rules-back-button");
     // Set the Donate button on the About page
     const $donateButton = $("#donate-button");
+    // Set the Check button on the Game page
+    const $checkButton = $("#check-button");
     // Load stored theme preference on page load
     // Reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
     // Reference: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#toggling-manually
@@ -36,6 +38,10 @@ function setupThemeSwitch() {
         .toggleClass("btn-light", !isLightMode)
         .toggleClass("btn-dark", isLightMode);
     $donateButton
+        .toggleClass("btn-light", !isLightMode)
+        .toggleClass("btn-dark", isLightMode);
+    // Toggle style for the Check button (if it exists on the page)
+    $checkButton
         .toggleClass("btn-light", !isLightMode)
         .toggleClass("btn-dark", isLightMode);
     // Set up an event listener for when the theme switch is toggled
@@ -62,6 +68,9 @@ function setupThemeSwitch() {
             .toggleClass("btn-light", !isLightMode)
             .toggleClass("btn-dark", isLightMode);
         $donateButton
+            .toggleClass("btn-light", !isLightMode)
+            .toggleClass("btn-dark", isLightMode);
+        $checkButton
             .toggleClass("btn-light", !isLightMode)
             .toggleClass("btn-dark", isLightMode);
     });

@@ -111,5 +111,31 @@ function enableCellSelection() {
     });
 }
 
+function checkUserInput() {
+    if (!currentSolution) return;
+
+    document.querySelectorAll('.editable').forEach(cell => {
+        const row = parseInt(cell.dataset.row);
+        const col = parseInt(cell.dataset.col);
+        const correctValue = currentSolution[row][col];
+        const userValue = cell.textContent.trim();
+
+        if (userValue === "") {
+            cell.classList.remove('incorrect');
+        } else if (userValue === String(correctValue)) {
+            cell.classList.remove('incorrect');
+        } else {
+            cell.classList.add('incorrect');
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const checkButton = document.getElementById('check-button');
+    if (checkButton) {
+        checkButton.addEventListener('click', checkUserInput);
+    }
+});
+
 // === Init ===
 renderEmptyGrid();
