@@ -9,11 +9,9 @@ let selectedCell = null;
 function renderEmptyGrid() {
     const gridContainer = document.getElementById('grid');
     gridContainer.innerHTML = '';
-
     for (let row = 0; row < 9; row++) {
         const rowDiv = document.createElement('div');
         rowDiv.classList.add('d-flex');
-
         for (let col = 0; col < 9; col++) {
             const cell = document.createElement('p');
             cell.classList.add('m-0', 'text-center', 'number', 'select');
@@ -21,20 +19,16 @@ function renderEmptyGrid() {
             cell.style.height = '40px';
             cell.dataset.row = row;
             cell.dataset.col = col;
-
             // Add thick borders between 3x3 boxes
             if ((col + 1) % 3 === 0 && col !== 8) cell.classList.add('right-border');
             if ((row + 1) % 3 === 0 && row !== 8) cell.classList.add('bottom-border');
-
             // Remove outer borders
             if (row === 0) cell.classList.add('no-border-top');
             if (col === 0) cell.classList.add('no-border-left');
             if (row === 8) cell.classList.add('no-border-bottom');
             if (col === 8) cell.classList.add('no-border-right');
-
             rowDiv.appendChild(cell);
         }
-
         gridContainer.appendChild(rowDiv);
     }
 }
@@ -57,7 +51,6 @@ function populateGrid(puzzle) {
             cell.style.cursor = 'pointer';
         }
     });
-
     enableCellSelection();
 }
 
@@ -66,7 +59,6 @@ function populateGrid(puzzle) {
  */
 function fetchSudokuBoard() {
     const selectedDifficulty = document.querySelector('input[name="difficulty"]:checked').value;
-
     $.ajax({
         method: 'GET',
         url: `https://api.api-ninjas.com/v1/sudokugenerate?difficulty=${selectedDifficulty}`,
@@ -98,13 +90,10 @@ function enableCellSelection() {
             selectedCell.classList.add('selected');
         });
     });
-
     document.addEventListener('keydown', function (e) {
         if (!selectedCell) return;
-
         const isEditable = selectedCell.classList.contains('editable');
         if (!isEditable) return;
-
         if (e.key >= '1' && e.key <= '9') {
             selectedCell.textContent = e.key;
         } else if (e.key === 'Backspace' || e.key === 'Delete') {
@@ -116,7 +105,6 @@ function enableCellSelection() {
         tile.addEventListener('click', function () {
             if (!selectedCell) return;
             if (!selectedCell.classList.contains('editable')) return;
-
             const val = this.textContent;
             selectedCell.textContent = val === 'X' ? '' : val;
         });
