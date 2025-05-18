@@ -350,7 +350,11 @@ body.dark #grid .selected {
 }
 
 p.incorrect {
-    color: red !important;
+    color: rgb(246, 101, 101) !important;
+}
+
+p.hinted {
+    color: rgb(75, 146, 75) !important;
 }
 
 /* Thick 3x3 borders in light mode */

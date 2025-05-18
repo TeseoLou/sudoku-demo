@@ -16,6 +16,8 @@ function setupThemeSwitch() {
     const $donateButton = $("#donate-button");
     // Set the Check button on the Game page
     const $checkButton = $("#check-button");
+    // Set the Hint button on the Game page
+    const $hintButton = $("#hint-button");
 
     // Load stored theme preference on page load
     // Reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
@@ -55,6 +57,11 @@ function setupThemeSwitch() {
     }
     if ($checkButton.length) {
         $checkButton
+            .toggleClass("btn-light", !isLightMode)
+            .toggleClass("btn-dark", isLightMode);
+    }
+    if ($hintButton.length) {
+        $hintButton
             .toggleClass("btn-light", !isLightMode)
             .toggleClass("btn-dark", isLightMode);
     }
@@ -100,6 +107,11 @@ function setupThemeSwitch() {
         }
         if ($checkButton.length) {
             $checkButton
+                .toggleClass("btn-light", !isLightMode)
+                .toggleClass("btn-dark", isLightMode);
+        }
+        if ($hintButton.length) {
+            $hintButton
                 .toggleClass("btn-light", !isLightMode)
                 .toggleClass("btn-dark", isLightMode);
         }

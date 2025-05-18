@@ -130,6 +130,27 @@ function checkUserInput() {
     });
 }
 
+function revealHint() {
+    if (!currentSolution) return;
+
+    // Find all editable, empty cells
+    const emptyCells = Array.from(document.querySelectorAll('.editable')).filter(cell => cell.textContent.trim() === '');
+
+    if (emptyCells.length === 0) return;
+
+    // Pick a random one
+    const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+
+    const row = parseInt(randomCell.dataset.row);
+    const col = parseInt(randomCell.dataset.col);
+    const correctValue = currentSolution[row][col];
+
+    // Fill it with correct value and style as hint
+    randomCell.textContent = correctValue;
+    randomCell.classList.add('hinted');
+    randomCell.classList.remove('incorrect'); // remove red if present
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const checkButton = document.getElementById('check-button');
     if (checkButton) {
@@ -142,5 +163,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// === Init ===
+document.addEventListener('DOMContentLoaded', function () {
+    const checkButton = document.getElementById('check-button');
+    if (checkButton) {
+        // Use slight delay to ensure mobile DOM updates are applied before checking
+        checkButton.addEventListener('click', () => {
+            setTimeout(() => {
+                checkUserInput();
+            }, 10);
+        });
+    }
+    const hintButton = document.getElementById('hint-button');
+    if (hintButton) {
+        // Slight delay ensures hint inserts after any user interaction
+        hintButton.addEventListener('click', () => {
+            setTimeout(() => {
+                revealHint();
+            }, 10);
+        });
+    }
+});
+
+
 renderEmptyGrid();
