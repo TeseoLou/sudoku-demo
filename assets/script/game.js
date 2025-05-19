@@ -103,9 +103,11 @@ function enableCellSelection() {
 
         if (e.key >= '1' && e.key <= '9') {
             selectedCell.textContent = e.key;
+            selectedCell.classList.remove('incorrect'); // Reset red if previously incorrect
             triggerAutoWinCheck(); // Check for win after number input
         } else if (e.key === 'Backspace' || e.key === 'Delete') {
             selectedCell.textContent = '';
+            selectedCell.classList.remove('incorrect'); // Reset red if cleared
             triggerAutoWinCheck(); // Also check after clearing
         }
     });
@@ -118,7 +120,7 @@ function enableCellSelection() {
 
             const val = this.textContent;
             selectedCell.textContent = val === 'X' ? '' : val;
-
+            selectedCell.classList.remove('incorrect'); // Reset red if tile input used
             triggerAutoWinCheck(); // Auto-check after tile input
         });
     });
