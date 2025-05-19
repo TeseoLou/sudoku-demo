@@ -254,11 +254,13 @@ function triggerAutoWinCheck() {
         const setupModalElement = document.getElementById("setup-modal");
         const setupModal = new bootstrap.Modal(setupModalElement);
         setupModal.show();
+    } else if (allFilled && !isBoardCompleteAndCorrect()) {
+        alert("🔍 Try again! It looks like there's an error somewhere!");
     }
 }
 
 function endGameDueToTime() {
-    alert("Time's up! Better luck next time.");
+    alert("⏰ Time's up! Better luck next time.");
 
     document.querySelectorAll('.editable').forEach(cell => {
         cell.classList.remove('editable');
