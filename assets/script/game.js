@@ -368,46 +368,44 @@ function isBoardFilled() {
         // Return true if this cell has something in it
         return value !== '';
     });
-    // Only return true if every single editable cell had a value
     return allFilled;
 }
 
 /**
- * Fires a celebratory confetti animation on the screen
+ * Confetti animation when board is complete
  */
-function launchConfetti() {
-    // Trigger the confetti animation with some customized settings
+function popConfetti() {
     confetti({
-        // Number of confetti pieces to show
-        particleCount: 150,
-        // How far the confetti spreads out (higher means wider burst)
-        spread: 80,
+        // Confetti pieces
+        particleCount: 200,
+        // How far the confetti spreads out 
+        spread: 100,
         // Starting point of the confetti on the Y axis (0 = top, 1 = bottom)
-        origin: { y: 0.6 }
+        origin: { y: 0.5 }
     });
 }
 
 /**
- * Checks if the board is complete and correct.
+ * Checks if the board is complete and correct
  */
 function triggerAutoWinCheck() {
-    // If the player hasn't already won and the solution is correct
+    // If the player hasn't completed yet and the answers are right
     if (!hasCelebrated && isBoardCompleteAndCorrect()) {
-        // Show confetti and applause as a reward
-        launchConfetti();
+        // Show confetti and applause
+        popConfetti();
         soundEffects.play("applause");
-        // Prevent repeated celebration on further checks
+        // Prevent repeated celebration
         hasCelebrated = true;
-        // Halt the countdown timer if it's currently running
+        // Halt the countdown timer
         if (countdownInterval) {
             clearInterval(countdownInterval);
         }
         // Access the setup modal using Bootstrap's Modal API
         const setupModal = $('#setup-modal'); 
         const setupModalInstance = new bootstrap.Modal(setupModal[0]);
-        // Display the setup modal again after victory
+        // Display the setup modal again after board completion
         setupModalInstance.show();  
-    // If the board is full but there's an error
+    // If the board is full but the user has made a mistake
     } else if (isBoardFilled() && !isBoardCompleteAndCorrect()) {
         // Notify the user
         soundEffects.play("error");
