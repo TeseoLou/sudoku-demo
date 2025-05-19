@@ -356,13 +356,26 @@ body.dark #grid .selected {
     background-color: #bcb6e998;
 }
 
+/* Incorrect input feedback (light theme) */
 p.incorrect {
-    color: rgb(246, 101, 101) !important;
+    color: #7d2525 !important;
 }
 
-p.hinted {
-    color: rgb(75, 146, 75) !important;
+/* Incorrect input feedback override for dark mode */
+body.dark p.incorrect {
+    color: #f69696 !important;
 }
+
+/* Hinted cell color (light theme) */
+p.hinted {
+    color: #285228 !important;
+}
+
+/* Hinted cell color override for dark mode */
+body.dark p.hinted {
+    color: #a5f3a5 !important;
+}
+
 
 /* Thick 3x3 borders in light mode */
 #grid p.right-border {
