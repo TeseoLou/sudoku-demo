@@ -244,6 +244,14 @@ function triggerAutoWinCheck() {
     if (!hasCelebrated && isBoardCompleteAndCorrect()) {
         launchConfetti();
         hasCelebrated = true;
+        // Stop the countdown timer if it's running
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        // Reopen the setup modal using Bootstrap's modal API
+        const setupModalElement = document.getElementById("setup-modal");
+        const setupModal = new bootstrap.Modal(setupModalElement);
+        setupModal.show();
     }
 }
 
@@ -254,9 +262,6 @@ function endGameDueToTime() {
         cell.classList.remove('editable');
         cell.style.pointerEvents = "none";
     });
-
-    // Clear the grid entirely
-    renderEmptyGrid();
 
     // Reopen the setup modal using Bootstrap's modal API
     const setupModalElement = document.getElementById("setup-modal");
