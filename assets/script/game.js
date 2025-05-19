@@ -124,10 +124,12 @@ function enableCellSelection() {
             selectedCell.textContent = e.key;
             selectedCell.classList.remove('incorrect'); // Reset red if previously incorrect
             triggerAutoWinCheck(); // Check for win after number input
+            soundEffects.play("key");
         } else if (e.key === 'Backspace' || e.key === 'Delete') {
             selectedCell.textContent = '';
             selectedCell.classList.remove('incorrect'); // Reset red if cleared
             triggerAutoWinCheck(); // Also check after clearing
+            soundEffects.play("key");
         }
     });
 
@@ -288,8 +290,8 @@ function triggerAutoWinCheck() {
 }
 
 function endGameDueToTime() {
-    alert("⏰ Time's up! Better luck next time.");
     soundEffects.play("alarm");
+    alert("⏰ Time's up! Better luck next time.");   
     document.querySelectorAll('.editable').forEach(cell => {
         cell.classList.remove('editable');
         cell.style.pointerEvents = "none";

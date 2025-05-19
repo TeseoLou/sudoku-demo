@@ -1,3 +1,16 @@
+const themeToggleSounds = {
+    tweet: new Audio("assets/sounds/tweet.mp3"),
+    hoot: new Audio("assets/sounds/hoot.mp3"),
+
+    play(name) {
+        const sound = this[name];
+        if (sound) {
+            sound.currentTime = 0; // restart sound
+            sound.play().catch(err => console.warn(`⚠️ Failed to play ${name}:`, err));
+        }
+    }
+};
+
 /**
  * Handle theme switch toggle (light/dark mode)
  */
@@ -70,6 +83,8 @@ function setupThemeSwitch() {
     // Reference: https://dev.to/whitep4nth3r/the-best-lightdark-mode-theme-toggle-in-javascript-368f
     themeSwitch.addEventListener("change", function () {
         const isLightMode = this.checked;
+
+        themeToggleSounds.play(isLightMode ? "tweet" : "hoot");
 
         $("body").toggleClass("dark", !isLightMode);
 
