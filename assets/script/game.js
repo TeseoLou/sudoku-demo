@@ -2,6 +2,8 @@ const API_KEY = '6nP4AYB9ImbH8hd6Zl79tg==iJV6BjdAY08uPpZU';
 
 let currentSolution = null;
 let selectedCell = null;
+let countdownInterval = null;
+let timeRemaining = 0;
 
 /**
  * Render a blank 9x9 Sudoku grid
@@ -151,17 +153,61 @@ function revealHint() {
     randomCell.classList.remove('incorrect'); // remove red if present
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const checkButton = document.getElementById('check-button');
-    if (checkButton) {
-        // Use slight delay to ensure mobile DOM updates are applied before checking
-        checkButton.addEventListener('click', () => {
-            setTimeout(() => {
-                checkUserInput();
-            }, 10);
-        });
+function startTimer() {
+    const selectedTime = document.querySelector('input[name="time"]:checked').value;
+
+    if (selectedTime === "none") {
+        // Clear timer text if no time is selected
+        document.getElementById("timer").textContent = "Timer: None";
+        return;
     }
-});
+
+    // Convert minutes to seconds
+    timeRemaining = parseInt(selectedTime) * 60;
+
+    // Update immediately
+    updateTimerDisplay();
+
+    // Clear any previous timer
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+    }
+
+    // Start countdown
+    countdownInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+
+        if (timeRemaining <= 0) {
+            clearInterval(countdownInterval);
+            endGameDueToTime();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    document.getElementById("timer").textContent = `Timer: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function endGameDueToTime() {
+    alert("Time's up! Better luck next time.");
+
+    // Optional: disable further input
+    document.querySelectorAll('.editable').forEach(cell => {
+        cell.classList.remove('editable');
+        cell.style.pointerEvents = "none";
+    });
+
+    // Clear the grid entirely
+    renderEmptyGrid();
+
+    // Reopen the setup modal using Bootstrap's modal API
+    const setupModalElement = document.getElementById("setup-modal");
+    const setupModal = new bootstrap.Modal(setupModalElement);
+    setupModal.show();
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     const checkButton = document.getElementById('check-button');
@@ -183,6 +229,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
 
 renderEmptyGrid();
