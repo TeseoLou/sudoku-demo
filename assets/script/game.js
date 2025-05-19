@@ -5,6 +5,7 @@ let selectedCell = null;
 let countdownInterval = null;
 let timeRemaining = 0;
 let hintsUsed = 0;
+let hasCelebrated = false;
 
 /**
  * Render a blank 9x9 Sudoku grid
@@ -93,23 +94,32 @@ function enableCellSelection() {
             selectedCell.classList.add('selected');
         });
     });
+
+    // Keyboard input handler
     document.addEventListener('keydown', function (e) {
         if (!selectedCell) return;
         const isEditable = selectedCell.classList.contains('editable');
         if (!isEditable) return;
+
         if (e.key >= '1' && e.key <= '9') {
             selectedCell.textContent = e.key;
+            triggerAutoWinCheck(); // Check for win after number input
         } else if (e.key === 'Backspace' || e.key === 'Delete') {
             selectedCell.textContent = '';
+            triggerAutoWinCheck(); // Also check after clearing
         }
     });
 
+    // Tile/tap input handler
     document.querySelectorAll('#numbers-container h2').forEach(tile => {
         tile.addEventListener('click', function () {
             if (!selectedCell) return;
             if (!selectedCell.classList.contains('editable')) return;
+
             const val = this.textContent;
             selectedCell.textContent = val === 'X' ? '' : val;
+
+            triggerAutoWinCheck(); // Auto-check after tile input
         });
     });
 }
@@ -117,7 +127,7 @@ function enableCellSelection() {
 function checkUserInput() {
     hintsUsed++;
     updateHintsDisplay();
-    
+
     if (!currentSolution) return;
 
     document.querySelectorAll('.editable').forEach(cell => {
@@ -208,6 +218,33 @@ function updateDifficultyDisplay() {
 
 function updateHintsDisplay() {
     document.getElementById("hints").textContent = `Hints: ${hintsUsed}`;
+}
+
+function isBoardCompleteAndCorrect() {
+    if (!currentSolution) return false;
+
+    return Array.from(document.querySelectorAll('.editable')).every(cell => {
+        const row = parseInt(cell.dataset.row);
+        const col = parseInt(cell.dataset.col);
+        const correctValue = String(currentSolution[row][col]);
+        const userValue = cell.textContent.trim();
+        return userValue === correctValue;
+    });
+}
+
+function launchConfetti() {
+    confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 }
+    });
+}
+
+function triggerAutoWinCheck() {
+    if (!hasCelebrated && isBoardCompleteAndCorrect()) {
+        launchConfetti();
+        hasCelebrated = true;
+    }
 }
 
 function endGameDueToTime() {

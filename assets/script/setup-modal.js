@@ -21,5 +21,6 @@ function setupStartButton() {
         updateDifficultyDisplay();
         hintsUsed = 0;
         updateHintsDisplay();
+        hasCelebrated = false;
     });
 }
