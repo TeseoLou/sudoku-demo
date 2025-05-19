@@ -7,6 +7,24 @@ let timeRemaining = 0;
 let hintsUsed = 0;
 let hasCelebrated = false;
 
+const soundEffects = {
+    key: new Audio("assets/sounds/key.mp3"),
+    tap: new Audio("assets/sounds/tap.mp3"),
+    applause: new Audio("assets/sounds/applause.mp3"),
+    error: new Audio("assets/sounds/error.mp3"),
+    alarm: new Audio("assets/sounds/alarm.mp3"),
+    page: new Audio("assets/sounds/page.mp3"),
+    hint: new Audio("assets/sounds/hint.mp3"),
+
+    play(name) {
+        const sound = this[name];
+        if (sound) {
+            sound.currentTime = 0; // restart sound
+            sound.play().catch(err => console.warn(`⚠️ Failed to play ${name}:`, err));
+        }
+    }
+};
+
 /**
  * Render a blank 9x9 Sudoku grid
  */
@@ -92,6 +110,7 @@ function enableCellSelection() {
             }
             selectedCell = this;
             selectedCell.classList.add('selected');
+            soundEffects.play("tap");
         });
     });
 
@@ -122,6 +141,7 @@ function enableCellSelection() {
             selectedCell.textContent = val === 'X' ? '' : val;
             selectedCell.classList.remove('incorrect'); // Reset red if tile input used
             triggerAutoWinCheck(); // Auto-check after tile input
+            soundEffects.play("key");
         });
     });
 }
@@ -234,6 +254,12 @@ function isBoardCompleteAndCorrect() {
     });
 }
 
+function isBoardFilled() {
+    return Array.from(document.querySelectorAll('.editable')).every(cell =>
+        cell.textContent.trim() !== ''
+    );
+}
+
 function launchConfetti() {
     confetti({
         particleCount: 150,
@@ -245,6 +271,7 @@ function launchConfetti() {
 function triggerAutoWinCheck() {
     if (!hasCelebrated && isBoardCompleteAndCorrect()) {
         launchConfetti();
+        soundEffects.play("applause");
         hasCelebrated = true;
         // Stop the countdown timer if it's running
         if (countdownInterval) {
@@ -254,14 +281,15 @@ function triggerAutoWinCheck() {
         const setupModalElement = document.getElementById("setup-modal");
         const setupModal = new bootstrap.Modal(setupModalElement);
         setupModal.show();
-    } else if (allFilled && !isBoardCompleteAndCorrect()) {
+    } else if (isBoardFilled() && !isBoardCompleteAndCorrect()) {
+        soundEffects.play("error");
         alert("🔍 Try again! It looks like there's an error somewhere!");
     }
 }
 
 function endGameDueToTime() {
     alert("⏰ Time's up! Better luck next time.");
-
+    soundEffects.play("alarm");
     document.querySelectorAll('.editable').forEach(cell => {
         cell.classList.remove('editable');
         cell.style.pointerEvents = "none";
@@ -280,6 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
         checkButton.addEventListener('click', () => {
             setTimeout(() => {
                 checkUserInput();
+                soundEffects.play("hint");
             }, 10);
         });
     }
@@ -289,9 +318,40 @@ document.addEventListener('DOMContentLoaded', function () {
         hintButton.addEventListener('click', () => {
             setTimeout(() => {
                 revealHint();
+                soundEffects.play("hint");
             }, 10);
         });
     }
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        modal.addEventListener('shown.bs.modal', () => {
+            soundEffects.play("page");
+        });
+        modal.addEventListener('hidden.bs.modal', () => {
+            soundEffects.play("page");
+        });
+    });
+    document.querySelectorAll('a[href="index.html"], a[href="about.html"]').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault(); // prevent default nav
+
+            const href = this.getAttribute('href');
+
+            const isLeavingGame = window.location.pathname.includes("index.html") || window.location.pathname === "/" || window.location.pathname.endsWith("index.html");
+
+            // Show confirmation only if leaving the game
+            if (isLeavingGame && href.includes("about.html")) {
+                const proceed = confirm("Are you sure you want to leave? Your current game will be lost.");
+                if (!proceed) return;
+            }
+
+            soundEffects.play("page");
+
+            setTimeout(() => {
+                window.location.href = href;
+            }, 300);
+        });
+    });
 });
 
 renderEmptyGrid();
