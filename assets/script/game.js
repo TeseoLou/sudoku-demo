@@ -47,210 +47,251 @@ const soundEffects = {
 // Reference: https://www.geeksforgeeks.org/create-a-sudoku-puzzle-using-html-css-javascript/
 function renderEmptyGrid() {
     // Get the grid container
-    const $gridContainer = $('#grid');
+    const gridContainer = $('#grid');
     // Clear any existing content
-    $gridContainer.empty();
+    gridContainer.empty();
     // Loop through each row index (0 to 8) to build 9 rows for the grid
     for (let row = 0; row < 9; row++) {
         // Create a row div with Bootstrap flex class
-        const $rowDiv = $('<div>').addClass('d-flex');
+        const rowDiv = $('<div>').addClass('d-flex');
         for (let col = 0; col < 9; col++) {
             // Create a paragraph element and add classes
-            const $cell = $('<p>')
+            const cell = $('<p>')
                 .addClass('m-0 text-center number select')
                 .css({ width: '40px', height: '40px' })
                 .attr('data-row', row)
                 .attr('data-col', col);
-            // Add thick borders between 3x3 boxes
-            if ((col + 1) % 3 === 0 && col !== 8) $cell.addClass('right-border');
-            if ((row + 1) % 3 === 0 && row !== 8) $cell.addClass('bottom-border');
-            // Remove outer borders
-            if (row === 0) $cell.addClass('no-border-top');
-            if (col === 0) $cell.addClass('no-border-left');
-            if (row === 8) $cell.addClass('no-border-bottom');
-            if (col === 8) $cell.addClass('no-border-right');
-            // Append cell to the current row
-            $rowDiv.append($cell);
+            // Add thicker borders between 3x3 sections, excluding the outermost edge
+            if ((col + 1) % 3 === 0 && col < 8) {
+                cell.addClass('right-border');
+            }
+            if ((row + 1) % 3 === 0 && row < 8) {
+                cell.addClass('bottom-border');
+            }
+            // Hide outer borders based on position
+            if (row === 0) {
+                cell.addClass('no-border-top');
+            }
+            if (col === 0) {
+                cell.addClass('no-border-left');
+            }
+            if (row === 8) {
+                cell.addClass('no-border-bottom');
+            }
+            if (col === 8) {
+                cell.addClass('no-border-right');
+            }
+            // Add the current cell to the row
+            rowDiv.append(cell);
+            // Once the row is built, add it to the main grid
+            gridContainer.append(rowDiv);
         }
-        // Append completed row to the grid
-        $gridContainer.append($rowDiv);
     }
 }
 
 /**
- * Populate the grid with API puzzle values
+ * Use generated sudoku grid from API Ninjas to put cell number values in board
  */
-function populateGrid(puzzle) {
-    // Select all cells with a data-row attribute
+function populateGrid(puzzleData) {
+    // Go through cells with data-row attribute
     $('[data-row]').each(function () {
-        // Get the row index from the cell's data attribute and convert to a number
-        const row = parseInt(this.dataset.row);
-        // Get the column index from the cell's data attribute and convert to a number
-        const col = parseInt(this.dataset.col);
-        // Retrieve the corresponding value from the puzzle array using row and col
-        const value = puzzle[row][col];
-        // If the puzzle cell contains a number
-        if (value !== null) {
-            // Display the value in the grid cell
-            this.textContent = value;
-            // Add bold styling and mark the cell as generated
+        // Find vertical index
+        const rowIndex = Number(this.dataset.row);
+        // Find horizontal index
+        const colIndex = Number(this.dataset.col);
+        // Get respective puzzle value
+        const cellValue = puzzleData[rowIndex][colIndex];
+        if (cellValue !== null) {
+            // Set a fixed cell value
+            this.textContent = cellValue;
+            // Make the fixed cell value stand out
             this.classList.add('fw-bold', 'generated');
         } else {
-            // Leave the cell blank if the puzzle value is null
+            // Clear the cell and mark it as user-editable
             this.textContent = '';
-            // Mark the cell as editable
+            // Add editable class to cell
             this.classList.add('editable');
-            // Change cursor to pointer to indicate interactivity
+            // Show interactivity
             this.style.cursor = 'pointer';
         }
     });
-    // Call function to enable cell click handling
+    // Allow interactions
     enableCellSelection();
 }
 
 /**
- * Fetch puzzle and solution from API based on selected difficulty
+ * Create a new Sudoku board + solution from API Ninjas according to difficulty level chosen by the user
+ * Reference: https://www.api-ninjas.com/api/sudoku
  */
 function fetchSudokuBoard() {
+    // Get the value of the currently selected radio button for difficulty
     const selectedDifficulty = document.querySelector('input[name="difficulty"]:checked').value;
+    // Make GET request
     $.ajax({
         method: 'GET',
         url: `https://api.api-ninjas.com/v1/sudokugenerate?difficulty=${selectedDifficulty}`,
         headers: { 'X-Api-Key': API_KEY },
         contentType: 'application/json',
+        // Request Success
         success: function (result) {
+            // Extract the puzzle and its solution from the API response
             const { puzzle, solution } = result;
+            // Save the correct solution
             currentSolution = solution;
-
+            // Prepare a fresh grid
             renderEmptyGrid();
+            // Put the cell values in the grid
             populateGrid(puzzle);
         },
-        error: function (jqXHR) {
-            console.error('Error fetching puzzle:', jqXHR.responseText);
+        // Request failure
+        error: function (response) {
+            // Show a message in the console to show failure
+            console.error('Failed to retrieve puzzle data:', response?.responseText || 'No response text available');
         }
     });
 }
 
 /**
- * Allow user to select editable cells and input numbers via keyboard or tile
+ * Allow interactivity with editable grid cells with clicking or typing
  */
 function enableCellSelection() {
-    document.querySelectorAll('.editable').forEach(cell => {
-        cell.addEventListener('click', function () {
+    // Make each editable cell selectable
+    $('.editable').each(function () {
+        $(this).on('click', function () {
+            // Deselect cells that were previously selected
             if (selectedCell) {
-                selectedCell.classList.remove('selected');
+                $(selectedCell).removeClass('selected');
             }
+            // Add selected class to clicked cell
             selectedCell = this;
-            selectedCell.classList.add('selected');
+            $(selectedCell).addClass('selected');
             soundEffects.play("tap");
         });
     });
-
-    // Keyboard input handler
-    document.addEventListener('keydown', function (e) {
+    // Handle keyboard number and deletion interactions
+    $(document).on('keydown', function (event) {
         if (!selectedCell) return;
-        const isEditable = selectedCell.classList.contains('editable');
-        if (!isEditable) return;
-
-        if (e.key >= '1' && e.key <= '9') {
-            selectedCell.textContent = e.key;
-            selectedCell.classList.remove('incorrect'); // Reset red if previously incorrect
-            triggerAutoWinCheck(); // Check for win after number input
+        const isAllowed = $(selectedCell).hasClass('editable');
+        if (!isAllowed) return;
+        // Accept numbers between 1-9
+        if (event.key >= '1' && event.key <= '9') {
+            selectedCell.textContent = event.key;
+            // Get rid of previous incorrect color
+            $(selectedCell).removeClass('incorrect');
+            // See if the game is complete
+            triggerAutoWinCheck();
             soundEffects.play("key");
-        } else if (e.key === 'Backspace' || e.key === 'Delete') {
+            // Allow backspace or delete
+        } else if (event.key === 'Backspace' || event.key === 'Delete') {
             selectedCell.textContent = '';
-            selectedCell.classList.remove('incorrect'); // Reset red if cleared
-            triggerAutoWinCheck(); // Also check after clearing
+            // Remove incorrect color if it is present
+            $(selectedCell).removeClass('incorrect');
+            // See if the game is complete
+            triggerAutoWinCheck();
             soundEffects.play("key");
         }
     });
-
-    // Tile/tap input handler
-    document.querySelectorAll('#numbers-container h2').forEach(tile => {
-        tile.addEventListener('click', function () {
+    // Handle clicks on on-screen number tiles
+    $('#numbers-container h2').each(function () {
+        $(this).on('click', function () {
             if (!selectedCell) return;
-            if (!selectedCell.classList.contains('editable')) return;
-
-            const val = this.textContent;
+            if (!$(selectedCell).hasClass('editable')) return;
+            const val = $(this).text();
             selectedCell.textContent = val === 'X' ? '' : val;
-            selectedCell.classList.remove('incorrect'); // Reset red if tile input used
-            triggerAutoWinCheck(); // Auto-check after tile input
+            // Remove incorrect color if it is present
+            $(selectedCell).removeClass('incorrect');
+            // See if the game is complete
+            triggerAutoWinCheck();
             soundEffects.play("key");
         });
     });
 }
 
+/**
+ * Compare the user's current inputs against the correct solution
+ */
 function checkUserInput() {
+    // Increase the hint counter and refresh the display
     hintsUsed++;
     updateHintsDisplay();
-
+    // If the solution hasn't been loaded yet, skip the check
     if (!currentSolution) return;
-
-    document.querySelectorAll('.editable').forEach(cell => {
-        const row = parseInt(cell.dataset.row);
-        const col = parseInt(cell.dataset.col);
-        const correctValue = currentSolution[row][col];
-        const userValue = cell.textContent.trim();
-
-        if (userValue === "") {
-            cell.classList.remove('incorrect');
-        } else if (userValue === String(correctValue)) {
-            cell.classList.remove('incorrect');
+    // Loop through each editable cell to compare input with the correct value
+    $('.editable').each(function () {
+        const cell = $(this);
+        const rowIndex = parseInt(cell.data('row'));
+        const colIndex = parseInt(cell.data('col'));
+        const expected = currentSolution[rowIndex][colIndex];
+        const entered = cell.text().trim();
+        // Clear incorrect state if cell is blank or correct
+        if (entered === "" || entered === String(expected)) {
+            cell.removeClass('incorrect');
         } else {
-            cell.classList.add('incorrect');
+            cell.addClass('incorrect');
         }
     });
 }
 
+/**
+ * Pick one empty cell and show its correct number from the solution
+ */
 function revealHint() {
+    // Increase the count of used hints and update the display in game-stats div
     hintsUsed++;
     updateHintsDisplay();
-
-    if (!currentSolution) return;
-
-    // Find all editable, empty cells
-    const emptyCells = Array.from(document.querySelectorAll('.editable')).filter(cell => cell.textContent.trim() === '');
-
-    if (emptyCells.length === 0) return;
-
-    // Pick a random one
-    const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-
-    const row = parseInt(randomCell.dataset.row);
-    const col = parseInt(randomCell.dataset.col);
-    const correctValue = currentSolution[row][col];
-
-    // Fill it with correct value and style as hint
-    randomCell.textContent = correctValue;
-    randomCell.classList.add('hinted');
-    randomCell.classList.remove('incorrect'); // remove red if present
-}
-
-function startTimer() {
-    const selectedTime = document.querySelector('input[name="time"]:checked').value;
-
-    if (selectedTime === "none") {
-        // Clear timer text if no time is selected
-        document.getElementById("timer").textContent = "Timer: None";
+    // Exit if there is no solution
+    if (!currentSolution) {
         return;
     }
+    // Identify all cells in the grid that are empty
+    const blanks = [];
+    $('.editable').each(function () {
+        const value = $(this).text().trim();
+        if (value.length === 0) {
+            blanks.push(this);
+        }
+    });
+    // Stop if there are no empty cells are left
+    if (blanks.length === 0) {
+        return;
+    }
+    // Randomly select one of the empty cells
+    const pick = blanks[Math.floor(Math.random() * blanks.length)];
+    const cell = $(pick);
+    // Find the matching solution value
+    const y = parseInt(cell.data('row'), 10);
+    const x = parseInt(cell.data('col'), 10);
+    const answer = currentSolution[y][x];
+    // Populate corresponding cell with the correct answer and apply hint styling
+    cell.text(answer);
+    cell.addClass('hinted').removeClass('incorrect');
+}
 
-    // Convert minutes to seconds
-    timeRemaining = parseInt(selectedTime) * 60;
-
-    // Update immediately
+/**
+ * Initiates a countdown timer corresponding with the time limit set by the user
+ */
+function startTimer() {
+    // Get the time limit set by the user in the setup modal
+    const timeLimit = $('input[name="time"]:checked').val();
+    if (timeLimit === "none") {
+        // Clear timer in game-stats div if no time is selected
+        $('#timer').text("Timer: None");
+        return;
+    }
+    // Change minutes to seconds
+    let minutes = parseInt(timeLimit, 10);
+    timeRemaining = minutes * 60;
+    // Show the initial time right away
     updateTimerDisplay();
-
-    // Clear any previous timer
+    // Stop any existing timer before starting a new one
     if (countdownInterval) {
         clearInterval(countdownInterval);
     }
-
-    // Start countdown
+    // Begin countdown loop every second
     countdownInterval = setInterval(() => {
         timeRemaining--;
         updateTimerDisplay();
-
+        // End game when timer reaches 00:00
         if (timeRemaining <= 0) {
             clearInterval(countdownInterval);
             endGameDueToTime();
@@ -258,104 +299,169 @@ function startTimer() {
     }, 1000);
 }
 
+/**
+ * Show remaining time in game-stats
+ */
 function updateTimerDisplay() {
     const minutes = Math.floor(timeRemaining / 60);
     const seconds = timeRemaining % 60;
-    document.getElementById("timer").textContent = `Timer: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    // Always show seconds with two digits
+    // Reference: https://stackoverflow.com/questions/8043026/how-to-format-numbers-by-prepending-0-to-single-digit-numbers
+    const reformattedSeconds = seconds.toString().padStart(2, '0');
+    // Update the timer text on the page
+    // Reference: https://stackoverflow.com/questions/59747815
+    $('#timer').text(`Timer: ${minutes}:${reformattedSeconds}`);
 }
 
+/**
+ * Show difficulty level in game-stats
+ */
 function updateDifficultyDisplay() {
-    const selected = document.querySelector('input[name="difficulty"]:checked');
-    if (selected) {
-        const label = selected.nextElementSibling?.textContent || selected.value;
-        document.getElementById("difficulty").textContent = `Difficulty: ${label}`;
+    // Get the currently checked radio button for difficulty
+    const difficultyLevel = $('input[name="difficulty"]:checked').get(0);
+    if (difficultyLevel) {
+        // Find label text next to the input/fallback to the value
+        const level = selected.nextElementSibling?.textContent || selected.value;
+        // Update the difficulty text on the page
+        $('#difficulty').text(`Difficulty: ${level}`);
     }
 }
 
+/**
+ * Displays the current number of hints used on the screen
+ */
 function updateHintsDisplay() {
-    document.getElementById("hints").textContent = `Hints: ${hintsUsed}`;
+    // Update the hints count in the UI using jQuery
+    $('#hints').text(`Hints: ${hintsUsed}`);
 }
 
+/**
+ * Checks whether all editable cells have the correct solution values
+ * Returns true if the entire board is filled and correct
+ */
 function isBoardCompleteAndCorrect() {
-    if (!currentSolution) return false;
-
-    return Array.from(document.querySelectorAll('.editable')).every(cell => {
-        const row = parseInt(cell.dataset.row);
-        const col = parseInt(cell.dataset.col);
-        const correctValue = String(currentSolution[row][col]);
-        const userValue = cell.textContent.trim();
-        return userValue === correctValue;
+    // Exit if filled board has incorrect values inputted
+    if (!currentSolution) {
+        return false;
+    }
+    // See if all editable cells matches the corresponding solution
+    const allCorrect = $('.editable').toArray().every(cell => {
+        const rowIndex = parseInt(cell.dataset.row, 10);
+        const colIndex = parseInt(cell.dataset.col, 10);
+        const expected = String(currentSolution[rowIndex][colIndex]);
+        const input = cell.textContent.trim();
+        return input === expected;
     });
+    return allCorrect;
 }
 
+/**
+ * Checks if every editable cell on the board has some value entered
+ */
 function isBoardFilled() {
-    return Array.from(document.querySelectorAll('.editable')).every(cell =>
-        cell.textContent.trim() !== ''
-    );
+    // Grab all editable cells and make an array
+    const editableCells = $('.editable').toArray();
+    // Go through array and it is filled with numbers
+    const allFilled = editableCells.every(cell => {
+        // Remove whitespace from cells' content
+        const value = cell.textContent.trim();
+        // Return true if this cell has something in it
+        return value !== '';
+    });
+    // Only return true if every single editable cell had a value
+    return allFilled;
 }
 
+/**
+ * Fires a celebratory confetti animation on the screen
+ */
 function launchConfetti() {
+    // Trigger the confetti animation with some customized settings
     confetti({
+        // Number of confetti pieces to show
         particleCount: 150,
+        // How far the confetti spreads out (higher means wider burst)
         spread: 80,
+        // Starting point of the confetti on the Y axis (0 = top, 1 = bottom)
         origin: { y: 0.6 }
     });
 }
 
+/**
+ * Checks if the board is complete and correct.
+ */
 function triggerAutoWinCheck() {
+    // If the player hasn't already won and the solution is correct
     if (!hasCelebrated && isBoardCompleteAndCorrect()) {
+        // Show confetti and applause as a reward
         launchConfetti();
         soundEffects.play("applause");
+        // Prevent repeated celebration on further checks
         hasCelebrated = true;
-        // Stop the countdown timer if it's running
+        // Halt the countdown timer if it's currently running
         if (countdownInterval) {
             clearInterval(countdownInterval);
         }
-        // Reopen the setup modal using Bootstrap's modal API
-        const setupModalElement = document.getElementById("setup-modal");
-        const setupModal = new bootstrap.Modal(setupModalElement);
-        setupModal.show();
+        // Access the setup modal using Bootstrap's Modal API
+        const setupModal = $('#setup-modal'); 
+        const setupModalInstance = new bootstrap.Modal(setupModal[0]);
+        // Display the setup modal again after victory
+        setupModalInstance.show();  
+    // If the board is full but there's an error
     } else if (isBoardFilled() && !isBoardCompleteAndCorrect()) {
+        // Notify the user
         soundEffects.play("error");
         alert("🔍 Try again! It looks like there's an error somewhere!");
     }
 }
 
+/**
+ * Ends the game when the timer runs out, disables input, and shows the setup modal
+ */
 function endGameDueToTime() {
+    // Notify the user
     soundEffects.play("alarm");
     alert("⏰ Time's up! Better luck next time.");
-    document.querySelectorAll('.editable').forEach(cell => {
-        cell.classList.remove('editable');
-        cell.style.pointerEvents = "none";
+    // Disable all editable cells 
+    $('.editable').each(function () {
+        // Remove editable class
+        $(this).removeClass('editable'); 
+        // Make the cell unclickable
+        $(this).css('pointer-events', 'none'); 
     });
-
-    // Reopen the setup modal using Bootstrap's modal API
-    const setupModalElement = document.getElementById("setup-modal");
-    const setupModal = new bootstrap.Modal(setupModalElement);
-    setupModal.show();
+    // Access the setup modal element
+    const setupModal = $('#setup-modal');
+    // Create a new Bootstrap modal instance using the raw DOM node
+    const setupModalInstance = new bootstrap.Modal(setupModal[0]);
+    // Display the modal to allow the player to start over or pick a new game
+    setupModalInstance.show();
 }
 
+/**
+ * Sets up button event listeners, sound triggers, and navigation handling once the page is fully loaded
+ */
 document.addEventListener('DOMContentLoaded', function () {
-    const checkButton = document.getElementById('check-button');
-    if (checkButton) {
-        // Use slight delay to ensure mobile DOM updates are applied before checking
-        checkButton.addEventListener('click', () => {
+    // Handle the Check button click
+    const checkButton = $('#check-button');
+    if (checkButton.length) {
+        checkButton.on('click', () => {
             setTimeout(() => {
                 checkUserInput();
                 soundEffects.play("hint");
             }, 10);
         });
     }
-    const hintButton = document.getElementById('hint-button');
-    if (hintButton) {
-        // Slight delay ensures hint inserts after any user interaction
-        hintButton.addEventListener('click', () => {
+    // Handle the Hint button click
+    const $hintButton = $('#hint-button');
+    if ($hintButton.length) {
+        $hintButton.on('click', () => {
             setTimeout(() => {
                 revealHint();
                 soundEffects.play("hint");
             }, 10);
         });
     }
+    // Add sound effects for when any Bootstrap modal opens or closes
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {
         modal.addEventListener('shown.bs.modal', () => {
@@ -365,22 +471,21 @@ document.addEventListener('DOMContentLoaded', function () {
             soundEffects.play("page");
         });
     });
+    // Intercept clicks on main navigation links
     document.querySelectorAll('a[href="index.html"], a[href="about.html"]').forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault(); // prevent default nav
-
-            const href = this.getAttribute('href');
-
+        link.addEventListener('click', function (event) {
+            // Stop the browser from navigating right away
+            event.preventDefault(); 
+            const href = $(this).attr('href');
+            // Check if the current page is index.html
             const isLeavingGame = window.location.pathname.includes("index.html") || window.location.pathname === "/" || window.location.pathname.endsWith("index.html");
-
-            // Show confirmation only if leaving the game
+            // Prompt the user before leaving the game to avoid accidental loss
             if (isLeavingGame && href.includes("about.html")) {
                 const proceed = confirm("Are you sure you want to leave? Your current game will be lost.");
                 if (!proceed) return;
             }
-
+            // Play a page transition sound and navigate after a short delay
             soundEffects.play("page");
-
             setTimeout(() => {
                 window.location.href = href;
             }, 300);
