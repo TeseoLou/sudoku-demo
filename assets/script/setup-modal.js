@@ -17,10 +17,15 @@ function setupStartButton() {
         }
         // Call the board generator after modal closes
         fetchSudokuBoard();
+        // Start the game timer
         startTimer();
+        // Update the difficulty display based on the selected level
         updateDifficultyDisplay();
+        // Reset the number of hints used to zero
         hintsUsed = 0;
+        // Update the on-screen hint counter to reflect the reset
         updateHintsDisplay();
+        // Reset the celebration flag (used to prevent repeated celebrations)
         hasCelebrated = false;
     });
 }

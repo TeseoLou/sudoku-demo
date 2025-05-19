@@ -1,12 +1,23 @@
+// Global Declarations
+// API key used to access the puzzle generator service
 const API_KEY = '6nP4AYB9ImbH8hd6Zl79tg==iJV6BjdAY08uPpZU';
-
+// Stores the correct solution grid returned by the API
 let currentSolution = null;
+// Tracks the currently selected cell in the grid (if any)
 let selectedCell = null;
+// Holds the interval ID for the countdown timer
 let countdownInterval = null;
+// Time remaining for the current game in seconds
 let timeRemaining = 0;
+// Number of hints the player has used so far
 let hintsUsed = 0;
+// Flag to prevent replaying celebration effects (e.g. confetti) more than once
 let hasCelebrated = false;
 
+
+// Sound manager for game sound effects
+// Object to store and control game sound effects
+// Reference: https://stackoverflow.com/questions/40100433
 const soundEffects = {
     key: new Audio("assets/sounds/key.mp3"),
     tap: new Audio("assets/sounds/tap.mp3"),
@@ -15,11 +26,16 @@ const soundEffects = {
     alarm: new Audio("assets/sounds/alarm.mp3"),
     page: new Audio("assets/sounds/page.mp3"),
     hint: new Audio("assets/sounds/hint.mp3"),
-
+    // Method to play a sound effect by name 
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
     play(name) {
+        // Retrieve the sound object matching the given name from the themeToggleSounds object
         const sound = this[name];
+        // Check if a valid sound was found for the given name
         if (sound) {
-            sound.currentTime = 0; // restart sound
+            // Restart sound
+            sound.currentTime = 0;
+            // Attempt to play the sound, and log a warning if playback fails (e.g. due to browser restrictions)
             sound.play().catch(err => console.warn(`⚠️ Failed to play ${name}:`, err));
         }
     }
@@ -28,30 +44,36 @@ const soundEffects = {
 /**
  * Render a blank 9x9 Sudoku grid
  */
+// Reference: https://www.geeksforgeeks.org/create-a-sudoku-puzzle-using-html-css-javascript/
 function renderEmptyGrid() {
-    const gridContainer = document.getElementById('grid');
-    gridContainer.innerHTML = '';
+    // Get the grid container
+    const $gridContainer = $('#grid');
+    // Clear any existing content
+    $gridContainer.empty();
+    // Loop through each row index (0 to 8) to build 9 rows for the grid
     for (let row = 0; row < 9; row++) {
-        const rowDiv = document.createElement('div');
-        rowDiv.classList.add('d-flex');
+        // Create a row div with Bootstrap flex class
+        const $rowDiv = $('<div>').addClass('d-flex');
         for (let col = 0; col < 9; col++) {
-            const cell = document.createElement('p');
-            cell.classList.add('m-0', 'text-center', 'number', 'select');
-            cell.style.width = '40px';
-            cell.style.height = '40px';
-            cell.dataset.row = row;
-            cell.dataset.col = col;
+            // Create a paragraph element and add classes
+            const $cell = $('<p>')
+                .addClass('m-0 text-center number select')
+                .css({ width: '40px', height: '40px' })
+                .attr('data-row', row)
+                .attr('data-col', col);
             // Add thick borders between 3x3 boxes
-            if ((col + 1) % 3 === 0 && col !== 8) cell.classList.add('right-border');
-            if ((row + 1) % 3 === 0 && row !== 8) cell.classList.add('bottom-border');
+            if ((col + 1) % 3 === 0 && col !== 8) $cell.addClass('right-border');
+            if ((row + 1) % 3 === 0 && row !== 8) $cell.addClass('bottom-border');
             // Remove outer borders
-            if (row === 0) cell.classList.add('no-border-top');
-            if (col === 0) cell.classList.add('no-border-left');
-            if (row === 8) cell.classList.add('no-border-bottom');
-            if (col === 8) cell.classList.add('no-border-right');
-            rowDiv.appendChild(cell);
+            if (row === 0) $cell.addClass('no-border-top');
+            if (col === 0) $cell.addClass('no-border-left');
+            if (row === 8) $cell.addClass('no-border-bottom');
+            if (col === 8) $cell.addClass('no-border-right');
+            // Append cell to the current row
+            $rowDiv.append($cell);
         }
-        gridContainer.appendChild(rowDiv);
+        // Append completed row to the grid
+        $gridContainer.append($rowDiv);
     }
 }
 
@@ -59,20 +81,21 @@ function renderEmptyGrid() {
  * Populate the grid with API puzzle values
  */
 function populateGrid(puzzle) {
-    document.querySelectorAll('[data-row]').forEach(cell => {
-        const row = parseInt(cell.dataset.row);
-        const col = parseInt(cell.dataset.col);
+    // Select all cells with a data-row attribute
+    $('[data-row]').each(function () {
+        const row = parseInt(this.dataset.row);
+        const col = parseInt(this.dataset.col);
         const value = puzzle[row][col];
-
         if (value !== null) {
-            cell.textContent = value;
-            cell.classList.add('fw-bold', 'generated');
+            this.textContent = value;
+            this.classList.add('fw-bold', 'generated');
         } else {
-            cell.textContent = '';
-            cell.classList.add('editable');
-            cell.style.cursor = 'pointer';
+            this.textContent = '';
+            this.classList.add('editable');
+            this.style.cursor = 'pointer';
         }
     });
+    // Call function to enable cell click handling
     enableCellSelection();
 }
 
@@ -291,7 +314,7 @@ function triggerAutoWinCheck() {
 
 function endGameDueToTime() {
     soundEffects.play("alarm");
-    alert("⏰ Time's up! Better luck next time.");   
+    alert("⏰ Time's up! Better luck next time.");
     document.querySelectorAll('.editable').forEach(cell => {
         cell.classList.remove('editable');
         cell.style.pointerEvents = "none";
