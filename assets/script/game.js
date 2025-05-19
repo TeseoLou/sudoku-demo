@@ -191,10 +191,17 @@ function updateTimerDisplay() {
     document.getElementById("timer").textContent = `Timer: ${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
+function updateDifficultyDisplay() {
+    const selected = document.querySelector('input[name="difficulty"]:checked');
+    if (selected) {
+        const label = selected.nextElementSibling?.textContent || selected.value;
+        document.getElementById("difficulty").textContent = `Difficulty: ${label}`;
+    }
+}
+
 function endGameDueToTime() {
     alert("Time's up! Better luck next time.");
 
-    // Optional: disable further input
     document.querySelectorAll('.editable').forEach(cell => {
         cell.classList.remove('editable');
         cell.style.pointerEvents = "none";

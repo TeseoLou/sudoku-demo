@@ -18,5 +18,6 @@ function setupStartButton() {
         // Call the board generator after modal closes
         fetchSudokuBoard();
         startTimer();
+        updateDifficultyDisplay();
     });
 }
