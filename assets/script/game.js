@@ -83,15 +83,24 @@ function renderEmptyGrid() {
 function populateGrid(puzzle) {
     // Select all cells with a data-row attribute
     $('[data-row]').each(function () {
+        // Get the row index from the cell's data attribute and convert to a number
         const row = parseInt(this.dataset.row);
+        // Get the column index from the cell's data attribute and convert to a number
         const col = parseInt(this.dataset.col);
+        // Retrieve the corresponding value from the puzzle array using row and col
         const value = puzzle[row][col];
+        // If the puzzle cell contains a number
         if (value !== null) {
+            // Display the value in the grid cell
             this.textContent = value;
+            // Add bold styling and mark the cell as generated
             this.classList.add('fw-bold', 'generated');
         } else {
+            // Leave the cell blank if the puzzle value is null
             this.textContent = '';
+            // Mark the cell as editable
             this.classList.add('editable');
+            // Change cursor to pointer to indicate interactivity
             this.style.cursor = 'pointer';
         }
     });
