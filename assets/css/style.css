@@ -222,28 +222,6 @@ body.dark .nav-link.active {
     min-width: 150px;
 }
 
-/* Custom switch thumb for all modes */
-.form-check-input[type="checkbox"]::before {
-    /* Empty content to enable rendering */
-    content: "";
-    /* Position relative to the input */
-    position: absolute;
-    /* Top offset for alignment */
-    top: 2px;
-    /* Left offset for alignment */
-    left: 2px;
-    /* Thumb width */
-    width: 1.1rem;
-    /* Thumb height */
-    height: 1.1rem;
-    /* Set thumb background to white */
-    background-color: var(--color-white);
-    /* Make thumb circular */
-    border-radius: 50%;
-    /* Smooth movement when toggled */
-    transition: transform 0.3s ease;
-}
-
 /* Styles applied when the theme switch is toggled ON in light mode */
 body:not(.dark) .form-check-input[type="checkbox"]:checked {
     /* Gold switch background */
