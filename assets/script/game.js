@@ -4,6 +4,7 @@ let currentSolution = null;
 let selectedCell = null;
 let countdownInterval = null;
 let timeRemaining = 0;
+let hintsUsed = 0;
 
 /**
  * Render a blank 9x9 Sudoku grid
@@ -114,6 +115,9 @@ function enableCellSelection() {
 }
 
 function checkUserInput() {
+    hintsUsed++;
+    updateHintsDisplay();
+    
     if (!currentSolution) return;
 
     document.querySelectorAll('.editable').forEach(cell => {
@@ -133,6 +137,9 @@ function checkUserInput() {
 }
 
 function revealHint() {
+    hintsUsed++;
+    updateHintsDisplay();
+
     if (!currentSolution) return;
 
     // Find all editable, empty cells
@@ -197,6 +204,10 @@ function updateDifficultyDisplay() {
         const label = selected.nextElementSibling?.textContent || selected.value;
         document.getElementById("difficulty").textContent = `Difficulty: ${label}`;
     }
+}
+
+function updateHintsDisplay() {
+    document.getElementById("hints").textContent = `Hints: ${hintsUsed}`;
 }
 
 function endGameDueToTime() {

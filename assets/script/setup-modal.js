@@ -19,5 +19,7 @@ function setupStartButton() {
         fetchSudokuBoard();
         startTimer();
         updateDifficultyDisplay();
+        hintsUsed = 0;
+        updateHintsDisplay();
     });
 }
