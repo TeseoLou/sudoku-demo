@@ -1,4 +1,5 @@
 // Global Declarations
+
 // API key used to access the puzzle generator service
 const API_KEY = '6nP4AYB9ImbH8hd6Zl79tg==iJV6BjdAY08uPpZU';
 // Stores the correct solution grid returned by the API
@@ -13,8 +14,6 @@ let timeRemaining = 0;
 let hintsUsed = 0;
 // Flag to prevent replaying celebration effects (e.g. confetti) more than once
 let hasCelebrated = false;
-
-
 // Sound manager for game sound effects
 // Object to store and control game sound effects
 // Reference: https://stackoverflow.com/questions/40100433
