@@ -492,9 +492,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     // Handle the Hint button click
-    const $hintButton = $('#hint-button');
-    if ($hintButton.length) {
-        $hintButton.on('click', () => {
+    const hintButton = $('#hint-button');
+    if (hintButton.length) {
+        hintButton.on('click', () => {
             setTimeout(() => {
                 revealHint();
                 soundEffects.play("hint");

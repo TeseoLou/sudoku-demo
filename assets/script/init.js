@@ -1,18 +1,18 @@
 /**
- * Initialize all behaviors on page load.
+ * Initialize all interactive features when the page loads
  */
 function initPage() {
-    // Setup smooth scroll and collapse for navbar links
+    // Handle nav link clicks and auto-collapse behavior
     setupNavLinkCollapse();
-    // Setup logic to collapse the navbar when clicking outside of it
+    // Close the navbar if user clicks outside of it
     setupOutsideNavbarCollapse();
-    // Setup the theme switch toggle functionality 
+    // Enable light/dark mode toggle
     setupThemeSwitch();
-    // Setup functionality to close the setup modal when the start button is clicked
+    // Close the setup modal when the start button is pressed
     setupStartButton();
 }
 
-// When the document is fully loaded, initialize everything
-$(document).ready(function () {
+// Run everything once the page is fully loaded
+$(document).ready(() => {
     initPage();
 });
