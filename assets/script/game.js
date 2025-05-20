@@ -320,7 +320,7 @@ function updateDifficultyDisplay() {
     const difficultyLevel = $('input[name="difficulty"]:checked').get(0);
     if (difficultyLevel) {
         // Find label text next to the input/fallback to the value
-        const level = selected.nextElementSibling?.textContent || selected.value;
+        const level = difficultyLevel.nextElementSibling?.textContent || difficultyLevel.value;
         // Update the difficulty text on the page
         $('#difficulty').text(`Difficulty: ${level}`);
     }
@@ -400,11 +400,11 @@ function triggerAutoWinCheck() {
             clearInterval(countdownInterval);
         }
         // Access the setup modal using Bootstrap's Modal API
-        const setupModal = $('#setup-modal'); 
+        const setupModal = $('#setup-modal');
         const setupModalInstance = new bootstrap.Modal(setupModal[0]);
         // Display the setup modal again after board completion
-        setupModalInstance.show();  
-    // If the board is full but the user has made a mistake
+        setupModalInstance.show();
+        // If the board is full but the user has made a mistake
     } else if (isBoardFilled() && !isBoardCompleteAndCorrect()) {
         // Notify the user
         soundEffects.play("error");
@@ -422,16 +422,39 @@ function endGameDueToTime() {
     // Disable all editable cells 
     $('.editable').each(function () {
         // Remove editable class
-        $(this).removeClass('editable'); 
+        $(this).removeClass('editable');
         // Make the cell unclickable
-        $(this).css('pointer-events', 'none'); 
+        $(this).css('pointer-events', 'none');
     });
     // Access the setup modal element
     const setupModal = $('#setup-modal');
     // Create a new Bootstrap modal instance using the raw DOM node
     const setupModalInstance = new bootstrap.Modal(setupModal[0]);
     // Display the modal to allow the player to start over or pick a new game
-    setupModalInstance.show();
+    setupModalInstance.show()
+    // When the modal is fully shown, trigger the start of a new game
+    setupModalInstance._element.addEventListener('shown.bs.modal', () => {
+        // Reset everything 
+        startNewGame();
+    }, { once: true }); // Ensure this only runs once per modal opening
+}
+
+/**
+ * Start a game by providing a fresh board, resetting stats, and resetting the timer and game stats.
+ */
+function startNewGame() {
+    // Load new board
+    fetchSudokuBoard();
+    // Start timer        
+    startTimer();
+    // Update difficulty shown          
+    updateDifficultyDisplay();
+    // Reset hints
+    hintsUsed = 0;
+    // Update hints display           
+    updateHintsDisplay();
+    // Reset celebration with confetti and cheer     
+    hasCelebrated = false;
 }
 
 /**
@@ -472,7 +495,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('a[href="index.html"], a[href="about.html"]').forEach(link => {
         link.addEventListener('click', function (event) {
             // Stop the browser from navigating right away
-            event.preventDefault(); 
+            event.preventDefault();
             const href = $(this).attr('href');
             // Check if the current page is index.html
             const isLeavingGame = window.location.pathname.includes("index.html") || window.location.pathname === "/" || window.location.pathname.endsWith("index.html");
