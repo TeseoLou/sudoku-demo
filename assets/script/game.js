@@ -21,8 +21,6 @@ const soundEffects = {
     key: new Audio("assets/sounds/key.mp3"),
     tap: new Audio("assets/sounds/tap.mp3"),
     applause: new Audio("assets/sounds/applause.mp3"),
-    error: new Audio("assets/sounds/error.mp3"),
-    alarm: new Audio("assets/sounds/alarm.mp3"),
     page: new Audio("assets/sounds/page.mp3"),
     hint: new Audio("assets/sounds/hint.mp3"),
     // Method to play a sound effect by name 
@@ -406,9 +404,20 @@ function triggerAutoWinCheck() {
         setupModalInstance.show();
         // If the board is full but the user has made a mistake
     } else if (isBoardFilled() && !isBoardCompleteAndCorrect()) {
-        // Notify the user
-        soundEffects.play("error");
-        alert("🔍 Try again! It looks like there's an error somewhere!");
+        // Get the preloaded error sound element from the HTML
+        // Reference: https://stackoverflow.com/questions/21815323
+        const errorAudio = document.getElementById("error-sound");
+        // Make sure the audio element exists before trying to play it
+        if (errorAudio) {
+            // Reset the audio to the start so it plays from the beginning each time
+            errorAudio.currentTime = 0;
+            // Attempt to play the error sound
+            errorAudio.play().catch(err => console.warn("🔇 Couldn't play error sound:", err));
+        }
+        // Delay the alert slightly so the sound can begin playing before the blocking alert appears
+        setTimeout(() => {
+            alert("🔍 Try again! It looks like there's an error somewhere!");
+        }, 100); // 100ms delay
     }
 }
 
@@ -416,9 +425,20 @@ function triggerAutoWinCheck() {
  * Ends the game when the timer runs out, disables input, and shows the setup modal
  */
 function endGameDueToTime() {
-    // Notify the user
-    soundEffects.play("alarm");
-    alert("⏰ Time's up! Better luck next time.");
+    // Get the preloaded alarm sound element from the HTML
+    // Reference: https://stackoverflow.com/questions/21815323
+    const alarmAudio = document.getElementById("alarm-sound");
+    // Make sure the element exists before trying to use it
+    if (alarmAudio) {
+        // Reset playback position to the beginning
+        alarmAudio.currentTime = 0;
+        // Attempt to play the alarm sound
+        alarmAudio.play().catch(err => console.warn("🔇 Couldn't play alarm:", err));
+    }
+    // Slightly delay the alert so the alarm sound has time to begin playing
+    setTimeout(() => {
+        alert("⏰ Time's up! Better luck next time."); // 100ms delay
+    }, 100);
     // Disable all editable cells 
     $('.editable').each(function () {
         // Remove editable class

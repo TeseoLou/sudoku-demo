@@ -225,6 +225,14 @@
             </div>
         </div>
     </footer>
+    <!-- Preload alarm sound to avoid delay on playback -->
+    <audio id="alarm-sound" preload="auto">
+        <source src="assets/sounds/alarm.mp3" type="audio/mpeg">
+    </audio>
+    <!-- Preload error sound too if needed -->
+    <audio id="error-sound" preload="auto">
+        <source src="assets/sounds/error.mp3" type="audio/mpeg">
+    </audio>
     <!-- JavaScript Dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
@@ -240,4 +248,5 @@
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/00ece23e82.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
