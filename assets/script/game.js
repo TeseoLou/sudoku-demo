@@ -496,7 +496,7 @@ function startNewGame() {
 }
 
 /**
- * Sets up button event listeners, sound triggers, and navigation handling once the page is fully loaded
+ * Sets up button event listeners and sound triggers
  */
 document.addEventListener('DOMContentLoaded', function () {
     // Handle the Check button click
