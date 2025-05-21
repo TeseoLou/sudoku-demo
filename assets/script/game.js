@@ -46,8 +46,10 @@ function renderEmptyGrid() {
     // Get the grid container
     const gridContainer = $('#grid');
     // Clear any existing content
+    // Reference: https://stackoverflow.com/questions/1701973
     gridContainer.empty();
     // Loop through each row index (0 to 8) to build 9 rows for the grid
+    // Reference: https://teamtreehouse.com/community/create-an-interactive-grid-with-jquery?
     for (let row = 0; row < 9; row++) {
         // Create a row div with Bootstrap flex class
         const rowDiv = $('<div>').addClass('d-flex');
@@ -58,6 +60,8 @@ function renderEmptyGrid() {
                 .css({ width: '40px', height: '40px' })
                 .attr('data-row', row)
                 .attr('data-col', col);
+            // Create board styling on cells
+            // Reference: https://stackoverflow.com/questions/31231945
             // Add thicker borders between 3x3 sections, excluding the outermost edge
             if ((col + 1) % 3 === 0 && col < 8) {
                 cell.addClass('right-border');
@@ -78,6 +82,8 @@ function renderEmptyGrid() {
             if (col === 8) {
                 cell.addClass('no-border-right');
             }
+            // Join cells and rows together
+            // Reference: https://stackoverflow.com/questions/19058606
             // Add the current cell to the row
             rowDiv.append(cell);
             // Once the row is built, add it to the main grid
@@ -91,18 +97,28 @@ function renderEmptyGrid() {
  */
 function populateGrid(puzzleData) {
     // Go through cells with data-row attribute
+    // Reference: https://stackoverflow.com/questions/4958081
     $('[data-row]').each(function () {
+        // 
+        // Retrieve row and col attributes from each element and convert to numbers
+        // Reference: https://stackoverflow.com/questions/76361204
+        // Reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
         // Find vertical index
         const rowIndex = Number(this.dataset.row);
         // Find horizontal index
         const colIndex = Number(this.dataset.col);
-        // Get respective puzzle value
+        // Get respective puzzle position
+        // Reference: https://www.freecodecamp.org/news/javascript-2d-arrays/
         const cellValue = puzzleData[rowIndex][colIndex];
+        // Give cells different styling classes based on datatype
+        // Add value to the cell if datatype is not null
+        // Reference: https://codedamn.com/news/javascript/check-if-undefined-null
         if (cellValue !== null) {
             // Set a fixed cell value
             this.textContent = cellValue;
             // Make the fixed cell value stand out
             this.classList.add('fw-bold', 'generated');
+        // Set value to an empty string if datatype is null
         } else {
             // Clear the cell and mark it as user-editable
             this.textContent = '';
@@ -122,8 +138,10 @@ function populateGrid(puzzleData) {
  */
 function fetchSudokuBoard() {
     // Get the value of the currently selected radio button for difficulty
+    // Reference: https://stackoverflow.com/questions/15148659
     const selectedDifficulty = document.querySelector('input[name="difficulty"]:checked').value;
     // Make GET request
+    // Reference: https://www.youtube.com/watch?v=X51Ry-R5coQ
     $.ajax({
         method: 'GET',
         url: `https://api.api-ninjas.com/v1/sudokugenerate?difficulty=${selectedDifficulty}`,
@@ -132,6 +150,7 @@ function fetchSudokuBoard() {
         // Request Success
         success: function (result) {
             // Extract the puzzle and its solution from the API response
+            // Reference: https://wesbos.com/destructuring-objects
             const { puzzle, solution } = result;
             // Save the correct solution
             currentSolution = solution;

@@ -1,6 +1,7 @@
 /**
- * Collapse the Bootstrap navbar when a nav-link is clicked.
+ * Collapse the Bootstrap navbar when a nav-link is clicked
  */
+// Reference: https://stackoverflow.com/questions/62375324
 function setupNavLinkCollapse() {
     // Attach a click event to all nav links inside the collapsed navbar
     document.querySelectorAll(".navbar-collapse .nav-link").forEach(function (link) {
@@ -32,8 +33,9 @@ function setupNavLinkCollapse() {
 }
 
 /**
- * Collapse the Bootstrap navbar when clicking outside of the open menu.
+ * Collapse the Bootstrap navbar when clicking outside of the open menu
  */
+// Reference: https://stackoverflow.com/questions/74670132
 function setupOutsideNavbarCollapse() {
     // Listen for any click on the entire document
     document.addEventListener("click", function (event) {

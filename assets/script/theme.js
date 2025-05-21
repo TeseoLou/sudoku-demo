@@ -36,17 +36,20 @@ function setupThemeSwitch() {
     const checkButton = $("#check-button");
     const hintButton = $("#hint-button");
     // Load stored theme preference on page load
+    // Reference: https://whitep4nth3r.com/blog/best-light-dark-mode-theme-toggle-javascript/#:~:text=Get%20theme%20preference%20from%20local%20storage,-We%20can%20use&text=On%20page%20load%2C%20use%20localStorage,the%20value%20will%20be%20null%20.
     // Reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
     // Reference: https://css-tricks.com/a-complete-guide-to-dark-mode-on-the-web/#toggling-manually
     const savedTheme = localStorage.getItem("theme");
     const isLightMode = savedTheme !== "dark"; // default to light mode if unset
     // Toggle the 'dark' class on the <body> based on the user's saved preference
+    // Reference: https://stackoverflow.com/questions/60469551
     $("body").toggleClass("dark", !isLightMode);
     // Update the checkbox's checked property to reflect the current mode
+    // Reference: https://api.jquery.com/prop/
     $(themeSwitch).prop("checked", isLightMode);
     // Change the icon class to a sun or moon based on the mode
     themeIcon.attr("class", isLightMode ? "fa-solid fa-sun" : "fa-solid fa-moon");
-    // Toggle button styles array
+    // Make button array
     const themeButtons = [
         newGameButton,
         startButton,
@@ -55,12 +58,13 @@ function setupThemeSwitch() {
         checkButton,
         hintButton
     ];
-    // Loop through each button element that needs theme styling
-    themeButtons.forEach(btn => {
-        // Only proceed if the jQuery element actually matched something
-        if (btn.length) {
+    // Loop through each button
+    // Reference: https://www.freecodecamp.org/news/javascript-array-foreach-tutorial-how-to-iterate-through-elements-in-an-array-with-map/
+    themeButtons.forEach(button => {
+        // Only proceed if the element actually matched something
+        if (button.length) {
             // If we're in light mode, remove the dark class and add the light one, and vice versa
-            btn
+            button
                 .toggleClass("btn-light", !isLightMode) // Apply light button class when not in light mode
                 .toggleClass("btn-dark", isLightMode);  // Apply dark button class when light mode is active
         }
@@ -83,6 +87,7 @@ function setupThemeSwitch() {
         // Reference: https://www.w3schools.com/jsref/prop_win_localstorage.asp
         localStorage.setItem("theme", isLightMode ? "light" : "dark");
         // Loop through each button and toggle Bootstrap theme classes
+        // Reference: https://www.freecodecamp.org/news/javascript-array-foreach-tutorial-how-to-iterate-through-elements-in-an-array-with-map/
         themeButtons.forEach($btn => {
             if ($btn.length) {
                 // Add 'btn-dark' in light mode, 'btn-light' in dark mode
@@ -97,9 +102,11 @@ function setupThemeSwitch() {
 }
 
 // Check if the HTML document has already been fully loaded and parsed
+// Reference: https://builtin.com/articles/document-ready-javascript?
 if (document.readyState !== "loading") {
     // If so immediately run the setupThemeSwitch function
     setupThemeSwitch();
+// Reference: https://oxylabs.io/resources/web-scraping-faq/javascript/wait-page-load
 } else {
     // If not wait until the DOM is fully loaded before running the function
     document.addEventListener("DOMContentLoaded", setupThemeSwitch);
