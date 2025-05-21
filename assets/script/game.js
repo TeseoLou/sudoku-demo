@@ -1,5 +1,4 @@
 // Global Declarations
-
 // API key used to access the puzzle generator service
 const API_KEY = '6nP4AYB9ImbH8hd6Zl79tg==iJV6BjdAY08uPpZU';
 // Stores the correct solution grid returned by the API
@@ -520,36 +519,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 10);
         });
     }
-    // Add sound effects for when any Bootstrap modal opens or closes
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        modal.addEventListener('shown.bs.modal', () => {
-            soundEffects.play("page");
-        });
-        modal.addEventListener('hidden.bs.modal', () => {
-            soundEffects.play("page");
-        });
-    });
-    // Intercept clicks on main navigation links
-    document.querySelectorAll('a[href="index.html"], a[href="about.html"]').forEach(link => {
-        link.addEventListener('click', function (event) {
-            // Stop the browser from navigating right away
-            event.preventDefault();
-            const href = $(this).attr('href');
-            // Check if the current page is index.html
-            const isLeavingGame = window.location.pathname.includes("index.html") || window.location.pathname === "/" || window.location.pathname.endsWith("index.html");
-            // Prompt the user before leaving the game to avoid accidental loss
-            if (isLeavingGame && href.includes("about.html")) {
-                const proceed = confirm("Are you sure you want to leave? Your current game will be lost.");
-                if (!proceed) return;
-            }
-            // Play a page transition sound and navigate after a short delay
-            soundEffects.play("page");
-            setTimeout(() => {
-                window.location.href = href;
-            }, 300);
-        });
-    });
 });
 
 renderEmptyGrid();

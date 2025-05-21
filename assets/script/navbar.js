@@ -1,3 +1,18 @@
+const navSounds = {
+    page: new Audio("assets/sounds/page.mp3"),
+    play(name) {
+        // Retrieve the sound object matching the given name from the themeToggleSounds object
+        const sound = this[name];
+        // Check if a valid sound was found for the given name
+        if (sound) {
+            // Restart sound
+            sound.currentTime = 0;
+            // Attempt to play the sound, and log a warning if playback fails (e.g. due to browser restrictions)
+            sound.play().catch(err => console.warn(`⚠️ Failed to play ${name}:`, err));
+        }
+    }
+};
+
 /**
  * Collapse the Bootstrap navbar when a nav-link is clicked
  */
@@ -63,3 +78,38 @@ function setupOutsideNavbarCollapse() {
     });
 }
 
+/**
+ * Sets up button event listeners, sound triggers, and navigation handling once the page is fully loaded
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    // Add sound effects for when any Bootstrap modal opens or closes
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        modal.addEventListener('shown.bs.modal', () => {
+            soundEffects.play("page");
+        });
+        modal.addEventListener('hidden.bs.modal', () => {
+            soundEffects.play("page");
+        });
+    });
+    // Intercept clicks on main navigation links
+    document.querySelectorAll('a[href="index.html"], a[href="about.html"]').forEach(link => {
+        link.addEventListener('click', function (event) {
+            // Stop the browser from navigating right away
+            event.preventDefault();
+            const href = $(this).attr('href');
+            // Check if the current page is index.html
+            const isLeavingGame = window.location.pathname.includes("index.html") || window.location.pathname === "/" || window.location.pathname.endsWith("index.html");
+            // Prompt the user before leaving the game to avoid accidental loss
+            if (isLeavingGame && href.includes("about.html")) {
+                const proceed = confirm("Are you sure you want to leave? Your current game will be lost.");
+                if (!proceed) return;
+            }
+            // Play a page transition sound and navigate after a short delay
+            soundEffects.play("page");
+            setTimeout(() => {
+                window.location.href = href;
+            }, 300);
+        });
+    });
+});
