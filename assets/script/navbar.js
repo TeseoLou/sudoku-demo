@@ -7,8 +7,8 @@ const navSounds = {
         if (sound) {
             // Restart sound
             sound.currentTime = 0;
-            // Attempt to play the sound, and log a warning if playback fails (e.g. due to browser restrictions)
-            sound.play().catch(err => console.warn(`⚠️ Failed to play ${name}:`, err));
+            // Play the sound
+            sound.play();
         }
     }
 };
@@ -26,6 +26,7 @@ function setupNavLinkCollapse() {
             // Set the target section based on the href using jQuery
             const section = $(href);
             // Only proceed if the target section exists in the DOM
+            // Reference: https://dev.to/lavary/how-to-check-if-an-element-exists-in-javascript-with-examples-4mpb#:~:text=So%20to%20check%20if%20the,ll%20get%20a%20null%20value
             if (section.length) {
                 // Prevent the default anchor jump behavior for smoother scrolling
                 // Reference: https://www.w3schools.com/howto/howto_css_smooth_scroll.asp
@@ -82,31 +83,44 @@ function setupOutsideNavbarCollapse() {
  * Sets up button event listeners, sound triggers, and navigation handling once the page is fully loaded
  */
 document.addEventListener('DOMContentLoaded', function () {
-    // Add sound effects for when any Bootstrap modal opens or closes
+    // Selects all elements with the class .modal from the DOM
+    // Reference: https://getbootstrap.com/docs/5.3/components/modal/
     const modals = document.querySelectorAll('.modal');
+    // Reference: https://stackoverflow.com/questions/47168607
     modals.forEach(modal => {
+        // Reference: https://getbootstrap.com/docs/5.3/components/modal/#events
         modal.addEventListener('shown.bs.modal', () => {
             soundEffects.play("page");
         });
+        // Reference: https://getbootstrap.com/docs/5.3/components/modal/#events
         modal.addEventListener('hidden.bs.modal', () => {
             soundEffects.play("page");
         });
     });
     // Intercept clicks on main navigation links
+    // Reference: https://stackoverflow.com/questions/23269951
+    // Reference: https://attacomsian.com/blog/javascript-loop-dom-elements
     document.querySelectorAll('a[href="index.html"], a[href="about.html"]').forEach(link => {
+        // Attaches a click event listener to each selected link
         link.addEventListener('click', function (event) {
             // Stop the browser from navigating right away
+            // Reference: https://stackoverflow.com/questions/821011
             event.preventDefault();
+            // Identify the href attribute of the clicked link
             const href = $(this).attr('href');
             // Check if the current page is index.html
+            // Reference: https://www.samanthaming.com/tidbits/86-window-location-cheatsheet/
             const isLeavingGame = window.location.pathname.includes("index.html") || window.location.pathname === "/" || window.location.pathname.endsWith("index.html");
             // Prompt the user before leaving the game to avoid accidental loss
             if (isLeavingGame && href.includes("about.html")) {
+                // Reference: https://www.geeksforgeeks.org/javascript-window-confirm-method/
                 const proceed = confirm("Are you sure you want to leave? Your current game will be lost.");
                 if (!proceed) return;
             }
             // Play a page transition sound and navigate after a short delay
             soundEffects.play("page");
+            // Then navigates to the desired page after a 300ms delay
+            // Reference: https://stackoverflow.com/questions/66144270
             setTimeout(() => {
                 window.location.href = href;
             }, 300);

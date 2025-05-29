@@ -12,11 +12,12 @@ function setupStartButton() {
         // Get the existing Bootstrap modal instance for the setup modal
         // Reference: https://getbootstrap.com/docs/5.3/components/modal/#methods
         const setupModalBootstrap = bootstrap.Modal.getInstance(setupModal[0]);
-        // If the modal instance exists, hide the modal
+        // If the modal instance exists hide the modal
         if (setupModalBootstrap) {
+            // Reference: https://getbootstrap.com/docs/5.0/components/modal/#hide
             setupModalBootstrap.hide();
         }
-        // Start a fresh game with a new board and reset stats
+        // Call function - Start a game by providing a fresh board, resetting stats, and resetting the timer and game stats
         startNewGame();
     });
 }

@@ -3,13 +3,13 @@
  */
 // Reference: https://www.shecodes.io/athena/60837-how-to-call-a-function-within-another-function-in-javascript
 function initPage() {
-    // Handle nav link clicks and auto-collapse behavior
+    // Call function - Collapse the Bootstrap navbar when a nav-link is clicked
     setupNavLinkCollapse();
-    // Close the navbar if user clicks outside of it
+    // Call function - Collapse the Bootstrap navbar when clicking outside of the open menu
     setupOutsideNavbarCollapse();
-    // Enable light/dark mode toggle
+    // Call function - Setup the theme switch logic on page load and user interaction
     setupThemeSwitch();
-    // Close the setup modal when the start button is pressed
+    // Call function - Close the setup modal when the Enter button is clicked
     setupStartButton();
 }
 

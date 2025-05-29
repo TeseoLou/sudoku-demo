@@ -31,8 +31,8 @@ const soundEffects = {
         if (sound) {
             // Restart sound
             sound.currentTime = 0;
-            // Attempt to play the sound, and log a warning if playback fails 
-            sound.play().catch(err => console.warn(`⚠️ Failed to play ${name}:`, err));
+            // Play the sound
+            sound.play();
         }
     }
 };

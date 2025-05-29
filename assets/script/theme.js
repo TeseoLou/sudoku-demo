@@ -9,10 +9,14 @@ const themeToggleSounds = {
     // Method that plays a sound effect by name 
     // Reference: https://developer.mozilla.org/en-US/docs/Web/API/HTMLAudioElement
     play(name) {
+        // Retrieve the sound object matching the given name from the themeToggleSounds object
         const sound = this[name];
+        // Check if a valid sound was found for the given name
         if (sound) {
+            // Restart sound
             sound.currentTime = 0;
-            sound.play().catch(err => console.warn(`⚠️ Failed to play ${name}:`, err));
+            // Play the sound
+            sound.play();
         }
     }
 };
@@ -65,7 +69,7 @@ function setupThemeSwitch() {
     // Reference: https://whitep4nth3r.com/blog/best-light-dark-mode-theme-toggle-javascript/
     const savedTheme = localStorage.getItem("theme");
     const isLightMode = savedTheme !== "dark"; // Default to light mode
-    // Apply the display theme silently
+    // Call function - Apply the theme settings to the DOM without sound
     applyTheme(isLightMode, false);
     // Add listener for user toggle
     // Reference: https://dev.to/whitep4nth3r/the-best-lightdark-mode-theme-toggle-in-javascript-368f
@@ -74,7 +78,7 @@ function setupThemeSwitch() {
         // Update ARIA for accessibility
         // Reference: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-checked
         this.setAttribute("aria-checked", isLight ? "true" : "false");
-        // Apply theme with sound since this is a manual user action
+        // Call function - Apply the theme settings to the DOM with sound
         applyTheme(isLight, true);
     });
 }
@@ -82,6 +86,7 @@ function setupThemeSwitch() {
 // Run setupThemeSwitch when DOM is ready
 // Reference: https://builtin.com/articles/document-ready-javascript
 if (document.readyState !== "loading") {
+    // Call function - Setup the theme switch logic on page load and user interaction
     setupThemeSwitch();
 } else {
     document.addEventListener("DOMContentLoaded", setupThemeSwitch);
