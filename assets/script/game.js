@@ -31,7 +31,7 @@ const soundEffects = {
         if (sound) {
             // Restart sound
             sound.currentTime = 0;
-            // Attempt to play the sound, and log a warning if playback fails (e.g. due to browser restrictions)
+            // Attempt to play the sound, and log a warning if playback fails 
             sound.play().catch(err => console.warn(`⚠️ Failed to play ${name}:`, err));
         }
     }
@@ -117,7 +117,7 @@ function populateGrid(puzzleData) {
             this.textContent = cellValue;
             // Make the fixed cell value stand out
             this.classList.add('fw-bold', 'generated');
-        // Set value to an empty string if datatype is null
+            // Set value to an empty string if datatype is null
         } else {
             // Clear the cell and mark it as user-editable
             this.textContent = '';
@@ -127,7 +127,7 @@ function populateGrid(puzzleData) {
             this.style.cursor = 'pointer';
         }
     });
-    // Allow interactions
+    // Call function - Allow interactivity with editable grid cells with clicking or typing
     enableCellSelection();
 }
 
@@ -171,7 +171,9 @@ function fetchSudokuBoard() {
  */
 function enableCellSelection() {
     // Make each editable cell selectable
+    // Reference: https://stackoverflow.com/questions/47168607
     $('.editable').each(function () {
+        // Reference: https://datatables.net/forums/discussion/59126/how-to-remove-selected-class-of-row-when-clicking-outside-of-row
         $(this).on('click', function () {
             // Deselect cells that were previously selected
             if (selectedCell) {
@@ -185,37 +187,59 @@ function enableCellSelection() {
     });
     // Handle keyboard number and deletion interactions
     $(document).on('keydown', function (event) {
-        if (!selectedCell) return;
+        // Prevent interaction if no cell is currently selected to ensure we only proceed if a cell has been clicked
+        if (!selectedCell) {
+            return;
+        }
+        // Check if the selected cell has the 'editable' class allowing to lock the cells with original game values
+        // Reference: https://api.jquery.com/hasClass/
         const isAllowed = $(selectedCell).hasClass('editable');
-        if (!isAllowed) return;
+        // If the selected cell is not editable, exit function
+        if (!isAllowed) {
+            return;
+        }
         // Accept numbers between 1-9
+        // Reference: https://stackoverflow.com/questions/38955573
         if (event.key >= '1' && event.key <= '9') {
+            // Set the content of the selected cell to the number key pressed by the user
+            // Reference: https://iamhuzaifa.medium.com/keyboard-event-codes-javascript-project-aec43bb7bf79
             selectedCell.textContent = event.key;
             // Get rid of previous incorrect color
             $(selectedCell).removeClass('incorrect');
-            // See if the game is complete
+            // Call function - Checks if the board is complete and correct
             triggerAutoWinCheck();
             soundEffects.play("key");
-            // Allow backspace or delete
-        } else if (event.key === 'Backspace' || event.key === 'Delete') {
+        }
+        // Allow backspace or delete
+        // Reference: https://stackoverflow.com/questions/1116244
+        else if (event.key === 'Backspace' || event.key === 'Delete') {
+            // Clear the content of the selected cell by setting it to an empty string which removes previously entered numbers
+            // Reference: https://dev.to/javascript_jeep/how-to-empty-the-dom-element-in-javascript-nf8
             selectedCell.textContent = '';
             // Remove incorrect color if it is present
             $(selectedCell).removeClass('incorrect');
-            // See if the game is complete
+            // Call function - Checks if the board is complete and correct
             triggerAutoWinCheck();
             soundEffects.play("key");
         }
     });
     // Handle clicks on on-screen number tiles
     $('#numbers-container h2').each(function () {
+        // // Attach a click event listener to the current element
         $(this).on('click', function () {
+            // Prevent interaction if no cell is currently selected to ensure we only proceed if a cell has been clicked
             if (!selectedCell) return;
+            // If the selected cell is not editable, exit function
             if (!$(selectedCell).hasClass('editable')) return;
+            // Get the text content of the clicked on-screen number tile
+            // Reference: https://www.tutorialrepublic.com/jquery-tutorial/jquery-getter-and-setter.php
             const val = $(this).text();
+            // Set the selected cell’s content based on the clicked tile value using ternary operator
+            // Reference: https://forum.freecodecamp.org/t/need-help-on-step-70-javascript/695562
             selectedCell.textContent = val === 'X' ? '' : val;
             // Remove incorrect color if it is present
             $(selectedCell).removeClass('incorrect');
-            // See if the game is complete
+            // Call function - Checks if the board is complete and correct
             triggerAutoWinCheck();
             soundEffects.play("key");
         });
@@ -228,20 +252,33 @@ function enableCellSelection() {
 function checkUserInput() {
     // Increase the hint counter and refresh the display
     hintsUsed++;
+    // Call function - Displays the current number of hints used on the screen
     updateHintsDisplay();
-    // If the solution hasn't been loaded yet, skip the check
-    if (!currentSolution) return;
+    // If the solution hasn't been loaded yet skip the check
+    if (!currentSolution) {
+        return;
+    }
     // Loop through each editable cell to compare input with the correct value
+    // Reference: https://stackoverflow.com/questions/47168607
     $('.editable').each(function () {
         const cell = $(this);
+        // Retrieves the 'data-row' and 'data-col' attributes from the current cell, which indicate its position in the grid and parseInt converts these string values to integers
+        // Reference: https://stackoverflow.com/questions/34067985
         const rowIndex = parseInt(cell.data('row'));
         const colIndex = parseInt(cell.data('col'));
+        // Finds the correct value from the currentSolution array based on the cell's row and column indices
+        // Reference: https://www.freecodecamp.org/news/javascript-2d-arrays/
         const expected = currentSolution[rowIndex][colIndex];
+        // Gets the text input of the cell and removes any whitespace
+        // Reference: https://stackoverflow.com/questions/33682536
         const entered = cell.text().trim();
         // Clear incorrect state if cell is blank or correct
+        // Reference: https://www.freecodecamp.org/news/javascript-if-else-and-if-then-js-conditional-statements
         if (entered === "" || entered === String(expected)) {
+            // If the cell is empty or the entered value matches the expected value the 'incorrect' class will be removed
             cell.removeClass('incorrect');
         } else {
+            // If the entered value does not match the expected value, the 'incorrect' class is added
             cell.addClass('incorrect');
         }
     });
@@ -253,15 +290,21 @@ function checkUserInput() {
 function revealHint() {
     // Increase the count of used hints and update the display in game-stats div
     hintsUsed++;
+    // Call function - Displays the current number of hints used on the screen
     updateHintsDisplay();
     // Exit if there is no solution
     if (!currentSolution) {
         return;
     }
-    // Identify all cells in the grid that are empty
+    // Identify all cells in the grid that are empty and creates an empty array to store references to empty cells
     const blanks = [];
+    // Iterates through all editable cells
+    // Reference: https://stackoverflow.com/questions/47168607
     $('.editable').each(function () {
+        // Gather cell text content
+        // Reference: https://stackoverflow.com/questions/33682536
         const value = $(this).text().trim();
+        // If a cell is empty it is added to the blanks array
         if (value.length === 0) {
             blanks.push(this);
         }
@@ -271,11 +314,16 @@ function revealHint() {
         return;
     }
     // Randomly select one of the empty cells
+    // Reference: https://timonweb.com/javascript/how-to-get-a-random-value-from-a-javascript-array/
     const pick = blanks[Math.floor(Math.random() * blanks.length)];
     const cell = $(pick);
-    // Find the matching solution value
+    // Retrieve the row and column indices from the cell's data attributes and parseInt ensures the values are treated as base-10 integers
+    // Reference: https://stackoverflow.com/questions/34067985
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
     const y = parseInt(cell.data('row'), 10);
     const x = parseInt(cell.data('col'), 10);
+    // Use the row and column indices to access the correct answer from the solution array
+    // Reference: https://www.freecodecamp.org/news/javascript-2d-arrays/
     const answer = currentSolution[y][x];
     // Populate corresponding cell with the correct answer and apply hint styling
     cell.text(answer);
@@ -287,28 +335,40 @@ function revealHint() {
  */
 function startTimer() {
     // Get the time limit set by the user in the setup modal
+    // Reference: https://stackoverflow.com/questions/15148659
     const timeLimit = $('input[name="time"]:checked').val();
+    // If the user selects no timer
     if (timeLimit === "none") {
         // Clear timer in game-stats div if no time is selected
         $('#timer').text("Timer: None");
+        // Exits without starting a countdown
         return;
     }
-    // Change minutes to seconds
+    // Converts the user’s time limit from a string to an integer
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
     let minutes = parseInt(timeLimit, 10);
+    // Multiplies by 60 to convert minutes to seconds
     timeRemaining = minutes * 60;
-    // Show the initial time right away
+    // Call function- Show remaining time in game-stats
     updateTimerDisplay();
     // Stop any existing timer before starting a new one
+    // Reference: https://stackoverflow.com/questions/57860947
     if (countdownInterval) {
         clearInterval(countdownInterval);
     }
-    // Begin countdown loop every second
+    // Begin countdown loop every second/1000ms
+    // Reference: https://vaidehijoshi.github.io/blog/2015/01/06/the-final-countdown-using-javascripts-setinterval-plus-clearinterval-methods/
     countdownInterval = setInterval(() => {
+        // Decrements the time
         timeRemaining--;
+        // Call function - Show remaining time in game-stats on each tick
         updateTimerDisplay();
         // End game when timer reaches 00:00
         if (timeRemaining <= 0) {
+            // Stop existing timer
+            // Reference: https://stackoverflow.com/questions/57860947
             clearInterval(countdownInterval);
+            // Call function - Ends the game when the timer runs out, disables input, and shows the setup modal
             endGameDueToTime();
         }
     }, 1000);
@@ -318,7 +378,10 @@ function startTimer() {
  * Show remaining time in game-stats
  */
 function updateTimerDisplay() {
+    // Reference: https://stackoverflow.com/questions/3733227
+    // Calculates the full minutes left by dividing total seconds by 60
     const minutes = Math.floor(timeRemaining / 60);
+    // Uses the modulo operator (%) to get the remaining seconds after minutes have been calculated which then gives the seconds portion of the timer in game-stats t
     const seconds = timeRemaining % 60;
     // Always show seconds with two digits
     // Reference: https://stackoverflow.com/questions/8043026/how-to-format-numbers-by-prepending-0-to-single-digit-numbers
@@ -332,12 +395,15 @@ function updateTimerDisplay() {
  * Show difficulty level in game-stats
  */
 function updateDifficultyDisplay() {
-    // Get the currently checked radio button for difficulty
+    // Find the selected radio input with the name="difficulty"
+    // Reference: https://stackoverflow.com/questions/15148659
     const difficultyLevel = $('input[name="difficulty"]:checked').get(0);
+    // Ensures that a difficulty level was actually selected before trying to access properties on it
     if (difficultyLevel) {
-        // Find label text next to the input/fallback to the value
-        const level = difficultyLevel.nextElementSibling?.textContent || difficultyLevel.value;
-        // Update the difficulty text on the page
+        // Find the label text next to the radio button using and if no sibling label exists, it falls back to using the input’s value
+        // Reference: https://accreditly.io/articles/how-to-get-the-sibling-or-next-element-in-javascript
+        const level = difficultyLevel.nextElementSibling.textContent;
+        // Update the difficulty text on the page using template literal
         $('#difficulty').text(`Difficulty: ${level}`);
     }
 }
@@ -346,27 +412,37 @@ function updateDifficultyDisplay() {
  * Displays the current number of hints used on the screen
  */
 function updateHintsDisplay() {
-    // Update the hints count in the UI using jQuery
+    // Update the hints count in the game-stats using template literal
     $('#hints').text(`Hints: ${hintsUsed}`);
 }
 
 /**
- * Checks whether all editable cells have the correct solution values
- * Returns true if the entire board is filled and correct
+ * Checks whether all editable cells have the correct solution values and returns true if the entire board is filled and correct
  */
 function isBoardCompleteAndCorrect() {
-    // Exit if filled board has incorrect values inputted
+    // Exit if currentSolution is falsy meaning games solution data is not loaded or theres no valid reference to the answer grid
     if (!currentSolution) {
         return false;
     }
-    // See if all editable cells matches the corresponding solution
+    // Selects all elements with the class .editable then converts all into an array and checks if every cell matches the correct value
+    // Reference: https://api.jquery.com/toArray/
+    // Reference: https://www.geeksforgeeks.org/javascript-array-every-method/
     const allCorrect = $('.editable').toArray().every(cell => {
+        // Retrieves 'data-row' and 'data-col' attributes from each cell and changes them to integers
+        // Reference: https://stackoverflow.com/questions/34067985
+        // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
         const rowIndex = parseInt(cell.dataset.row, 10);
         const colIndex = parseInt(cell.dataset.col, 10);
+        // Finds the correct solution value from the 2D currentSolution array and converts it to a string for comparison
+        // https://www.freecodecamp.org/news/javascript-2d-arrays/
         const expected = String(currentSolution[rowIndex][colIndex]);
+        // Retrieves the current text inside the cell and removes whitespace
+        // Reference: https://stackoverflow.com/questions/33682536
         const input = cell.textContent.trim();
+        // Compares the user input to the expected value and returns true if they match
         return input === expected;
     });
+    // The function returns true if all editable cells are correct and false otherwise
     return allCorrect;
 }
 
@@ -375,14 +451,18 @@ function isBoardCompleteAndCorrect() {
  */
 function isBoardFilled() {
     // Grab all editable cells and make an array
+    // Reference: https://api.jquery.com/toArray/
     const editableCells = $('.editable').toArray();
     // Go through array and it is filled with numbers
+    // Reference: https://www.geeksforgeeks.org/javascript-array-every-method/
     const allFilled = editableCells.every(cell => {
-        // Remove whitespace from cells' content
+        // Remove whitespace from cells content
+        // Reference: https://stackoverflow.com/questions/33682536
         const value = cell.textContent.trim();
-        // Return true if this cell has something in it
+        // If the trimmed value is not an empty string the cell is considered filled and will return true only if this condition is true for every cell
         return value !== '';
     });
+    // The function returns true if all editable cells are filled and returns false if one or more cells are empty
     return allFilled;
 }
 
@@ -390,12 +470,13 @@ function isBoardFilled() {
  * Confetti animation when board is complete
  */
 function popConfetti() {
+    // Reference: https://www.kirilv.com/canvas-confetti/
     confetti({
-        // Confetti pieces
+        // Confetti pieces to launch
         particleCount: 200,
         // How far the confetti spreads out 
         spread: 100,
-        // Starting point of the confetti on the Y axis (0 = top, 1 = bottom)
+        // Starting point of the confetti on the vertical axis
         origin: { y: 0.5 }
     });
 }
@@ -406,36 +487,41 @@ function popConfetti() {
 function triggerAutoWinCheck() {
     // If the player hasn't completed yet and the answers are right
     if (!hasCelebrated && isBoardCompleteAndCorrect()) {
-        // Show confetti and applause
+        // Call function - Confetti animation when board is complete
         popConfetti();
         soundEffects.play("applause");
         // Prevent repeated celebration
         hasCelebrated = true;
         // Halt the countdown timer
+        // Reference: https://stackoverflow.com/questions/57860947
         if (countdownInterval) {
             clearInterval(countdownInterval);
         }
         // Access the setup modal using Bootstrap's Modal API
+        // Reference: https://getbootstrap.com/docs/5.3/components/modal/#methods
         const setupModal = $('#setup-modal');
-        const setupModalInstance = new bootstrap.Modal(setupModal[0]);
         // Display the setup modal again after board completion
+        // Reference: https://stackoverflow.com/questions/62827002
+        const setupModalInstance = new bootstrap.Modal(setupModal[0]);
         setupModalInstance.show();
-        // If the board is full but the user has made a mistake
-    } else if (isBoardFilled() && !isBoardCompleteAndCorrect()) {
+    } // If the board is full but the user has made a mistake
+    else if (isBoardFilled() && !isBoardCompleteAndCorrect()) {
         // Get the preloaded error sound element from the HTML
         // Reference: https://stackoverflow.com/questions/21815323
         const errorAudio = document.getElementById("error-sound");
         // Make sure the audio element exists before trying to play it
         if (errorAudio) {
             // Reset the audio to the start so it plays from the beginning each time
+            // Reference: https://dev.to/pavelkeyzik/does-anyone-knows-how-to-change-current-time-of-song-correctly-in-javascript-2mkn
             errorAudio.currentTime = 0;
-            // Attempt to play the error sound
-            errorAudio.play().catch(err => console.warn("🔇 Couldn't play error sound:", err));
+            // Play the error sound
+            errorAudio.play();
         }
         // Delay the alert slightly so the sound can begin playing before the blocking alert appears
+        // Reference: https://stackoverflow.com/questions/65764348
         setTimeout(() => {
             alert("🔍 Try again! It looks like there's an error somewhere!");
-        }, 100); // 100ms delay
+        }, 100); // 0.1second/100ms delay
     }
 }
 
@@ -449,49 +535,58 @@ function endGameDueToTime() {
     // Make sure the element exists before trying to use it
     if (alarmAudio) {
         // Reset playback position to the beginning
+        // Reference: https://dev.to/pavelkeyzik/does-anyone-knows-how-to-change-current-time-of-song-correctly-in-javascript-2mkn
         alarmAudio.currentTime = 0;
         // Attempt to play the alarm sound
-        alarmAudio.play().catch(err => console.warn("🔇 Couldn't play alarm:", err));
+        alarmAudio.play();
     }
     // Slightly delay the alert so the alarm sound has time to begin playing
+    // Reference: https://stackoverflow.com/questions/65764348
     setTimeout(() => {
         alert("⏰ Time's up! Better luck next time."); // 100ms delay
     }, 100);
-    // Disable all editable cells 
+    // Disable all editable cells #
+    // https://stackoverflow.com/questions/47168607
     $('.editable').each(function () {
         // Remove editable class
         $(this).removeClass('editable');
         // Make the cell unclickable
+        // Reference: https://stackoverflow.com/questions/8906520
         $(this).css('pointer-events', 'none');
     });
     // Access the setup modal element
-    const setupModal = $('#setup-modal');
-    // Create a new Bootstrap modal instance using the raw DOM node
-    const setupModalInstance = new bootstrap.Modal(setupModal[0]);
-    // Display the modal to allow the player to start over or pick a new game
+    const setupModalElement = document.getElementById('setup-modal');
+    // Create a new Bootstrap modal instance and display to allow the player to start over or pick a new game
+    // Reference: https://getbootstrap.com/docs/5.3/components/modal/#methods
+    const setupModalInstance = new bootstrap.Modal(setupModalElement);
     setupModalInstance.show()
-    // When the modal is fully shown, trigger the start of a new game
-    setupModalInstance._element.addEventListener('shown.bs.modal', () => {
-        // Reset everything 
+    // When the modal is fully shown trigger the start of a new game
+    // https://getbootstrap.com/docs/5.3/components/modal/#events
+    setupModalElement.addEventListener('shown.bs.modal', () => {
+        // Call function - Start a game by providing a fresh board, resetting stats, and resetting the timer and game stats
         startNewGame();
-    }, { once: true }); // Ensure this only runs once per modal opening
+    }
+        // Ensure this only runs once per modal opening
+        // Reference: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#once
+        , { once: true });
 }
 
 /**
  * Start a game by providing a fresh board, resetting stats, and resetting the timer and game stats.
  */
+// Reference: https://www.shecodes.io/athena/60837-how-to-call-a-function-within-another-function-in-javascript
 function startNewGame() {
-    // Load new board
+    // Call function - Create a new Sudoku board + solution from API Ninjas according to difficulty level chosen by the user
     fetchSudokuBoard();
-    // Start timer        
+    // Call function - Initiates a countdown timer corresponding with the time limit set by the user
     startTimer();
-    // Update difficulty shown          
+    // Call function - Show difficulty level in game-stats          
     updateDifficultyDisplay();
     // Reset hints
     hintsUsed = 0;
-    // Update hints display           
+    // Call function - Displays the current number of hints used on the screen           
     updateHintsDisplay();
-    // Reset celebration with confetti and cheer     
+    // Reset celebration      
     hasCelebrated = false;
 }
 
@@ -501,24 +596,40 @@ function startNewGame() {
 document.addEventListener('DOMContentLoaded', function () {
     // Handle the Check button click
     const checkButton = $('#check-button');
+    // Checks whether the button exists in the DOM
+    // Reference: https://dev.to/lavary/how-to-check-if-an-element-exists-in-javascript-with-examples-4mpb#:~:text=So%20to%20check%20if%20the,ll%20get%20a%20null%20value
     if (checkButton.length) {
+        // Adds a click event listener
+        // Reference: https://stackoverflow.com/questions/66144270
         checkButton.on('click', () => {
+            // Executes function and plays a sound 
             setTimeout(() => {
+                // Call function - Compare the user's current inputs against the correct solution
                 checkUserInput();
                 soundEffects.play("hint");
-            }, 10);
+            }
+                // After a short 10ms delay
+                , 10);
         });
     }
     // Handle the Hint button click
     const hintButton = $('#hint-button');
+    // Checks whether the button exists in the DOM
+    // Reference: https://dev.to/lavary/how-to-check-if-an-element-exists-in-javascript-with-examples-4mpb#:~:text=So%20to%20check%20if%20the,ll%20get%20a%20null%20value
     if (hintButton.length) {
+        // Adds a click event listener
+        // Reference: https://stackoverflow.com/questions/66144270
         hintButton.on('click', () => {
             setTimeout(() => {
+                // Call function - Pick one empty cell and show its correct number from the solution
                 revealHint();
                 soundEffects.play("hint");
-            }, 10);
+            }
+                // After a short 10ms delay
+                , 10);
         });
     }
 });
 
+// Call function - Render a blank 9x9 Sudoku grid
 renderEmptyGrid();

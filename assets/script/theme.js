@@ -19,12 +19,9 @@ const themeToggleSounds = {
 
 /**
  * Apply the theme settings to the DOM.
- * 
- * @param {boolean} isLightMode - true for light mode, false for dark
- * @param {boolean} playSound - whether or not to play the theme sound
  */
 function applyTheme(isLightMode, playSound = false) {
-    // Toggle 'dark' class on the <body> based on theme
+    // Toggle 'dark' class based on theme
     // Reference: https://stackoverflow.com/questions/60469551
     $("body").toggleClass("dark", !isLightMode);
     // Update the checkbox to reflect the current theme
@@ -68,7 +65,7 @@ function setupThemeSwitch() {
     // Reference: https://whitep4nth3r.com/blog/best-light-dark-mode-theme-toggle-javascript/
     const savedTheme = localStorage.getItem("theme");
     const isLightMode = savedTheme !== "dark"; // Default to light mode
-    // Apply theme silently (without sound)
+    // Apply the display theme silently
     applyTheme(isLightMode, false);
     // Add listener for user toggle
     // Reference: https://dev.to/whitep4nth3r/the-best-lightdark-mode-theme-toggle-in-javascript-368f
